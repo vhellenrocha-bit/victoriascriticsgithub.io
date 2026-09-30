@@ -204,11 +204,12 @@
         <p class="subtitulo-revista">Alta Gastronomia & Crítica Independente</p>
     </header>
 
-    <!-- MOSAICO PÚBLICO -->
+    <!-- MOSAICO PÚBLICO COM IMAGENS REAIS ATIVAS -->
     <main class="mosaico-container">
+        <!-- Bloco 1: Imagem Gourmet de Entrada (Alta Cozinha Escura) -->
         <div class="bloco-mosaico grande" onclick="location.href='resenha-restaurante-bresca.html'">
             <a href="resenha-restaurante-bresca.html">
-                <img src="https://unsplash.com" alt="Bresca Gastronomia">
+                <img src="https://unsplash.com" alt="Bresca Gastronomia Especial">
                 <div class="legenda-mosaico">
                     <h3>Uma experiência inesquecível no Restaurante Bresca</h3>
                 </div>
@@ -222,8 +223,9 @@
             </div>
         </div>
 
+        <!-- Bloco 3: Imagem Vertical de Doçaria/Sobremesa Fina -->
         <div class="bloco-mosaico alto">
-            <img src="https://unsplash.com" alt="Sobremesa Conceitual">
+            <img src="https://unsplash.com" alt="Açúcar na Alta Cozinha">
             <div class="legenda-mosaico">
                 <h3>A Reinvenção do Açúcar na Alta Cozinha</h3>
             </div>
@@ -237,20 +239,21 @@
             </div>
         </div>
 
+        <!-- Bloco 5: Imagem Horizontal de Prato Gourmet Italiano Colorido -->
         <div class="bloco-mosaico largo">
-            <img src="https://unsplash.com" alt="Ingredientes Frescos">
+            <img src="https://unsplash.com" alt="Ingredientes e Sabores Finos">
             <div class="legenda-mosaico">
                 <h3>O Segredo por Trás dos Ingredientes Ancestrais</h3>
             </div>
         </div>
     </main>
 
-    <!-- JANELA FLUTUANTE (MODAL ADMIN) -->
+    <!-- JANELA FLUTUANTE (MODAL COMPLETO) -->
     <div id="modalAdmin" class="modal-admin oculto">
         <div class="janela-container">
             <span class="fechar-modal" onclick="fecharModal()">&times;</span>
             
-            <!-- 1. BLOCO DE LOGIN -->
+            <!-- 1. LOGIN -->
             <div id="bloco-login">
                 <h2 style="font-family: 'Playfair Display', serif; text-align: center;">Acesso à Revista</h2>
                 <form onsubmit="executarLogin(event)">
@@ -261,9 +264,3 @@
                     <div class="campo-grupo">
                         <label>Password</label>
                         <input type="password" id="login-senha" required placeholder="Sua password">
-                    </div>
-                    <button type="submit" class="btn-principal">Entrar</button>
-                </form>
-                <a class="link-alternar" onclick="mostrarRegisto()">Não tem conta? Criar conta de Utilizador</a>
-            </div>
-

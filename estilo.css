@@ -1,4 +1,4 @@
-/* 1. IMPORTAÇÃO DE FONTES DE REVISTA (Do Google Fonts) */
+/* 1. IMPORTAÇÃO DE FONTES DE REVISTA CORRIGIDA (Do Google Fonts) */
 @import url('https://googleapis.com');
 
 body {
@@ -40,6 +40,16 @@ h2, h3 {
     margin-bottom: 15px;
 }
 
+/* Estilo para a frase de introdução/resumo */
+.subtitulo {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #555555;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 /* 4. DESIGN DAS FOTOS DOS PRATOS */
 img {
     display: block;
@@ -60,4 +70,29 @@ footer {
     font-size: 0.9rem;
     color: #777777;
     letter-spacing: 0.5px;
+}
+
+/* Remove os pontos pretos e centraliza os links dos artigos */
+.lista-artigos {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Deixa o link elegante, com um sublinhado suave e cor sofisticada */
+.lista-artigos li a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #111111;
+    text-decoration: none;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+/* Quando o leitor passa o rato por cima do título do artigo */
+.lista-artigos li a:hover {
+    color: #997d54; /* Muda para um tom dourado/gourmet sutil */
+    border-bottom-color: #997d54;
 }

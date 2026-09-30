@@ -3,13 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victoria's Critics - Canal de Discussão Verificado</title>
+    <title>Victoria's Critics - Canal de Discussão Sério</title>
     
-    <!-- CONEXÃO COM OS SCRIPTS DO FIREBASE (GOOGLE) -->
-    <script src="https://gstatic.com"></script>
-    <script src="https://gstatic.com"></script>
-    <script src="https://gstatic.com"></script>
-
     <style>
         @import url('https://googleapis.com');
 
@@ -146,6 +141,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             margin: 0 0 25px 0;
+            letter-spacing: 0.5px;
         }
 
         .caixa-comentario-feed {
@@ -154,6 +150,7 @@
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
         }
 
         .autor-comentario {
@@ -173,15 +170,17 @@
             padding: 2px 6px;
             border-radius: 2px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .texto-comentario {
             font-size: 1rem;
             color: #222222;
             margin: 0;
+            line-height: 1.6;
         }
 
-        /* JANELA FLUTUANTE (MODAL DE LOGIN) */
+        /* JANELA FLUTUANTE (MODAL INTERATIVO COMPACTO) */
         .modal-admin {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -193,19 +192,22 @@
         .janela-container {
             background-color: #ffffff; padding: 40px; border-radius: 8px; max-width: 460px; width: 100%;
             box-sizing: border-box; border-top: 4px solid #4a1c1c; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
         }
 
         .fechar-modal { position: absolute; top: 15px; right: 20px; font-size: 1.6rem; cursor: pointer; color: #999; }
+        .fechar-modal:hover { color: #111; }
         .campo-grupo { margin-bottom: 20px; }
         label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #555; font-weight: 600; }
-        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #cccccc; border-radius: 4px; box-sizing: border-box; font-size: 1rem; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #cccccc; border-radius: 4px; box-sizing: border-box; font-size: 1rem; font-family: 'Inter', sans-serif; }
+        input:focus, textarea:focus { border-color: #4a1c1c; outline: none; }
         
         .btn-principal {
             background-color: #111111; color: #ffffff; border: none; width: 100%; padding: 14px;
-            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px; font-size: 0.85rem; transition: background 0.2s;
         }
         .btn-principal:hover { background-color: #4a1c1c; }
-        .link-alternar { display: block; text-align: center; margin-top: 20px; color: #997d54; text-decoration: none; cursor: pointer; font-size: 0.85rem; }
+        .link-alternar { display: block; text-align: center; margin-top: 20px; color: #997d54; text-decoration: none; cursor: pointer; font-size: 0.85rem; font-weight: 500; }
         
         .oculto { display: none !important; }
 
@@ -215,22 +217,22 @@
 </head>
 <body>
 
-    <!-- BARRA SUPERIOR -->
+    <!-- BARRA SOCIAL DE ESTADO -->
     <div class="barra-usuario">
-        <span id="mensagem-boas-vindas">Autenticação Requerida — Modo Leitura</span>
+        <span id="mensagem-boas-vindas">Canal de Discussão Moderado — Modo Leitura</span>
         <button id="btn-auth-topo" class="btn-status-auth" onclick="abrirModal()">Entrar / Registar</button>
     </div>
 
     <header class="topo-revista">
         <h1>VICTORIA'S CRITICS</h1>
-        <p class="subtitulo-revista">Alta Gastronomia & Canal de Discussão Auditado</p>
+        <p class="subtitulo-revista">Alta Gastronomia & Debate Crítico Real</p>
     </header>
 
     <!-- MOSAICO PÚBLICO -->
     <main class="mosaico-container">
         <div class="bloco-mosaico grande" onclick="location.href='resenha-restaurante-bresca.html'">
             <a href="resenha-restaurante-bresca.html">
-                <img src="https://unsplash.com" alt="Bresca">
+                <img src="https://unsplash.com" alt="Restaurante Bresca">
                 <div class="legenda-mosaico"><h3>Uma experiência inesquecível no Restaurante Bresca</h3></div>
             </a>
         </div>
@@ -242,7 +244,7 @@
             <div class="legenda-mosaico"><h3>A Reinvenção do Açúcar na Alta Cozinha</h3></div>
         </div>
         <div class="bloco-mosaico cor-oliva">
-            <div class="conteudo-texto-bloco"><span class="tag-bloco">E-mail Seguro</span><h3>Verificação Obrigatória</h3><p>Para evitar perfis falsos, enviamos um link de ativação real para a sua caixa de entrada.</p></div>
+            <div class="conteudo-texto-bloco"><span class="tag-bloco">Veracidade</span><h3>Debate Independente</h3><p>Contas auditadas localmente. Não são permitidos perfis falsos ou spam automático.</p></div>
         </div>
         <div class="bloco-mosaico largo">
             <img src="https://unsplash.com" alt="Prato">
@@ -250,21 +252,8 @@
         </div>
     </main>
 
-    <!-- MURAL SOCIAL -->
+    <!-- PAINEL REAL DE COMENTÁRIOS MODERADOS -->
     <section class="mural-social-seccao">
-        <h2>Discussões de Leitores Verificados</h2>
+        <h2>Painel de Discussão Crítica</h2>
         
         <div id="mural-feed-comentarios">
-            <!-- Os comentários serão descarregados em tempo real aqui -->
-        </div>
-<section style="text-align: center; padding: 40px 20px; background-color: #ffffff; margin-top: 30px; border: 1px dashed #997d54;">
-    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #4a1c1c;">Apoie o Jornalismo Gastronómico Independente</h3>
-    <p style="font-size: 0.9rem; color: #555; max-width: 600px; margin: 0 auto 20px auto;">
-        As nossas resenhas são 100% livres de patrocínios de restaurantes. Se valoriza análises honestas e reais, contribua para a manutenção do canal.
-    </p>
-    <!-- LINK PARA A SUA PLATAFORMA DE DOAÇÃO (Ex: Buy Me a Coffee ou PayPal) -->
-    <a href="INSERIR_LINK_AQUI" target="_blank" style="background-color: #111111; color: #ffffff; text-decoration: none; padding: 12px 30px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; font-weight: 600; display: inline-block;">
-        Contribuir com um Donativo
-    </a>
-</section>
-

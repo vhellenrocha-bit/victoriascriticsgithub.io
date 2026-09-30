@@ -26,34 +26,70 @@ const btnAuthTopo =
     document.getElementById("btn-auth-topo");
 
 
+/* ================================
+   MODAL
+================================ */
+
 function abrirModal() {
+
+    if (!modalAuth) {
+        return;
+    }
+
     modalAuth.classList.remove("oculto");
+
     mostrarLogin();
 }
 
 
 function fecharModal() {
+
+    if (!modalAuth) {
+        return;
+    }
+
     modalAuth.classList.add("oculto");
 }
 
 
 function mostrarLogin() {
+
+    if (!areaLogin || !areaCadastro) {
+        return;
+    }
+
     areaLogin.classList.remove("oculto");
+
     areaCadastro.classList.add("oculto");
 }
 
 
 function mostrarCadastro() {
+
+    if (!areaLogin || !areaCadastro) {
+        return;
+    }
+
     areaLogin.classList.add("oculto");
+
     areaCadastro.classList.remove("oculto");
 }
 
 
-modalAuth.addEventListener("click", function(event) {
-    if (event.target === modalAuth) {
-        fecharModal();
-    }
-});
+if (modalAuth) {
+
+    modalAuth.addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === modalAuth) {
+                fecharModal();
+            }
+
+        }
+    );
+
+}
 
 
 /* ================================
@@ -63,67 +99,86 @@ modalAuth.addEventListener("click", function(event) {
 const formCadastro =
     document.getElementById("form-cadastro");
 
-formCadastro.addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+if (formCadastro) {
 
-    const username =
-        document
-            .getElementById("cadastro-username")
-            .value
-            .trim();
+    formCadastro.addEventListener(
+        "submit",
+        async function(event) {
 
-    const email =
-        document
-            .getElementById("cadastro-email")
-            .value
-            .trim();
+            event.preventDefault();
 
-    const password =
-        document
-            .getElementById("cadastro-password")
-            .value;
+            const username =
+                document
+                    .getElementById("cadastro-username")
+                    .value
+                    .trim();
 
-    const mensagem =
-        document.getElementById("mensagem-cadastro");
+            const email =
+                document
+                    .getElementById("cadastro-email")
+                    .value
+                    .trim();
 
-    mensagem.textContent =
-        "A criar a sua conta...";
+            const password =
+                document
+                    .getElementById("cadastro-password")
+                    .value;
 
-    const { data, error } =
-        await supabaseClient.auth.signUp({
-            email: email,
-            password: password,
-            options: {
-                data: {
-                    username: username
-                }
+            const mensagem =
+                document.getElementById(
+                    "mensagem-cadastro"
+                );
+
+            mensagem.textContent =
+                "A criar a sua conta...";
+
+            const { data, error } =
+                await supabaseClient.auth.signUp({
+
+                    email: email,
+
+                    password: password,
+
+                    options: {
+                        data: {
+                            username: username
+                        }
+                    }
+
+                });
+
+
+            if (error) {
+
+                console.error(
+                    "ERRO NO CADASTRO:",
+                    error
+                );
+
+                mensagem.textContent =
+                    "Erro: " + error.message;
+
+                return;
             }
-        });
 
-    if (error) {
 
-        console.error(
-            "ERRO NO CADASTRO:",
-            error
-        );
+            console.log(
+                "CADASTRO:",
+                data
+            );
 
-        mensagem.textContent =
-            "Erro: " + error.message;
 
-        return;
-    }
+            mensagem.textContent =
+                "Conta criada com sucesso!";
 
-    console.log(
-        "CADASTRO:",
-        data
+
+            formCadastro.reset();
+
+        }
     );
 
-    mensagem.textContent =
-        "Conta criada com sucesso!";
-
-    formCadastro.reset();
-});
+}
 
 
 /* ================================
@@ -133,53 +188,71 @@ formCadastro.addEventListener("submit", async function(event) {
 const formLogin =
     document.getElementById("form-login");
 
-formLogin.addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+if (formLogin) {
 
-    const email =
-        document
-            .getElementById("login-email")
-            .value
-            .trim();
+    formLogin.addEventListener(
+        "submit",
+        async function(event) {
 
-    const password =
-        document
-            .getElementById("login-password")
-            .value;
+            event.preventDefault();
 
-    const mensagem =
-        document.getElementById("mensagem-login");
+            const email =
+                document
+                    .getElementById("login-email")
+                    .value
+                    .trim();
 
-    mensagem.textContent =
-        "A entrar...";
+            const password =
+                document
+                    .getElementById("login-password")
+                    .value;
 
-    const { error } =
-        await supabaseClient.auth
-            .signInWithPassword({
-                email: email,
-                password: password
-            });
+            const mensagem =
+                document.getElementById(
+                    "mensagem-login"
+                );
 
-    if (error) {
 
-        console.error(
-            "ERRO NO LOGIN:",
-            error
-        );
+            mensagem.textContent =
+                "A entrar...";
 
-        mensagem.textContent =
-            "Erro: " + error.message;
 
-        return;
-    }
+            const { error } =
+                await supabaseClient.auth
+                    .signInWithPassword({
 
-    formLogin.reset();
+                        email: email,
 
-    fecharModal();
+                        password: password
 
-    atualizarUsuario();
-});
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    "ERRO NO LOGIN:",
+                    error
+                );
+
+                mensagem.textContent =
+                    "Erro: " + error.message;
+
+                return;
+            }
+
+
+            formLogin.reset();
+
+            fecharModal();
+
+            atualizarUsuario();
+
+        }
+    );
+
+}
 
 
 /* ================================
@@ -203,23 +276,39 @@ async function verificarEditora() {
     const {
         data: { user },
         error: userError
+
     } = await supabaseClient.auth.getUser();
 
+
     if (userError || !user) {
-        console.log("Não existe utilizador autenticado.");
+
+        console.log(
+            "Não existe utilizador autenticado."
+        );
+
         return false;
     }
 
-    console.log("Utilizador autenticado:", user.email);
 
-    const { data, error } =
-        await supabaseClient
-            .from("profiles")
-            .select("role")
-            .eq("id", user.id)
-            .maybeSingle();
+    console.log(
+        "Utilizador autenticado:",
+        user.email
+    );
+
+
+    const {
+        data,
+        error
+
+    } = await supabaseClient
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+
 
     if (error) {
+
         console.error(
             "ERRO AO LER PERFIL:",
             error
@@ -228,12 +317,15 @@ async function verificarEditora() {
         return false;
     }
 
+
     console.log(
         "Perfil encontrado:",
         data
     );
 
+
     if (!data) {
+
         console.log(
             "Não existe perfil para este utilizador."
         );
@@ -241,13 +333,16 @@ async function verificarEditora() {
         return false;
     }
 
+
     if (data.role === "editor") {
+
         console.log(
             "UTILIZADOR É EDITORA!"
         );
 
         return true;
     }
+
 
     console.log(
         "Utilizador não é editora."
@@ -256,56 +351,30 @@ async function verificarEditora() {
     return false;
 }
 
-    const {
-        data: { user }
-    } = await supabaseClient.auth.getUser();
-
-    if (!user) {
-        return false;
-    }
-
-    const { data, error } =
-        await supabaseClient
-            .from("profiles")
-            .select("role")
-            .eq("id", user.id)
-            .single();
-
-    if (error) {
-
-        console.error(
-            "ERRO AO VERIFICAR EDITORA:",
-            error
-        );
-
-        return false;
-    }
-
-    return data.role === "editor";
-}
-
 
 /* ================================
-   MOSTRAR PAINEL
+   MOSTRAR PAINEL DA EDITORA
 ================================ */
 
 function mostrarPainelEditora() {
 
-    let painel =
+    const painel =
         document.getElementById(
             "painel-editora"
         );
 
+
     if (!painel) {
         return;
     }
+
 
     painel.classList.remove("oculto");
 }
 
 
 /* ================================
-   ESCONDER PAINEL
+   ESCONDER PAINEL DA EDITORA
 ================================ */
 
 function esconderPainelEditora() {
@@ -315,9 +384,11 @@ function esconderPainelEditora() {
             "painel-editora"
         );
 
+
     if (!painel) {
         return;
     }
+
 
     painel.classList.add("oculto");
 }
@@ -331,7 +402,9 @@ async function atualizarUsuario() {
 
     const {
         data: { user }
+
     } = await supabaseClient.auth.getUser();
+
 
     if (user) {
 
@@ -339,16 +412,26 @@ async function atualizarUsuario() {
             user.user_metadata?.username ||
             "Utilizador";
 
-        mensagemBoasVindas.textContent =
-            "Olá, " +
-            nome +
-            " — Modo Discussão Ativo";
 
-        btnAuthTopo.textContent =
-            "Sair";
+        if (mensagemBoasVindas) {
 
-        btnAuthTopo.onclick =
-            fazerLogout;
+            mensagemBoasVindas.textContent =
+                "Olá, " +
+                nome +
+                " — Modo Discussão Ativo";
+
+        }
+
+
+        if (btnAuthTopo) {
+
+            btnAuthTopo.textContent =
+                "Sair";
+
+            btnAuthTopo.onclick =
+                fazerLogout;
+
+        }
 
 
         const ehEditora =
@@ -365,19 +448,33 @@ async function atualizarUsuario() {
 
         }
 
+
     } else {
 
-        mensagemBoasVindas.textContent =
-            "Canal de Discussão Moderado — Modo Leitura";
 
-        btnAuthTopo.textContent =
-            "Entrar / Registar";
+        if (mensagemBoasVindas) {
 
-        btnAuthTopo.onclick =
-            abrirModal;
+            mensagemBoasVindas.textContent =
+                "Canal de Discussão Moderado — Modo Leitura";
+
+        }
+
+
+        if (btnAuthTopo) {
+
+            btnAuthTopo.textContent =
+                "Entrar / Registar";
+
+            btnAuthTopo.onclick =
+                abrirModal;
+
+        }
+
 
         esconderPainelEditora();
+
     }
+
 }
 
 
@@ -387,27 +484,44 @@ async function atualizarUsuario() {
 
 async function criarPublicacao() {
 
-    const titulo =
-        document
-            .getElementById("editor-titulo")
-            .value
-            .trim();
+    const campoTitulo =
+        document.getElementById(
+            "editor-titulo"
+        );
 
-    const conteudo =
-        document
-            .getElementById("editor-conteudo")
-            .value
-            .trim();
+    const campoConteudo =
+        document.getElementById(
+            "editor-conteudo"
+        );
 
     const mensagem =
-        document
-            .getElementById("mensagem-editor")
-            ;
+        document.getElementById(
+            "mensagem-editor"
+        );
+
+
+    if (!campoTitulo || !campoConteudo) {
+
+        return;
+    }
+
+
+    const titulo =
+        campoTitulo.value.trim();
+
+
+    const conteudo =
+        campoConteudo.value.trim();
+
 
     if (!titulo || !conteudo) {
 
-        mensagem.textContent =
-            "Preencha o título e o texto.";
+        if (mensagem) {
+
+            mensagem.textContent =
+                "Preencha o título e o texto.";
+
+        }
 
         return;
     }
@@ -415,13 +529,18 @@ async function criarPublicacao() {
 
     const {
         data: { user }
+
     } = await supabaseClient.auth.getUser();
 
 
     if (!user) {
 
-        mensagem.textContent =
-            "É necessário estar autenticada.";
+        if (mensagem) {
+
+            mensagem.textContent =
+                "É necessário estar autenticada.";
+
+        }
 
         return;
     }
@@ -433,24 +552,36 @@ async function criarPublicacao() {
 
     if (!ehEditora) {
 
-        mensagem.textContent =
-            "Acesso não autorizado.";
+        if (mensagem) {
+
+            mensagem.textContent =
+                "Acesso não autorizado.";
+
+        }
 
         return;
     }
 
 
-    mensagem.textContent =
-        "A publicar...";
+    if (mensagem) {
+
+        mensagem.textContent =
+            "A publicar...";
+
+    }
 
 
     const { error } =
         await supabaseClient
             .from("publicacoes")
             .insert({
+
                 titulo: titulo,
+
                 conteudo: conteudo,
+
                 publicada: true
+
             });
 
 
@@ -461,36 +592,49 @@ async function criarPublicacao() {
             error
         );
 
-        mensagem.textContent =
-            "Erro ao publicar: " +
-            error.message;
+
+        if (mensagem) {
+
+            mensagem.textContent =
+                "Erro ao publicar: " +
+                error.message;
+
+        }
 
         return;
     }
 
 
-    mensagem.textContent =
-        "✓ Publicação criada com sucesso!";
+    if (mensagem) {
 
-    document
-        .getElementById("editor-titulo")
-        .value = "";
+        mensagem.textContent =
+            "✓ Publicação criada com sucesso!";
 
-    document
-        .getElementById("editor-conteudo")
-        .value = "";
+    }
+
+
+    campoTitulo.value = "";
+
+    campoConteudo.value = "";
+
 }
 
 
 /* ================================
-   SUPABASE
+   SUPABASE — SESSÃO
 ================================ */
 
 supabaseClient.auth.onAuthStateChange(
     function() {
+
         atualizarUsuario();
+
     }
 );
 
+
+/* ================================
+   INICIAR
+================================ */
 
 atualizarUsuario();

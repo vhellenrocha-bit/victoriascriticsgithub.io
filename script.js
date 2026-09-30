@@ -1,7 +1,3 @@
-// ==========================================
-// SUPABASE
-// ==========================================
-
 const SUPABASE_URL =
     "https://mefjsltueonhhrlusqpy.supabase.co";
 
@@ -13,11 +9,6 @@ const supabaseClient =
         SUPABASE_URL,
         SUPABASE_ANON_KEY
     );
-
-
-// ==========================================
-// ELEMENTOS
-// ==========================================
 
 const modalAuth =
     document.getElementById("modal-auth");
@@ -35,248 +26,177 @@ const btnAuthTopo =
     document.getElementById("btn-auth-topo");
 
 
-// ==========================================
-// ABRIR / FECHAR
-// ==========================================
-
 function abrirModal() {
-
     modalAuth.classList.remove("oculto");
-
     mostrarLogin();
-
 }
 
 
 function fecharModal() {
-
     modalAuth.classList.add("oculto");
-
 }
 
 
 function mostrarLogin() {
-
     areaLogin.classList.remove("oculto");
-
     areaCadastro.classList.add("oculto");
-
 }
 
 
 function mostrarCadastro() {
-
     areaLogin.classList.add("oculto");
-
     areaCadastro.classList.remove("oculto");
-
 }
 
 
-// ==========================================
-// FECHAR AO CLICAR FORA
-// ==========================================
-
-modalAuth.addEventListener(
-    "click",
-    function(event) {
-
-        if (event.target === modalAuth) {
-
-            fecharModal();
-
-        }
-
+modalAuth.addEventListener("click", function(event) {
+    if (event.target === modalAuth) {
+        fecharModal();
     }
-);
+});
 
 
-// ==========================================
-// CADASTRO
-// ==========================================
+/* ================================
+   CADASTRO
+================================ */
 
 const formCadastro =
     document.getElementById("form-cadastro");
 
+formCadastro.addEventListener("submit", async function(event) {
 
-formCadastro.addEventListener(
-    "submit",
-    async function(event) {
+    event.preventDefault();
 
-        event.preventDefault();
+    const username =
+        document
+            .getElementById("cadastro-username")
+            .value
+            .trim();
 
+    const email =
+        document
+            .getElementById("cadastro-email")
+            .value
+            .trim();
 
-        const username =
-            document
-                .getElementById("cadastro-username")
-                .value
-                .trim();
+    const password =
+        document
+            .getElementById("cadastro-password")
+            .value;
 
+    const mensagem =
+        document.getElementById("mensagem-cadastro");
 
-        const email =
-            document
-                .getElementById("cadastro-email")
-                .value
-                .trim();
+    mensagem.textContent =
+        "A criar a sua conta...";
 
-
-        const password =
-            document
-                .getElementById("cadastro-password")
-                .value;
-
-
-        const mensagem =
-            document.getElementById(
-                "mensagem-cadastro"
-            );
-
-
-        mensagem.textContent =
-            "A criar a sua conta...";
-
-
-        const { data, error } =
-            await supabaseClient.auth.signUp({
-
-                email: email,
-
-                password: password,
-
-                options: {
-
-                    data: {
-
-                        username: username
-
-                    }
-
+    const { data, error } =
+        await supabaseClient.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: {
+                    username: username
                 }
+            }
+        });
 
-            });
+    if (error) {
 
-
-        if (error) {
-
-            console.error(
-                "ERRO NO CADASTRO:",
-                error
-            );
-
-            mensagem.textContent =
-                "Erro: " + error.message;
-
-            return;
-
-        }
-
-
-        console.log(
-            "CADASTRO:",
-            data
+        console.error(
+            "ERRO NO CADASTRO:",
+            error
         );
 
-
         mensagem.textContent =
-            "Conta criada com sucesso!";
+            "Erro: " + error.message;
 
-
-        formCadastro.reset();
-
+        return;
     }
-);
+
+    console.log(
+        "CADASTRO:",
+        data
+    );
+
+    mensagem.textContent =
+        "Conta criada com sucesso!";
+
+    formCadastro.reset();
+});
 
 
-// ==========================================
-// LOGIN
-// ==========================================
+/* ================================
+   LOGIN
+================================ */
 
 const formLogin =
     document.getElementById("form-login");
 
+formLogin.addEventListener("submit", async function(event) {
 
-formLogin.addEventListener(
-    "submit",
-    async function(event) {
+    event.preventDefault();
 
-        event.preventDefault();
+    const email =
+        document
+            .getElementById("login-email")
+            .value
+            .trim();
 
+    const password =
+        document
+            .getElementById("login-password")
+            .value;
 
-        const email =
-            document
-                .getElementById("login-email")
-                .value
-                .trim();
+    const mensagem =
+        document.getElementById("mensagem-login");
 
+    mensagem.textContent =
+        "A entrar...";
 
-        const password =
-            document
-                .getElementById("login-password")
-                .value;
+    const { error } =
+        await supabaseClient.auth
+            .signInWithPassword({
+                email: email,
+                password: password
+            });
 
+    if (error) {
 
-        const mensagem =
-            document.getElementById(
-                "mensagem-login"
-            );
-
+        console.error(
+            "ERRO NO LOGIN:",
+            error
+        );
 
         mensagem.textContent =
-            "A entrar...";
+            "Erro: " + error.message;
 
-
-        const { error } =
-            await supabaseClient.auth
-                .signInWithPassword({
-
-                    email: email,
-
-                    password: password
-
-                });
-
-
-        if (error) {
-
-            console.error(
-                "ERRO NO LOGIN:",
-                error
-            );
-
-            mensagem.textContent =
-                "Erro: " + error.message;
-
-            return;
-
-        }
-
-
-        formLogin.reset();
-
-        fecharModal();
-
-        atualizarUsuario();
-
+        return;
     }
-);
+
+    formLogin.reset();
+
+    fecharModal();
+
+    atualizarUsuario();
+});
 
 
-// ==========================================
-// SAIR
-// ==========================================
+/* ================================
+   LOGOUT
+================================ */
 
 async function fazerLogout() {
 
     await supabaseClient.auth.signOut();
 
     atualizarUsuario();
-
 }
 
 
-// ==========================================
-// VERIFICAR SE É EDITORA
-// ==========================================
+/* ================================
+   VERIFICAR EDITORA
+================================ */
 
 async function verificarEditora() {
 
@@ -284,13 +204,9 @@ async function verificarEditora() {
         data: { user }
     } = await supabaseClient.auth.getUser();
 
-
     if (!user) {
-
         return false;
-
     }
-
 
     const { data, error } =
         await supabaseClient
@@ -298,7 +214,6 @@ async function verificarEditora() {
             .select("role")
             .eq("id", user.id)
             .single();
-
 
     if (error) {
 
@@ -308,18 +223,53 @@ async function verificarEditora() {
         );
 
         return false;
-
     }
 
-
     return data.role === "editor";
-
 }
 
 
-// ==========================================
-// ATUALIZAR UTILIZADOR
-// ==========================================
+/* ================================
+   MOSTRAR PAINEL
+================================ */
+
+function mostrarPainelEditora() {
+
+    let painel =
+        document.getElementById(
+            "painel-editora"
+        );
+
+    if (!painel) {
+        return;
+    }
+
+    painel.classList.remove("oculto");
+}
+
+
+/* ================================
+   ESCONDER PAINEL
+================================ */
+
+function esconderPainelEditora() {
+
+    const painel =
+        document.getElementById(
+            "painel-editora"
+        );
+
+    if (!painel) {
+        return;
+    }
+
+    painel.classList.add("oculto");
+}
+
+
+/* ================================
+   ATUALIZAR UTILIZADOR
+================================ */
 
 async function atualizarUsuario() {
 
@@ -327,23 +277,19 @@ async function atualizarUsuario() {
         data: { user }
     } = await supabaseClient.auth.getUser();
 
-
     if (user) {
 
         const nome =
             user.user_metadata?.username ||
             "Utilizador";
 
-
         mensagemBoasVindas.textContent =
             "Olá, " +
             nome +
             " — Modo Discussão Ativo";
 
-
         btnAuthTopo.textContent =
             "Sair";
-
 
         btnAuthTopo.onclick =
             fazerLogout;
@@ -353,45 +299,142 @@ async function atualizarUsuario() {
             await verificarEditora();
 
 
-        console.log(
-            "É editora?",
-            ehEditora
-        );
+        if (ehEditora) {
 
+            mostrarPainelEditora();
+
+        } else {
+
+            esconderPainelEditora();
+
+        }
 
     } else {
 
         mensagemBoasVindas.textContent =
             "Canal de Discussão Moderado — Modo Leitura";
 
-
         btnAuthTopo.textContent =
             "Entrar / Registar";
-
 
         btnAuthTopo.onclick =
             abrirModal;
 
+        esconderPainelEditora();
     }
-
 }
 
 
-// ==========================================
-// VERIFICAR ALTERAÇÕES DE LOGIN
-// ==========================================
+/* ================================
+   CRIAR PUBLICAÇÃO
+================================ */
+
+async function criarPublicacao() {
+
+    const titulo =
+        document
+            .getElementById("editor-titulo")
+            .value
+            .trim();
+
+    const conteudo =
+        document
+            .getElementById("editor-conteudo")
+            .value
+            .trim();
+
+    const mensagem =
+        document
+            .getElementById("mensagem-editor")
+            ;
+
+    if (!titulo || !conteudo) {
+
+        mensagem.textContent =
+            "Preencha o título e o texto.";
+
+        return;
+    }
+
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        mensagem.textContent =
+            "É necessário estar autenticada.";
+
+        return;
+    }
+
+
+    const ehEditora =
+        await verificarEditora();
+
+
+    if (!ehEditora) {
+
+        mensagem.textContent =
+            "Acesso não autorizado.";
+
+        return;
+    }
+
+
+    mensagem.textContent =
+        "A publicar...";
+
+
+    const { error } =
+        await supabaseClient
+            .from("publicacoes")
+            .insert({
+                titulo: titulo,
+                conteudo: conteudo,
+                publicada: true
+            });
+
+
+    if (error) {
+
+        console.error(
+            "ERRO AO PUBLICAR:",
+            error
+        );
+
+        mensagem.textContent =
+            "Erro ao publicar: " +
+            error.message;
+
+        return;
+    }
+
+
+    mensagem.textContent =
+        "✓ Publicação criada com sucesso!";
+
+    document
+        .getElementById("editor-titulo")
+        .value = "";
+
+    document
+        .getElementById("editor-conteudo")
+        .value = "";
+}
+
+
+/* ================================
+   SUPABASE
+================================ */
 
 supabaseClient.auth.onAuthStateChange(
     function() {
-
         atualizarUsuario();
-
     }
 );
 
-
-// ==========================================
-// INICIAR
-// ==========================================
 
 atualizarUsuario();

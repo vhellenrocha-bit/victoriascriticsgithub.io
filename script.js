@@ -256,7 +256,39 @@ async function fazerLogout() {
 // ATUALIZAR UTILIZADOR
 // ==========================================
 
-async function atualizarUsuario() {
+async function atualizarUsuario() {// ==========================================
+// VERIFICAR SE O UTILIZADOR É EDITORA
+// ==========================================
+
+async function verificarEditora() {
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        return false;
+    }
+
+    const { data, error } =
+        await supabaseClient
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
+
+    if (error) {
+
+        console.error(
+            "Erro ao verificar perfil:",
+            error
+        );
+
+        return false;
+    }
+
+    return data.role === "editor";
+}
 
     const {
         data: { user }

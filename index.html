@@ -8,31 +8,57 @@
 </head>
 <body>
 
-    <!-- CABEÇALHO DA SUA REVISTA -->
-    <header style="text-align: center; margin-top: 60px;">
-        <h1>Victoria's Critics</h1>
-        <p class="subtitulo">A sua revista gastronómica de alta cozinha.</p>
+    <!-- CAPA DA REVISTA (Inspirada na capa Delicious) -->
+    <header class="capa-premium">
+        <div class="capa-overlay">
+            <span class="capa-data">SETEMBRO 2026</span>
+            <h1>VICTORIA'S CRITICS</h1>
+            <p class="capa-slogan">FOOD MAGAZINE — ALTA COZINHA</p>
+        </div>
     </header>
 
-    <!-- LISTA DAS SUAS CRÍTICAS (MENU PRINCIPAL) -->
-    <main class="container">
-        <h2 style="text-align: center; margin-top: 50px; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 2px; color: #666;">
-            Últimas Resenhas
-        </h2>
+    <!-- CONTEÚDO PRINCIPAL EM GRELHA EDITORIAL -->
+    <main class="grid-editorial">
         
-        <ul class="lista-artigos">
-            <!-- Este link leva o leitor direto para a página que criou sobre o Bresca -->
-            <li>
-                <a href="resenha-restaurante-bresca.html">Uma experiência inesquecível no Restaurante Bresca</a>
-            </li>
-        </ul>
+        <!-- Bloco Escuro de Destaque (Inspirado na sua primeira imagem) -->
+        <section class="bloco-destaque-preto">
+            <div class="conteudo-destaque">
+                <span class="tag-editorial">Alta Gastronomia</span>
+                <h2>O Canto da Contemporaneidade</h2>
+                <p>Uma análise profunda sobre a fusão de ingredientes ancestrais com as técnicas mais arrojadas da culinária moderna europeia.</p>
+            </div>
+            <div class="imagem-destaque-chef">
+                <!-- Imagem conceitual de IA: Prato minimalista de alta cozinha -->
+                <img src="https://unsplash.com" alt="Chef e Gastronomia Conceitual">
+            </div>
+        </section>
+
+        <!-- Secção das Resenhas com Fotos "Cool" de IA -->
+        <section class="seccao-resenhas">
+            <h3 class="titulo-linhas">Últimas Críticas</h3>
+            
+            <div class="grelha-artigos">
+                <!-- Cartão do Artigo do Restaurante Bresca -->
+                <article class="cartao-artigo">
+                    <a href="resenha-restaurante-bresca.html">
+                        <div class="moldura-foto">
+                            <!-- Imagem de IA: Prato sofisticado com espumas e trufas -->
+                            <img src="https://unsplash.com" alt="Prato Gourmet no Restaurante Bresca">
+                        </div>
+                        <span class="artigo-categoria">Resenha</span>
+                        <h4 class="artigo-titulo-link">Uma experiência inesquecível no Restaurante Bresca</h4>
+                        <p class="artigo-resumo">Texturas surpreendentes e um equilíbrio perfeito entre o clássico e o inesperado.</p>
+                    </a>
+                </article>
+            </div>
+        </section>
+
     </main>
 
-    <!-- O SEU RODAPÉ DE PROTEÇÃO COMPLETA -->
-    <footer>
+    <!-- RODAPÉ FIXO NO FUNDO E DISCRETO -->
+    <footer class="rodape-editorial">
         <p>&copy; 2026 Victoria's Critics. Todos os direitos reservados. É proibida a cópia ou reprodução do conteúdo.</p>
     </footer>
 
 </body>
 </html>
-

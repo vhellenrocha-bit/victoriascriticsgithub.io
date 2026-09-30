@@ -1,14 +1,24 @@
+// ==========================================
+// SUPABASE
+// ==========================================
+
 const SUPABASE_URL =
     "https://mefjsltueonhhrlusqpy.supabase.co";
 
 const SUPABASE_ANON_KEY =
     "sb_publishable_sUY0ZUsbQnx8Jm1NENe4Cg_7g0ceZdf";
 
+
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_ANON_KEY
     );
+
+
+// ==========================================
+// ELEMENTOS DO SITE
+// ==========================================
 
 const modalAuth =
     document.getElementById("modal-auth");
@@ -26,9 +36,9 @@ const btnAuthTopo =
     document.getElementById("btn-auth-topo");
 
 
-/* ================================
-   MODAL
-================================ */
+// ==========================================
+// ABRIR MODAL
+// ==========================================
 
 function abrirModal() {
 
@@ -42,6 +52,10 @@ function abrirModal() {
 }
 
 
+// ==========================================
+// FECHAR MODAL
+// ==========================================
+
 function fecharModal() {
 
     if (!modalAuth) {
@@ -51,6 +65,10 @@ function fecharModal() {
     modalAuth.classList.add("oculto");
 }
 
+
+// ==========================================
+// MOSTRAR LOGIN
+// ==========================================
 
 function mostrarLogin() {
 
@@ -64,6 +82,10 @@ function mostrarLogin() {
 }
 
 
+// ==========================================
+// MOSTRAR CADASTRO
+// ==========================================
+
 function mostrarCadastro() {
 
     if (!areaLogin || !areaCadastro) {
@@ -76,6 +98,10 @@ function mostrarCadastro() {
 }
 
 
+// ==========================================
+// FECHAR MODAL AO CLICAR FORA
+// ==========================================
+
 if (modalAuth) {
 
     modalAuth.addEventListener(
@@ -83,7 +109,9 @@ if (modalAuth) {
         function(event) {
 
             if (event.target === modalAuth) {
+
                 fecharModal();
+
             }
 
         }
@@ -92,9 +120,9 @@ if (modalAuth) {
 }
 
 
-/* ================================
-   CADASTRO
-================================ */
+// ==========================================
+// CADASTRO
+// ==========================================
 
 const formCadastro =
     document.getElementById("form-cadastro");
@@ -108,11 +136,13 @@ if (formCadastro) {
 
             event.preventDefault();
 
+
             const username =
                 document
                     .getElementById("cadastro-username")
                     .value
                     .trim();
+
 
             const email =
                 document
@@ -120,18 +150,22 @@ if (formCadastro) {
                     .value
                     .trim();
 
+
             const password =
                 document
                     .getElementById("cadastro-password")
                     .value;
+
 
             const mensagem =
                 document.getElementById(
                     "mensagem-cadastro"
                 );
 
+
             mensagem.textContent =
                 "A criar a sua conta...";
+
 
             const { data, error } =
                 await supabaseClient.auth.signUp({
@@ -141,9 +175,13 @@ if (formCadastro) {
                     password: password,
 
                     options: {
+
                         data: {
+
                             username: username
+
                         }
+
                     }
 
                 });
@@ -156,8 +194,11 @@ if (formCadastro) {
                     error
                 );
 
+
                 mensagem.textContent =
-                    "Erro: " + error.message;
+                    "Erro: " +
+                    error.message;
+
 
                 return;
             }
@@ -181,9 +222,9 @@ if (formCadastro) {
 }
 
 
-/* ================================
-   LOGIN
-================================ */
+// ==========================================
+// LOGIN
+// ==========================================
 
 const formLogin =
     document.getElementById("form-login");
@@ -197,16 +238,19 @@ if (formLogin) {
 
             event.preventDefault();
 
+
             const email =
                 document
                     .getElementById("login-email")
                     .value
                     .trim();
 
+
             const password =
                 document
                     .getElementById("login-password")
                     .value;
+
 
             const mensagem =
                 document.getElementById(
@@ -236,8 +280,11 @@ if (formLogin) {
                     error
                 );
 
+
                 mensagem.textContent =
-                    "Erro: " + error.message;
+                    "Erro: " +
+                    error.message;
+
 
                 return;
             }
@@ -255,21 +302,22 @@ if (formLogin) {
 }
 
 
-/* ================================
-   LOGOUT
-================================ */
+// ==========================================
+// LOGOUT
+// ==========================================
 
 async function fazerLogout() {
 
     await supabaseClient.auth.signOut();
 
     atualizarUsuario();
+
 }
 
 
-/* ================================
-   VERIFICAR EDITORA
-================================ */
+// ==========================================
+// VERIFICAR SE É EDITORA
+// ==========================================
 
 async function verificarEditora() {
 
@@ -352,9 +400,9 @@ async function verificarEditora() {
 }
 
 
-/* ================================
-   MOSTRAR PAINEL DA EDITORA
-================================ */
+// ==========================================
+// MOSTRAR PAINEL DA EDITORA
+// ==========================================
 
 function mostrarPainelEditora() {
 
@@ -370,12 +418,13 @@ function mostrarPainelEditora() {
 
 
     painel.classList.remove("oculto");
+
 }
 
 
-/* ================================
-   ESCONDER PAINEL DA EDITORA
-================================ */
+// ==========================================
+// ESCONDER PAINEL DA EDITORA
+// ==========================================
 
 function esconderPainelEditora() {
 
@@ -391,12 +440,13 @@ function esconderPainelEditora() {
 
 
     painel.classList.add("oculto");
+
 }
 
 
-/* ================================
-   ATUALIZAR UTILIZADOR
-================================ */
+// ==========================================
+// ATUALIZAR UTILIZADOR
+// ==========================================
 
 async function atualizarUsuario() {
 
@@ -451,7 +501,6 @@ async function atualizarUsuario() {
 
     } else {
 
-
         if (mensagemBoasVindas) {
 
             mensagemBoasVindas.textContent =
@@ -478,9 +527,9 @@ async function atualizarUsuario() {
 }
 
 
-/* ================================
-   CRIAR PUBLICAÇÃO
-================================ */
+// ==========================================
+// CRIAR PUBLICAÇÃO
+// ==========================================
 
 async function criarPublicacao() {
 
@@ -489,10 +538,12 @@ async function criarPublicacao() {
             "editor-titulo"
         );
 
+
     const campoConteudo =
         document.getElementById(
             "editor-conteudo"
         );
+
 
     const mensagem =
         document.getElementById(
@@ -620,9 +671,9 @@ async function criarPublicacao() {
 }
 
 
-/* ================================
-   SUPABASE — SESSÃO
-================================ */
+// ==========================================
+// SUPABASE — ESTADO DE LOGIN
+// ==========================================
 
 supabaseClient.auth.onAuthStateChange(
     function() {
@@ -633,8 +684,8 @@ supabaseClient.auth.onAuthStateChange(
 );
 
 
-/* ================================
-   INICIAR
-================================ */
+// ==========================================
+// INICIAR
+// ==========================================
 
 atualizarUsuario();

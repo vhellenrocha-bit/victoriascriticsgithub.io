@@ -1,32 +1,227 @@
-<h1>O que há de pior no Restaurante Bresca? </h1>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O pior do Restaurante Bresca? — Victoria's Critics</title>
+    
+    <!-- ESTILO EDITORIAL DE ALTO IMPACTO (Inspirado nos seus modelos) -->
+    <style>
+        @import url('https://googleapis.com');
 
-<p class="subtitulo"> Por que não a "carbotrufa"? </p>
+        body {
+            background-color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            color: #111111;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
 
-<p>
-  Este é um texto sobre saudades, sabor e ódio.
-</p>
+        /* BARRA DO TOPO (Identidade da Revista) */
+        .header-artigo {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 1px solid #111111;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-<h2>Carbotrufa</h2>
-<p>
-  Apesar do nome sugestivo, a "carbotrufa" consegue juntar o pior dos seus ingredientes, mas antes de detalhar este impetuante sabor, 
-  gostaria de descrever a minha experiencia...
-  Naquela noite, havia marcado o jantar com antecedencia, mas confesso que fiquei surpresa quando cheguei e observei aquele lugar cheio, 
-  não estava preparada para esperar, e já premeditei o pior...
-  Todavia, não foi bem assim, um funcionário de pronto, guiou-me até a mesa, que estava perfeitamente reservada, a mesa continha uma poltrona que seguia para
-  a mesa ao lado, achei íntimo demais, parecia-me que o casal ao lado lia-me os pensamentos. 
-  O funcionário logo voltou com o menu, a príncipio os valores pareciam tão convidativos. Mas logo depois percebi o porquê.
-  O que inclinou-me a escolher o prato que é o motivo do meu ódio foi, na verdade, a saudade de um momento em minhas férias, carbonara lembra Roma, certo?
-  Então, why not carbotrufa?! 
+        .header-artigo .marca-link {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #111111;
+            letter-spacing: 2px;
+        }
 
-  <img src=carbotrufa.jpeg alt=Prato de massa com molho bacon e queijo>
-  
-  Então deixe-me contar melhor sobre, aquilo era um rigatoni muito al dente, estava muito seco já que o molho estava no fundo do prato, o prato era grande 
-  mas havia uma circunferencia pequena mo meio, de forma que a massa ficou apenas com a esperança de encostar no molho, e o acesso era complicado.
-  O molho era enjoativo, e bom, aquele não seria bem um permigiano reggiano, o gosto é de um grana padano, estava demais! 
-  E a cereja no topo do bolo foi a tal trufa, roubou todo o sabor e foi o grande problema no prato. Tudo sabia a trufa, quem pesou a mão?
-  O bacon veio tostado, queimado, rígido, crocante!
-  Pode ser bacon, não sou tão exigente, mas mal consegui sentir o sabor predominante deste corte.
-  E no final de tudo o que importa é o sabor, e se sacia tua fome, claro! Mal consegui terminar o prato, fiquei cheia de tudo, então de certa forma o prato
-  cumpriu um dos requisitos.
-  
-</p>
+        /* BLOCO DO TÍTULO (Dramático e Impactante) */
+        .bloco-titulo {
+            max-width: 800px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #111111;
+            margin: 0 0 15px 0;
+        }
+
+        .subtitulo {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #bd1c1c; /* Vermelho sutil para indicar a crítica negativa */
+            margin: 0 0 30px 0;
+        }
+
+        .autor-data {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888888;
+        }
+
+        /* CONTEÚDO DO TEXTO (Colunas e Espaçamento Inspirados no Modelo 2) */
+        .conteudo-editorial {
+            flex: 1;
+            max-width: 700px; /* Mantém a leitura focada e refinada */
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+            box-sizing: border-box;
+        }
+
+        .paragrafo-destaque {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #333333;
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+            border-left: 3px solid #111111;
+            padding-left: 20px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: #222222;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        /* RECORTE SOFISTICADO E MENOR DA IMAGEM (Solicitado) */
+        .container-imagem-recortada {
+            max-width: 380px; /* Tamanho menor e compacto de exibição */
+            margin: 40px auto;
+            padding: 10px;
+            background-color: #fbf9f6;
+            border: 1px solid #e2ded9; /* Moldura fina de exposição */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+        }
+
+        .container-imagem-recortada img {
+            width: 100%;
+            height: 380px; /* Força o formato perfeitamente quadrado (1:1) */
+            object-fit: cover; /* Recorta as bordas automaticamente de forma limpa */
+            display: block;
+            filter: grayscale(15%) contrast(105%); /* Dá um ar mais dramático/cool */
+            transition: filter 0.4s ease;
+        }
+
+        .container-imagem-recortada:hover img {
+            filter: grayscale(0%) contrast(100%); /* Volta à cor normal com interatividade */
+        }
+
+        .legenda-foto {
+            font-size: 0.75rem;
+            color: #777777;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        /* RODAPÉ DISCRETO COM A FRASE DE PROTEÇÃO NO FINAL ABSOLUTO */
+        .rodape-artigo {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid #eeeeee;
+            background-color: #ffffff;
+            margin-top: auto;
+        }
+
+        .rodape-artigo p {
+            font-size: 0.7rem; /* Fonte muito pequena */
+            color: #999999;
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VOLTAR PARA A CAPA -->
+    <header class="header-artigo">
+        <a href="index.html" class="marca-link">VICTORIA'S CRITICS</a>
+    </header>
+
+    <!-- ÁREA DO TÍTULO PRINCIPAL -->
+    <div class="bloco-titulo">
+        <h1>O que há de pior no Restaurante Bresca?</h1>
+        <p class="subtitulo">Por que não a "carbotrufa"?</p>
+        <div class="autor-data">Por Victoria • Setembro 2026</div>
+    </div>
+
+    <!-- TEXTO EDITORIAL DA CRÍTICA -->
+    <main class="conteudo-editorial">
+        
+        <p class="paragrafo-destaque">
+            Este é um texto sobre saudades, sabor e ódio.
+        </p>
+
+        <h2>Carbotrufa</h2>
+        
+        <p>
+            Apesar do nome sugestivo, a "carbotrufa" consegue juntar o pior dos seus ingredientes, mas antes de detalhar este impetuante sabor, gostaria de descrever a minha experiência...
+        </p>
+        
+        <p>
+            Naquela noite, havia marcado o jantar com antecedência, mas confesso que fiquei surpresa quando cheguei e observei aquele lugar cheio, não estava preparada para esperar, e já premeditei o pior... Todavia, não foi bem assim, um funcionário de pronto, guiou-me até a mesa, que estava perfeitamente reservada. A mesa continha uma poltrona que seguia para a mesa ao lado, achei íntimo demais, parecia-me que o casal ao lado lia-me os pensamentos.
+        </p>
+        
+        <p>
+            O funcionário logo voltou com o menu, a princípio os valores pareciam tão convidativos. Mas logo depois percebi o porquê. O que inclinou-me a escolher o prato que é o motivo do meu ódio foi, na verdade, a saudade de um momento em minhas férias, carbonara lembra Roma, certo? Então, <em>why not carbotrufa?!</em>
+        </p>
+
+        <!-- APRESENTAÇÃO SOFISTICADA DA IMAGEM EM TAMANHO MENOR E RECORTADA -->
+        <div class="container-imagem-recortada">
+            <img src="carbotrufa.jpeg" alt="Prato de massa com molho bacon e queijo">
+            <div class="legenda-foto">A "carbotrufa" servida no Restaurante Bresca: rigatoni muito al dente e excesso de trufa.</div>
+        </div>
+        
+        <p>
+            Então deixe-me contar melhor sobre, aquilo era um rigatoni muito al dente, estava muito seco já que o molho estava no fundo do prato, o prato era grande mas havia uma circunferência pequena no meio, de forma que a massa ficou apenas com a esperança de encostar no molho, e o acesso era complicado.
+        </p>
+        
+        <p>
+            O molho era enjoativo, e bom, aquele não seria bem um permigiano reggiano, o gosto é de um grana padano, estava demais! E a cereja no topo do bolo foi a tal trufa, roubou todo o sabor e foi o grande problema no prato. Tudo sabia a trufa, quem pesou a mão? O bacon veio tostado, queimado, rígido, crocante! Pode ser bacon, não sou tão exigente, mas mal consegui sentir o sabor predominante deste corte.
+        </p>
+        
+        <p>
+            E no final de tudo o que importa é o sabor, e se sacia tua fome, claro! Mal consegui terminar o prato, fiquei cheia de tudo, então de certa forma o prato cumpriu um dos requisitos.
+        </p>
+        
+    </main>
+
+    <!-- FRASE DE PROTEÇÃO MÁXIMA EXIGIDA NO FIM DA PÁGINA -->
+    <footer class="rodape-artigo">
+        <p>&copy; 2026 Victoria's Critics. Todos os direitos reservados. É proibida a cópia ou reprodução do conteúdo.</p>
+    </footer>
+
+</body>
+</html>

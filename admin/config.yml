@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: vhellenrocha-bit/victoriascriticsgithub.io # O seu repositório
+  branch: main
+
+media_folder: "images" # Pasta onde as fotos das suas resenhas vão ficar guardadas
+public_folder: "/images"
+
+collections:
+  - name: "resenhas"
+    label: "Resenhas Gastronómicas"
+    folder: "_posts" # Pasta onde os textos vão ser guardados automaticamente
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título da Resenha", name: "title", widget: "string" }
+      - { label: "Data de Publicação", name: "date", widget: "datetime" }
+      - { label: "Resumo / Subtítulo", name: "description", widget: "string" }
+      - { label: "Fotografia do Prato", name: "image", widget: "image" }
+      - { label: "Texto da Crítica", name: "body", widget: "markdown" }

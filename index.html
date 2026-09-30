@@ -218,7 +218,82 @@
 <body>
 
     <!-- BARRA SOCIAL DE ESTADO -->
-    <div class="barra-usuario"><button
+    <div class="barra-usuario"><section
+    id="painel-editora"
+    class="painel-editora oculto"
+>
+
+    <div class="painel-editora-cabecalho">
+
+        <div>
+            <span class="selo-editora">
+                ⚜ EDITORA
+            </span>
+
+            <h2>
+                Painel da Editora
+            </h2>
+
+            <p>
+                Área privada de publicação e gestão
+                do Victoria's Critics.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="editor-publicacao">
+
+        <h3>
+            Nova publicação
+        </h3>
+
+
+        <div class="campo-grupo">
+
+            <label for="editor-titulo">
+                Título
+            </label>
+
+            <input
+                type="text"
+                id="editor-titulo"
+                placeholder="Título da crítica"
+            >
+
+        </div>
+
+
+        <div class="campo-grupo">
+
+            <label for="editor-conteudo">
+                Texto
+            </label>
+
+            <textarea
+                id="editor-conteudo"
+                rows="10"
+                placeholder="Escreva aqui a sua crítica..."
+            ></textarea>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="btn-principal"
+            onclick="criarPublicacao()"
+        >
+            Publicar texto
+        </button>
+
+
+        <p id="mensagem-editor"></p>
+
+    </div>
+
+</section><button
     id="btn-painel-editora"
     class="btn-status-auth oculto"
     onclick="abrirPainelEditora()"

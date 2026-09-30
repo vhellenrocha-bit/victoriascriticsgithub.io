@@ -1,12 +1,247 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Painel de Administração - Victoria's Critics</title>
-  </head>
-  <body>
-    <!-- Inclui o script do painel de controlo direto do GitHub -->
-    <script src="https://unpkg.com@^3.0.0/dist/decap-cms.js"></script>
-  </body>
-</html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victoria's Critics — Painel de Controlo</title>
+    <style>
+        @import url('https://googleapis.com');
+
+        body {
+            background-color: #fbf9f6;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #111111;
+        }
+
+        /* CARD DE AUTENTICAÇÃO */
+        .painel-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+            max-width: 450px;
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 4px solid #4a1c1c; /* Tom Vinho da Revista */
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .campo-grupo {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #666666;
+            font-weight: 500;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfdfd;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4a1c1c;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        /* BOTÕES GOURMET INTERATIVOS */
+        .btn-principal {
+            background-color: #111111;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-principal:hover {
+            background-color: #4a1c1c; /* Muda para Vinho no foco */
+            transform: translateY(-2px);
+        }
+
+        .alternar-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #997d54; /* Tom Dourado */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* PAINEL DE ESCRITA (Escondido antes do Login) */
+        .oculto { display: none !important; }
+        
+        .painel-escrita {
+            max-width: 800px;
+        }
+
+        /* FRONTEIRA DISCRETA DE DIREITOS NO FUNDO DO PAINEL */
+        .rodape-painel {
+            font-size: 0.65rem;
+            color: #aaaaaa;
+            text-align: center;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. ECRÃ DE LOGIN / REGISTO -->
+    <div id="seccao-autenticacao" class="painel-container">
+        <h2 id="autenticacao-titulo">Victoria's Critics</h2>
+        
+        <form id="form-auth" onsubmit="tratarAutenticacao(event)">
+            <div class="campo-grupo">
+                <label>E-mail de Administrador</label>
+                <input type="email" id="auth-email" required placeholder="exemplo@victoriascritics.com">
+            </div>
+            <div class="campo-grupo">
+                <label>Palavra-passe</label>
+                <input type="password" id="auth-senha" required placeholder="Sua senha secreta">
+            </div>
+            <button type="submit" id="btn-auth-acao" class="btn-principal">Entrar no Painel</button>
+        </form>
+        
+        <a id="link-alternar" class="alternar-link" onclick="alternarModo()">Não tem conta? Criar conta de Dona</a>
+        <div class="rodape-painel">Acesso Restrito Editorial</div>
+    </div>
+
+    <!-- 2. PAINEL DE PUBLICAÇÃO REAL (Apenas visível após Login) -->
+    <div id="seccao-publicar" class="painel-container painel-escrita oculto">
+        <h2>Nova Resenha Gastronómica</h2>
+        
+        <form id="form-publicar" onsubmit="enviarParaGitHub(event)">
+            <div class="campo-grupo">
+                <label>Nome do Arquivo (Ex: resenha-restaurante-xyz.html)</label>
+                <input type="text" id="pub-slug" required placeholder="resenha-restaurante-xyz.html">
+            </div>
+            <div class="campo-grupo">
+                <label>Título da Crítica</label>
+                <input type="text" id="pub-titulo" required placeholder="O que há de melhor/pior no...">
+            </div>
+            <div class="campo-grupo">
+                <label>Subtítulo / Resumo Curto</label>
+                <input type="text" id="pub-subtitulo" required placeholder="Uma frase curta de impacto...">
+            </div>
+            <div class="campo-grupo">
+                <label>Nome do Arquivo da Imagem (Opcional)</label>
+                <input type="text" id="pub-imagem" placeholder="carbotrufa.jpeg">
+            </div>
+            <div class="campo-grupo">
+                <label>Texto Completo da Crítica (Use tags como &lt;p&gt; e &lt;h2&gt;)</label>
+                <textarea id="pub-texto" rows="10" required placeholder="Escreva aqui a sua experiência gastronómica..."></textarea>
+            </div>
+            <button type="submit" class="btn-principal">Publicar na Revista</button>
+            <button type="button" onclick="fazerLogout()" class="btn-principal" style="background-color: #666; margin-top: 10px;">Sair do Painel</button>
+        </form>
+    </div>
+
+    <!-- SCRIPT DE INTELIGÊNCIA E COMPORTAMENTO DO SITE -->
+    <script>
+        let modoLogin = true;
+        const tokenGitHub = "SEU_PERSONAL_ACCESS_TOKEN_AQUI"; // Token do GitHub para salvar arquivos de forma direta
+        const usuarioGitHub = "vhellenrocha-bit";
+        const repositorioGitHub = "victoriascriticsgithub.io";
+
+        function alternarModo() {
+            modoLogin = !modoLogin;
+            document.getElementById('autenticacao-titulo').innerText = modoLogin ? "Victoria's Critics" : "Criar Conta de Dona";
+            document.getElementById('btn-auth-acao').innerText = modoLogin ? "Entrar no Painel" : "Registar como Proprietária";
+            document.getElementById('link-alternar').innerText = modoLogin ? "Não tem conta? Criar conta de Dona" : "Já tem conta? Fazer Login";
+        }
+
+        // SIMULAÇÃO DO SISTEMA DE CONTAS (Local Secure Storage)
+        function tratarAutenticacao(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const senha = document.getElementById('auth-senha').value;
+
+            if (modoLogin) {
+                // Tenta fazer o Login
+                if (localStorage.getItem(email) === senha) {
+                    entrarNoPainel();
+                } else {
+                    alert("Dados incorretos! Verifique a senha ou crie uma nova conta.");
+                }
+            } else {
+                // Cria a Conta localmente no navegador de forma instantânea
+                localStorage.setItem(email, senha);
+                alert("Conta de Dona criada com total sucesso! Pode fazer o seu login.");
+                alternarModo();
+            }
+        }
+
+        function entrarNoPainel() {
+            document.getElementById('seccao-autenticacao').classList.add('oculto');
+            document.getElementById('seccao-publicar').classList.remove('orvalho', 'oculto');
+        }
+
+        function fazerLogout() {
+            document.getElementById('seccao-publicar').classList.add('oculto');
+            document.getElementById('seccao-autenticacao').classList.remove('oculto');
+            document.getElementById('form-publicar').reset();
+        }
+
+        // FUNÇÃO INTERATIVA QUE ENVIA A SUA RESENHA DIRETO PARA O GITHUB SÓ COM UM CLIQUE
+        async function enviarParaGitHub(e) {
+            e.preventDefault();
+            
+            const slug = document.getElementById('pub-slug').value;
+            const titulo = document.getElementById('pub-titulo').value;
+            const subtitulo = document.getElementById('pub-subtitulo').value;
+            const imagem = document.getElementById('pub-imagem').value || 'carbotrufa.jpeg';
+            const texto = document.getElementById('pub-texto').value;
+
+            // Monta o código completo da página com o estilo de revista luxuosa automaticamente
+            const codigoHTMLCompleto = `<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${titulo} — Victoria's Critics</title>
+    <link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+    <header style="text-align: center; padding: 30px 20px; border-bottom: 1px solid #111111; max-width: 900px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+        <a href="index.html" style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; text-decoration: none; color: #111111; letter-spacing: 2px;">VICTORIA'S CRITICS</a>
+    </header>
+    <div style="max-width: 800px; margin: 60px auto 40px auto; padding: 0 20px; text-align: center;">
+        <h1>${titulo}</h1>
+        <p class="subtitulo">${subtitulo}</p>

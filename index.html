@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victoria's Critics - Mosaico Interativo</title>
+    <title>Victoria's Critics - Rede Social Gastronómica</title>
     
     <style>
         @import url('https://googleapis.com');
@@ -19,36 +19,42 @@
             flex-direction: column;
         }
 
-        /* BOTÃO DE LOGIN NA PÁGINA PÚBLICA */
-        .btn-admin-topo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: #4a1c1c;
+        /* BARRA SUPERIOR DE UTILIZADOR (Estilo Rede Social) */
+        .barra-usuario {
+            background-color: #111111;
             color: #ffffff;
-            border: 1px solid #997d54;
-            padding: 8px 15px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
             letter-spacing: 1px;
-            cursor: pointer;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            z-index: 10;
+            text-transform: uppercase;
         }
 
-        .btn-admin-topo:hover {
-            background-color: #111111;
+        .btn-status-auth {
+            background-color: transparent;
+            color: #997d54;
+            border: 1px solid #997d54;
+            padding: 5px 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .btn-status-auth:hover {
+            background-color: #4a1c1c;
+            color: white;
         }
 
         .topo-revista {
             text-align: center;
-            padding: 60px 20px 30px 20px;
+            padding: 40px 20px 30px 20px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
             box-sizing: border-box;
-            position: relative;
         }
 
         .topo-revista h1 {
@@ -57,13 +63,6 @@
             font-weight: 700;
             letter-spacing: 2px;
             margin: 10px 0;
-        }
-
-        .data-edicao {
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: #997d54;
-            font-weight: 600;
         }
 
         .subtitulo-revista {
@@ -94,7 +93,7 @@
             background-color: #111111;
             cursor: pointer;
             border-radius: 4px;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .bloco-mosaico:hover {
@@ -102,14 +101,7 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
 
-        .bloco-mosaico a {
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
+        .bloco-mosaico a { text-decoration: none; color: inherit; width: 100%; height: 100%; display: block; }
         .bloco-mosaico.grande { grid-column: span 2; grid-row: span 2; }
         .bloco-mosaico.alto { grid-row: span 2; }
         .bloco-mosaico.largo { grid-column: span 2; }
@@ -117,19 +109,8 @@
         .bloco-mosaico.cor-vinho { background-color: #4a1c1c; color: #ffffff; padding: 30px; display: flex; align-items: center; }
         .bloco-mosaico.cor-oliva { background-color: #2d3b32; color: #ffffff; padding: 30px; display: flex; align-items: center; }
 
-        .bloco-mosaico img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-
+        .bloco-mosaico img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
         .bloco-mosaico:hover img { transform: scale(1.08); }
-
-        .conteudo-texto-bloco h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 0 0 10px 0; }
-        .conteudo-texto-bloco p { font-size: 0.9rem; line-height: 1.6; color: #dddddd; font-weight: 300; margin: 0; }
-        .tag-bloco { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #997d54; display: block; margin-bottom: 10px; }
 
         .legenda-mosaico {
             position: absolute;
@@ -139,128 +120,131 @@
             color: #ffffff;
         }
 
-        .legenda-mosaico h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 5px 0 0 0; font-weight: 400; line-height: 1.3; }
+        .legenda-mosaico h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 5px 0 0 0; line-height: 1.3; }
 
-        /* JANELA FLUTUANTE (MODAL INTERATIVO) */
+        /* MURAL SOCIAL DE COMENTÁRIOS COLETIVOS */
+        .mural-social-seccao {
+            max-width: 1200px;
+            width: 100%;
+            margin: 50px auto;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .mural-social-seccao h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #4a1c1c;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .caixa-comentario-feed {
+            background-color: #fdfdfd;
+            border-left: 3px solid #997d54;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.01);
+        }
+
+        .autor-comentario {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a1c1c;
+            margin-bottom: 5px;
+        }
+
+        .texto-comentario {
+            font-size: 0.95rem;
+            color: #333333;
+            margin: 0;
+        }
+
+        /* MODAL DE AUTENTICAÇÃO */
         .modal-admin {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
+            display: flex; justify-content: center; align-items: center; z-index: 100;
         }
 
         .janela-container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 100%;
-            box-sizing: border-box;
-            border-top: 4px solid #4a1c1c;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
+            background-color: #ffffff; padding: 40px; border-radius: 8px; max-width: 500px; width: 100%;
+            box-sizing: border-box; border-top: 4px solid #4a1c1c; position: relative;
         }
 
-        .fechar-modal {
-            position: absolute;
-            top: 15px; right: 15px;
-            font-size: 1.5rem; cursor: pointer; color: #666;
-        }
-
+        .fechar-modal { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; }
         .campo-grupo { margin-bottom: 20px; }
         label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #666; font-weight: 500; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; }
         
         .btn-principal {
             background-color: #111111; color: #ffffff; border: none; width: 100%; padding: 14px;
-            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px; transition: background 0.3s;
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px;
         }
         .btn-principal:hover { background-color: #4a1c1c; }
-
-        .link-alternar {
-            display: block; text-align: center; margin-top: 15px; color: #997d54; text-decoration: none; cursor: pointer; font-size: 0.85rem;
-        }
-
+        .link-alternar { display: block; text-align: center; margin-top: 15px; color: #997d54; text-decoration: none; cursor: pointer; font-size: 0.85rem; }
         .oculto { display: none !important; }
 
-        .rodape-discreto {
-            text-align: center; padding: 40px 20px; border-top: 1px solid #eeeeee; background-color: #ffffff; margin-top: 40px;
-        }
+        .rodape-discreto { text-align: center; padding: 40px 20px; border-top: 1px solid #eeeeee; background-color: #ffffff; }
         .rodape-discreto p { font-size: 0.7rem; color: #999999; margin: 0; }
     </style>
 </head>
 <body>
 
-    <!-- BOTÃO PÚBLICO NO TOPO -->
-    <button class="btn-admin-topo" onclick="abrirModal()">Painel da Editora</button>
+    <!-- BARRA SOCIAL INDICA SE O UTILIZADOR ESTÁ LOGADO -->
+    <div class="barra-usuario">
+        <span id="mensagem-boas-vindas">Modo Leitor Anónimo</span>
+        <button id="btn-auth-topo" class="btn-status-auth" onclick="abrirModal()">Entrar / Registar</button>
+    </div>
 
     <header class="topo-revista">
-        <span class="data-edicao">EDIÇÃO N° 01 — 2026</span>
         <h1>VICTORIA'S CRITICS</h1>
-        <p class="subtitulo-revista">Alta Gastronomia & Crítica Independente</p>
+        <p class="subtitulo-revista">Alta Gastronomia & Rede Social Independente</p>
     </header>
 
-    <!-- MOSAICO PÚBLICO COM IMAGENS REAIS ATIVAS -->
+    <!-- MOSAICO PÚBLICO -->
     <main class="mosaico-container">
-        <!-- Bloco 1: Imagem Gourmet de Entrada (Alta Cozinha Escura) -->
         <div class="bloco-mosaico grande" onclick="location.href='resenha-restaurante-bresca.html'">
             <a href="resenha-restaurante-bresca.html">
-                <img src="https://unsplash.com" alt="Bresca Gastronomia Especial">
-                <div class="legenda-mosaico">
-                    <h3>Uma experiência inesquecível no Restaurante Bresca</h3>
-                </div>
+                <img src="https://unsplash.com" alt="Restaurante Bresca">
+                <div class="legenda-mosaico"><h3>Uma experiência inesquecível no Restaurante Bresca</h3></div>
             </a>
         </div>
-
         <div class="bloco-mosaico cor-vinho">
-            <div class="conteudo-texto-bloco">
-                <span class="tag-bloco">O Manifesto</span>
-                <p>"A cozinha contemporânea não é apenas sobre alimentar, é sobre contar histórias através das texturas."</p>
-            </div>
+            <div class="conteudo-texto-bloco"><span class="tag-bloco">O Manifesto</span><p>"A cozinha contemporânea não é apenas sobre alimentar, é sobre contar histórias através das texturas."</p></div>
         </div>
-
-        <!-- Bloco 3: Imagem Vertical de Doçaria/Sobremesa Fina -->
         <div class="bloco-mosaico alto">
-            <img src="https://unsplash.com" alt="Açúcar na Alta Cozinha">
-            <div class="legenda-mosaico">
-                <h3>A Reinvenção do Açúcar na Alta Cozinha</h3>
-            </div>
+            <img src="https://unsplash.com" alt="Sobremesa">
+            <div class="legenda-mosaico"><h3>A Reinvenção do Açúcar na Alta Cozinha</h3></div>
         </div>
-
         <div class="bloco-mosaico cor-oliva">
-            <div class="conteudo-texto-bloco">
-                <span class="tag-bloco">Novidades</span>
-                <h3>Críticas Secretas</h3>
-                <p>Análises exclusivas aos bastidores dos restaurantes mais cobiçados da temporada.</p>
-            </div>
+            <div class="conteudo-texto-bloco"><span class="tag-bloco">Mural Ativo</span><h3>Críticas Vivas</h3><p>Registe uma conta em segundos e adicione a sua voz ao nosso feed gastronómico global.</p></div>
         </div>
-
-        <!-- Bloco 5: Imagem Horizontal de Prato Gourmet Italiano Colorido -->
         <div class="bloco-mosaico largo">
-            <img src="https://unsplash.com" alt="Ingredientes e Sabores Finos">
-            <div class="legenda-mosaico">
-                <h3>O Segredo por Trás dos Ingredientes Ancestrais</h3>
-            </div>
+            <img src="https://unsplash.com" alt="Prato">
+            <div class="legenda-mosaico"><h3>O Segredo por Trás dos Ingredientes Ancestrais</h3></div>
         </div>
     </main>
 
-    <!-- JANELA FLUTUANTE (MODAL COMPLETO) -->
-    <div id="modalAdmin" class="modal-admin oculto">
-        <div class="janela-container">
-            <span class="fechar-modal" onclick="fecharModal()">&times;</span>
-            
-            <!-- 1. LOGIN -->
-            <div id="bloco-login">
-                <h2 style="font-family: 'Playfair Display', serif; text-align: center;">Acesso à Revista</h2>
-                <form onsubmit="executarLogin(event)">
-                    <div class="campo-grupo">
-                        <label>E-mail</label>
-                        <input type="email" id="login-email" required placeholder="seu-email@gmail.com">
-                    </div>
-                    <div class="campo-grupo">
-                        <label>Password</label>
-                        <input type="password" id="login-senha" required placeholder="Sua password">
+    <!-- FEED SOCIAL EM TEMPO REAL NO FUNDO DA PÁGINA PÚBLICA -->
+    <section class="mural-social-seccao">
+        <h2>Mural Social de Discussão</h2>
+        
+        <!-- Área onde os comentários de todos aparecem dinamicamente -->
+        <div id="mural-feed-comentarios">
+            <!-- Comentários iniciais de exemplo -->
+            <div class="caixa-comentario-feed">
+                <div class="autor-comentario">pedro.gourmet@gmail.com escreveu sobre Restaurante Bresca:</div>
+                <p class="texto-comentario">Fui lá na semana passada e concordo totalmente com a Victoria, a quantidade de trufa arruinou o prato principal!</p>
+            </div>
+        </div>
+
+        <!-- Área de Input de Comentário (Disponível apenas para contas registadas) -->
+        <div id="zona-escrever-comentario" style="margin-top: 30px;" class="oculto">
+            <h4 style="margin-bottom: 10px;">Adicione o seu comentário ao Feed Social:</h4>
+            <div class="campo-grupo">

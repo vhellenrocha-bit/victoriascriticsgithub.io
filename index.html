@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victoria's Critics - Rede Social Gastronómica</title>
+    <title>Victoria's Critics - Mosaico Interativo & Rede Social</title>
     
+    <!-- CONEXÃO COM O FIREBASE (BASE DE DADOS DA REDE SOCIAL) -->
+    <script src="https://gstatic.com"></script>
+    <script src="https://gstatic.com"></script>
+
     <style>
         @import url('https://googleapis.com');
 
@@ -12,239 +16,141 @@
             background-color: #fbf9f6;
             font-family: 'Inter', sans-serif;
             color: #111111;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
         }
 
-        /* BARRA SUPERIOR DE UTILIZADOR (Estilo Rede Social) */
-        .barra-usuario {
-            background-color: #111111;
-            color: #ffffff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .btn-admin-topo {
+            position: absolute; top: 20px; left: 20px;
+            background-color: #4a1c1c; color: #ffffff;
+            border: 1px solid #997d54; padding: 8px 15px;
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 1px; cursor: pointer; border-radius: 2px;
+            z-index: 10; transition: all 0.3s;
         }
+        .btn-admin-topo:hover { background-color: #111111; }
 
-        .btn-status-auth {
-            background-color: transparent;
-            color: #997d54;
-            border: 1px solid #997d54;
-            padding: 5px 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            transition: all 0.3s;
-        }
-
-        .btn-status-auth:hover {
-            background-color: #4a1c1c;
-            color: white;
-        }
-
-        .topo-revista {
-            text-align: center;
-            padding: 40px 20px 30px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .topo-revista h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin: 10px 0;
-        }
-
-        .subtitulo-revista {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #555555;
-            margin: 0;
-        }
+        .topo-revista { text-align: center; padding: 60px 20px 30px 20px; }
+        .topo-revista h1 { font-family: 'Playfair Display', serif; font-size: 3.8rem; margin: 10px 0; }
+        .subtitulo-revista { font-family: 'Playfair Display', serif; font-style: italic; color: #555555; margin: 0; }
 
         /* GRELHA DO MOSAICO */
         .mosaico-container {
-            flex: 1;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            box-sizing: border-box;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 220px;
-            gap: 20px;
+            max-width: 1200px; width: 100%; margin: 0 auto; padding: 20px; box-sizing: border-box;
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 20px;
         }
 
-        .bloco-mosaico {
-            position: relative;
-            overflow: hidden;
-            background-color: #111111;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .bloco-mosaico:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-        }
-
-        .bloco-mosaico a { text-decoration: none; color: inherit; width: 100%; height: 100%; display: block; }
+        .bloco-mosaico { position: relative; overflow: hidden; background-color: #111111; border-radius: 4px; transition: transform 0.4s, box-shadow 0.4s; }
+        .bloco-mosaico:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+        .bloco-mosaico a { text-decoration: none; color: inherit; display: block; width: 100%; height: 100%; }
         .bloco-mosaico.grande { grid-column: span 2; grid-row: span 2; }
         .bloco-mosaico.alto { grid-row: span 2; }
         .bloco-mosaico.largo { grid-column: span 2; }
-
         .bloco-mosaico.cor-vinho { background-color: #4a1c1c; color: #ffffff; padding: 30px; display: flex; align-items: center; }
         .bloco-mosaico.cor-oliva { background-color: #2d3b32; color: #ffffff; padding: 30px; display: flex; align-items: center; }
-
-        .bloco-mosaico img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+        
+        .bloco-mosaico img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
         .bloco-mosaico:hover img { transform: scale(1.08); }
 
-        .legenda-mosaico {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 40px 20px 20px 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: #ffffff;
-        }
+        .legenda-mosaico { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 20px 20px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: #ffffff; }
+        .legenda-mosaico h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 5px 0 0 0; }
 
-        .legenda-mosaico h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 5px 0 0 0; line-height: 1.3; }
+        /* JANELA MODAL */
+        .modal-admin { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 100; }
+        .janela-container { background-color: #ffffff; padding: 40px; border-radius: 8px; max-width: 500px; width: 100%; box-sizing: border-box; border-top: 4px solid #4a1c1c; position: relative; max-height: 90vh; overflow-y: auto; }
+        .fechar-modal { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; color: #666; }
 
-        /* MURAL SOCIAL DE COMENTÁRIOS COLETIVOS */
-        .mural-social-seccao {
-            max-width: 1200px;
-            width: 100%;
-            margin: 50px auto;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-        }
-
-        .mural-social-seccao h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            border-bottom: 2px solid #4a1c1c;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        .caixa-comentario-feed {
-            background-color: #fdfdfd;
-            border-left: 3px solid #997d54;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border-radius: 0 4px 4px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.01);
-        }
-
-        .autor-comentario {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #4a1c1c;
-            margin-bottom: 5px;
-        }
-
-        .texto-comentario {
-            font-size: 0.95rem;
-            color: #333333;
-            margin: 0;
-        }
-
-        /* MODAL DE AUTENTICAÇÃO */
-        .modal-admin {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            display: flex; justify-content: center; align-items: center; z-index: 100;
-        }
-
-        .janela-container {
-            background-color: #ffffff; padding: 40px; border-radius: 8px; max-width: 500px; width: 100%;
-            box-sizing: border-box; border-top: 4px solid #4a1c1c; position: relative;
-        }
-
-        .fechar-modal { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; }
         .campo-grupo { margin-bottom: 20px; }
-        label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #666; font-weight: 500; }
-        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; }
+        label { display: block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: #666; font-weight: 500; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
-        .btn-principal {
-            background-color: #111111; color: #ffffff; border: none; width: 100%; padding: 14px;
-            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px;
-        }
+        .btn-principal { background-color: #111111; color: #ffffff; border: none; width: 100%; padding: 14px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px; }
         .btn-principal:hover { background-color: #4a1c1c; }
-        .link-alternar { display: block; text-align: center; margin-top: 15px; color: #997d54; text-decoration: none; cursor: pointer; font-size: 0.85rem; }
+        .link-alternar { display: block; text-align: center; margin-top: 15px; color: #997d54; cursor: pointer; font-size: 0.85rem; }
         .oculto { display: none !important; }
 
-        .rodape-discreto { text-align: center; padding: 40px 20px; border-top: 1px solid #eeeeee; background-color: #ffffff; }
+        /* MURAL DE COMENTÁRIOS DA REDE SOCIAL */
+        .mural-comentarios { margin-top: 25px; max-height: 200px; overflow-y: auto; border-top: 1px solid #eee; padding-top: 15px; }
+        .item-comentario { background-color: #f9f9f9; padding: 10px; border-radius: 4px; margin-bottom: 10px; font-size: 0.85rem; border-left: 3px solid #997d54; }
+        .item-comentario strong { color: #4a1c1c; display: block; margin-bottom: 2px; }
+
+        .rodape-discreto { text-align: center; padding: 40px 20px; border-top: 1px solid #eeeeee; background-color: #ffffff; margin-top: auto; }
         .rodape-discreto p { font-size: 0.7rem; color: #999999; margin: 0; }
     </style>
 </head>
 <body>
 
-    <!-- BARRA SOCIAL INDICA SE O UTILIZADOR ESTÁ LOGADO -->
-    <div class="barra-usuario">
-        <span id="mensagem-boas-vindas">Modo Leitor Anónimo</span>
-        <button id="btn-auth-topo" class="btn-status-auth" onclick="abrirModal()">Entrar / Registar</button>
-    </div>
+    <button class="btn-admin-topo" id="btn-status-painel" onclick="abrirModal()">Entrar na Rede</button>
 
     <header class="topo-revista">
+        <span class="data-edicao" style="font-size: 0.75rem; letter-spacing: 3px; color: #997d54; font-weight: 600;">EDIÇÃO N° 01 — 2026</span>
         <h1>VICTORIA'S CRITICS</h1>
         <p class="subtitulo-revista">Alta Gastronomia & Rede Social Independente</p>
     </header>
 
-    <!-- MOSAICO PÚBLICO -->
     <main class="mosaico-container">
-        <div class="bloco-mosaico grande" onclick="location.href='resenha-restaurante-bresca.html'">
+        <div class="bloco-mosaico grande">
             <a href="resenha-restaurante-bresca.html">
-                <img src="https://unsplash.com" alt="Restaurante Bresca">
+                <img src="https://unsplash.com" alt="Bresca">
                 <div class="legenda-mosaico"><h3>Uma experiência inesquecível no Restaurante Bresca</h3></div>
             </a>
         </div>
         <div class="bloco-mosaico cor-vinho">
-            <div class="conteudo-texto-bloco"><span class="tag-bloco">O Manifesto</span><p>"A cozinha contemporânea não é apenas sobre alimentar, é sobre contar histórias através das texturas."</p></div>
+            <div class="conteudo-texto-bloco" style="padding: 30px;"><p>"A cozinha contemporânea não é apenas sobre alimentar, é sobre contar histórias."</p></div>
         </div>
         <div class="bloco-mosaico alto">
             <img src="https://unsplash.com" alt="Sobremesa">
             <div class="legenda-mosaico"><h3>A Reinvenção do Açúcar na Alta Cozinha</h3></div>
         </div>
         <div class="bloco-mosaico cor-oliva">
-            <div class="conteudo-texto-bloco"><span class="tag-bloco">Mural Ativo</span><h3>Críticas Vivas</h3><p>Registe uma conta em segundos e adicione a sua voz ao nosso feed gastronómico global.</p></div>
+            <div class="conteudo-texto-bloco" style="padding: 30px;"><h3>Críticas Secretas</h3><p>Análises exclusivas aos bastidores dos restaurantes.</p></div>
         </div>
         <div class="bloco-mosaico largo">
-            <img src="https://unsplash.com" alt="Prato">
+            <img src="https://unsplash.com" alt="Massa">
             <div class="legenda-mosaico"><h3>O Segredo por Trás dos Ingredientes Ancestrais</h3></div>
         </div>
     </main>
 
-    <!-- FEED SOCIAL EM TEMPO REAL NO FUNDO DA PÁGINA PÚBLICA -->
-    <section class="mural-social-seccao">
-        <h2>Mural Social de Discussão</h2>
-        
-        <!-- Área onde os comentários de todos aparecem dinamicamente -->
-        <div id="mural-feed-comentarios">
-            <!-- Comentários iniciais de exemplo -->
-            <div class="caixa-comentario-feed">
-                <div class="autor-comentario">pedro.gourmet@gmail.com escreveu sobre Restaurante Bresca:</div>
-                <p class="texto-comentario">Fui lá na semana passada e concordo totalmente com a Victoria, a quantidade de trufa arruinou o prato principal!</p>
+    <!-- INTERFACE FLUTUANTE DA REDE SOCIAL -->
+    <div id="modalAdmin" class="modal-admin oculto">
+        <div class="janela-container">
+            <span class="fechar-modal" onclick="fecharModal()">&times;</span>
+            
+            <!-- FORMULÁRIO DE LOGIN -->
+            <div id="bloco-login">
+                <h2 style="font-family: 'Playfair Display', serif; text-align: center;">Login Social</h2>
+                <form onsubmit="executarLogin(event)">
+                    <div class="campo-grupo"><label>E-mail</label><input type="email" id="login-email" Republic required></div>
+                    <div class="campo-grupo"><label>Password</label><input type="password" id="login-senha" required></div>
+                    <button type="submit" class="btn-principal">Entrar</button>
+                </form>
+                <a class="link-alternar" onclick="mostrarRegisto()">Não tem conta? Criar conta na rede</a>
             </div>
-        </div>
 
-        <!-- Área de Input de Comentário (Disponível apenas para contas registadas) -->
-        <div id="zona-escrever-comentario" style="margin-top: 30px;" class="oculto">
-            <h4 style="margin-bottom: 10px;">Adicione o seu comentário ao Feed Social:</h4>
-            <div class="campo-grupo">
+            <!-- FORMULÁRIO DE REGISTO -->
+            <div id="bloco-registo" class="oculto">
+                <h2 style="font-family: 'Playfair Display', serif; text-align: center;">Criar Perfil</h2>
+                <form onsubmit="executarRegisto(event)">
+                    <div class="campo-grupo"><label>E-mail</label><input type="email" id="registo-email" required></div>
+                    <div class="campo-grupo"><label>Password (mín. 6 caracteres + números)</label><input type="password" id="registo-senha" required></div>
+                    <button type="submit" class="btn-principal">Criar Conta</button>
+                </form>
+                <a class="link-alternar" onclick="mostrarLogin()">Já tem conta? Fazer Login</a>
+            </div>
+
+            <!-- ESPAÇO DA DONA DO SITE (VICTORIA) -->
+            <div id="bloco-escrita" class="oculto">
+                <h2 style="font-family: 'Playfair Display', serif; color: #4a1c1c;">Painel da Proprietária</h2>
+                <p>Autenticada: vhellen.rocha@gmail.com</p>
+                <form onsubmit="gerarArquivoDona(event)">
+                    <div class="campo-grupo"><label>Nome do Arquivo (.html)</label><input type="text" id="form-slug" required placeholder="resenha-x.html"></div>
+                    <div class="campo-grupo"><label>Título</label><input type="text" id="form-titulo" required></div>
+                    <div class="campo-grupo"><label>Subtítulo</label><input type="text" id="form-subtitulo" required></div>
+                    <div class="campo-grupo"><label>Texto</label><textarea id="form-texto" rows="4" required></textarea></div>
+                    <button type="submit" class="btn-principal">Publicar Resenha</button>
+                </form>
+            </div>
+
+            <!-- ESPAÇO DE COMENTÁRIOS DA REDE SOCIAL (Aba viva para leitores) -->
+            <div id="bloco-comentarios" class="oculto">

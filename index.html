@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victoria's Critics - Mosaico Interativo</title>
     
-    <!-- DESIGN PREMIUM E PALETA DE CORES GOURMET -->
     <style>
         @import url('https://googleapis.com');
 
@@ -20,6 +19,29 @@
             flex-direction: column;
         }
 
+        /* BOTÃO DE LOGIN NA PÁGINA PÚBLICA */
+        .btn-admin-topo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #111111;
+            color: #ffffff;
+            border: 1px solid #997d54;
+            padding: 8px 15px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .btn-admin-topo:hover {
+            background-color: #4a1c1c;
+            color: #ffffff;
+        }
+
         .topo-revista {
             text-align: center;
             padding: 60px 20px 30px 20px;
@@ -27,6 +49,7 @@
             margin: 0 auto;
             width: 100%;
             box-sizing: border-box;
+            position: relative;
         }
 
         .topo-revista h1 {
@@ -52,7 +75,7 @@
             margin: 0;
         }
 
-        /* MOSAICO INTERATIVO (GRELHA DE REVISTA) */
+        /* GRELHA DO MOSAICO */
         .mosaico-container {
             flex: 1;
             max-width: 1200px;
@@ -66,22 +89,18 @@
             gap: 20px;
         }
 
-        /* ELEMENTOS DO MOSAICO INTERATIVO */
         .bloco-mosaico {
             position: relative;
             overflow: hidden;
             background-color: #111111;
             cursor: pointer;
             border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            /* Animação de entrada suave */
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
         }
 
-        /* INTERATIVIDADE: Efeito Flutuante ao passar o rato (Hover) */
         .bloco-mosaico:hover {
-            transform: translateY(-5px); /* O bloco levanta ligeiramente */
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* A sombra aumenta */
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
 
         .bloco-mosaico a {
@@ -92,16 +111,13 @@
             display: block;
         }
 
-        /* TAMANHOS DO MOSAICO */
         .bloco-mosaico.grande { grid-column: span 2; grid-row: span 2; }
         .bloco-mosaico.alto { grid-row: span 2; }
         .bloco-mosaico.largo { grid-column: span 2; }
 
-        /* CORES GOURMET DAS CAIXAS */
         .bloco-mosaico.cor-vinho { background-color: #4a1c1c; color: #ffffff; padding: 30px; display: flex; align-items: center; }
         .bloco-mosaico.cor-oliva { background-color: #2d3b32; color: #ffffff; padding: 30px; display: flex; align-items: center; }
 
-        /* IMAGENS COM ZOOM INTERATIVO */
         .bloco-mosaico img {
             width: 100%;
             height: 100%;
@@ -110,53 +126,69 @@
             transition: transform 0.6s ease;
         }
 
-        .bloco-mosaico:hover img {
-            transform: scale(1.08); /* Dá zoom na comida ao passar o rato */
-        }
+        .bloco-mosaico:hover img { transform: scale(1.08); }
 
-        /* TEXTOS INTERATIVOS */
         .conteudo-texto-bloco h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 0 0 10px 0; }
         .conteudo-texto-bloco p { font-size: 0.9rem; line-height: 1.6; color: #dddddd; font-weight: 300; margin: 0; }
         .tag-bloco { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #997d54; display: block; margin-bottom: 10px; }
 
-        /* LEGENDAS SOBRE AS FOTOS */
         .legenda-mosaico {
             position: absolute;
             bottom: 0; left: 0; right: 0;
             padding: 40px 20px 20px 20px;
             background: linear-gradient(transparent, rgba(0,0,0,0.9));
             color: #ffffff;
-            transition: background 0.3s ease;
         }
 
-        /* INTERATIVIDADE: Escurece a legenda no foco */
-        .bloco-mosaico:hover .legenda-mosaico {
-            background: linear-gradient(transparent, rgba(0,0,0,0.95));
-        }
-
-        .legenda-mosaico .categoria { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #997d54; font-weight: 600; }
+        .legenda-mosaico class="categoria" { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #997d54; font-weight: 600; }
         .legenda-mosaico h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 5px 0 0 0; font-weight: 400; line-height: 1.3; }
 
-        /* RODAPÉ SOLICITADO (DISCRETO E PEQUENO NO FUNDO) */
-        .rodape-discreto {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid #eeeeee;
+        /* JANELA FLUTUANTE DE LOGIN E ESCRITA (MODAL) */
+        .modal-admin {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .janela-container {
             background-color: #ffffff;
-            margin-top: 40px;
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 4px solid #4a1c1c;
+            position: relative;
         }
 
-        .rodape-discreto p {
-            font-size: 0.7rem;
-            color: #999999;
-            letter-spacing: 0.5px;
-            margin: 0;
+        .fechar-modal {
+            position: absolute;
+            top: 15px; right: 15px;
+            font-size: 1.5rem; cursor: pointer; color: #666;
         }
 
-        /* RESPONSIVIDADE PARA TELEMÓVEIS */
-        @media (max-width: 900px) {
-            .mosaico-container { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+        .campo-grupo { margin-bottom: 20px; }
+        label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #666; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; }
+        
+        .btn-principal {
+            background-color: #111111; color: #ffffff; border: none; width: 100%; padding: 14px;
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px;
         }
+        .btn-principal:hover { background-color: #4a1c1c; }
+
+        .oculto { display: none !important; }
+
+        .rodape-discreto {
+            text-align: center; padding: 40px 20px; border-top: 1px solid #eeeeee; background-color: #ffffff; margin-top: 40px;
+        }
+        .rodape-discreto p { font-size: 0.7rem; color: #999999; margin: 0; }
+
+        @media (max-width: 900px) { .mosaico-container { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; } }
         @media (max-width: 600px) {
             .mosaico-container { grid-template-columns: 1fr; grid-auto-rows: auto; }
             .bloco-mosaico.grande, .bloco-mosaico.alto, .bloco-mosaico.largo { grid-column: span 1; grid-row: span 1; height: 280px; }
@@ -165,69 +197,71 @@
 </head>
 <body>
 
-    <!-- CABEÇALHO -->
+    <!-- BOTÃO PÚBLICO DE ACESSO -->
+    <button class="btn-admin-topo" onclick="abrirModal()">Painel da Editora</button>
+
     <header class="topo-revista">
         <span class="data-edicao">EDIÇÃO N° 01 — 2026</span>
         <h1>VICTORIA'S CRITICS</h1>
         <p class="subtitulo-revista">Alta Gastronomia & Crítica Independente</p>
     </header>
 
-    <!-- MOSAICO GOURMET INTERATIVO -->
+    <!-- MOSAICO PÚBLICO -->
     <main class="mosaico-container">
-        
-        <!-- Bloco 1: Foto Grande (Link Interativo para o Bresca) -->
         <div class="bloco-mosaico grande" onclick="location.href='resenha-restaurante-bresca.html'">
             <a href="resenha-restaurante-bresca.html">
                 <img src="https://unsplash.com" alt="Bresca Gastronomia">
                 <div class="legenda-mosaico">
-                    <span class="categoria">Destaque</span>
                     <h3>Uma experiência inesquecível no Restaurante Bresca</h3>
                 </div>
             </a>
         </div>
 
-        <!-- Bloco 2: Cor Vinho Interativa (Exibe mensagem de Alerta ao Clicar) -->
-        <div class="bloco-mosaico cor-vinho" onclick="alert('O Manifesto: Em breve poderá descarregar a nossa revista completa em formato PDF!')">
+        <div class="bloco-mosaico cor-vinho">
             <div class="conteudo-texto-bloco">
-                <span class="tag-bloco">O Manifesto (Clique Aqui)</span>
+                <span class="tag-bloco">O Manifesto</span>
                 <p>"A cozinha contemporânea não é apenas sobre alimentar, é sobre contar histórias através das texturas."</p>
             </div>
         </div>
 
-        <!-- Bloco 3: Foto Média Vertical (IA: Sobremesa Artística) -->
         <div class="bloco-mosaico alto">
             <img src="https://unsplash.com" alt="Sobremesa Conceitual">
             <div class="legenda-mosaico">
-                <span class="categoria">Tendências</span>
                 <h3>A Reinvenção do Açúcar na Alta Cozinha</h3>
             </div>
         </div>
 
-        <!-- Bloco 4: Cor Oliva Interativa -->
-        <div class="bloco-mosaico cor-oliva" onclick="alert('Subscreva a nossa Newsletter secreta deixando o seu contacto em breve!')">
+        <div class="bloco-mosaico cor-oliva">
             <div class="conteudo-texto-bloco">
-                <span class="tag-bloco">Novidades (Clique Aqui)</span>
+                <span class="tag-bloco">Novidades</span>
                 <h3>Críticas Secretas</h3>
                 <p>Análises exclusivas aos bastidores dos restaurantes mais cobiçados da temporada.</p>
             </div>
         </div>
 
-        <!-- Bloco 5: Foto Horizontal (IA: Prato de Massa Gourmet) -->
         <div class="bloco-mosaico largo">
             <img src="https://unsplash.com" alt="Ingredientes Frescos">
             <div class="legenda-mosaico">
-                <span class="categoria">Crónica</span>
                 <h3>O Segredo por Trás dos Ingredientes Ancestrais</h3>
             </div>
         </div>
-
     </main>
 
-    <!-- RODAPÉ DE PROTEÇÃO EXIGIDO -->
-    <footer class="rodape-discreto">
-        <p>&copy; 2026 Victoria's Critics. Todos os direitos reservados. É proibida a cópia ou reprodução do conteúdo.</p>
-    </footer>
-
-</body>
-</html>
+    <!-- JANELA FLUTUANTE (BLINDADA COM O SEU E-MAIL) -->
+    <div id="modalAdmin" class="modal-admin oculto">
+        <div class="janela-container">
+            <span class="fechar-modal" onclick="fecharModal()">&times;</span>
+            
+            <!-- FORMULÁRIO DE LOGIN -->
+            <div id="bloco-login">
+                <h2 style="font-family: 'Playfair Display', serif;">Acesso Restrito</h2>
+                <form onsubmit="validarDona(event)">
+                    <div class="campo-grupo">
+                        <label>E-mail da Proprietária</label>
+                        <!-- DEFINA O SEU E-MAIL DE DONA ABAIXO -->
+                        <input type="email" id="email-dona" required placeholder="seu-email@gmail.com">
+                    </div>
+                    <button type="submit" class="btn-principal">Entrar no Painel</button>
+                </form>
+            </div>
 

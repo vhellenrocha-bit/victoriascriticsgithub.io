@@ -201,6 +201,62 @@ async function fazerLogout() {
 async function verificarEditora() {
 
     const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+        console.log("Não existe utilizador autenticado.");
+        return false;
+    }
+
+    console.log("Utilizador autenticado:", user.email);
+
+    const { data, error } =
+        await supabaseClient
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .maybeSingle();
+
+    if (error) {
+        console.error(
+            "ERRO AO LER PERFIL:",
+            error
+        );
+
+        return false;
+    }
+
+    console.log(
+        "Perfil encontrado:",
+        data
+    );
+
+    if (!data) {
+        console.log(
+            "Não existe perfil para este utilizador."
+        );
+
+        return false;
+    }
+
+    if (data.role === "editor") {
+        console.log(
+            "UTILIZADOR É EDITORA!"
+        );
+
+        return true;
+    }
+
+    console.log(
+        "Utilizador não é editora."
+    );
+
+    return false;
+}
+
+    const {
         data: { user }
     } = await supabaseClient.auth.getUser();
 

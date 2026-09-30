@@ -13,15 +13,12 @@ const supabaseClient = window.supabase.createClient(
 
 
 // ==========================================
-// ELEMENTOS DO SITE
+// ELEMENTOS
 // ==========================================
 
 const modalAuth = document.getElementById("modal-auth");
-
 const areaLogin = document.getElementById("area-login");
-
-const areaCadastro =
-    document.getElementById("area-cadastro");
+const areaCadastro = document.getElementById("area-cadastro");
 
 const mensagemBoasVindas =
     document.getElementById("mensagem-boas-vindas");
@@ -39,6 +36,7 @@ function abrirModal() {
     modalAuth.classList.remove("oculto");
 
     mostrarLogin();
+
 }
 
 
@@ -49,6 +47,7 @@ function abrirModal() {
 function fecharModal() {
 
     modalAuth.classList.add("oculto");
+
 }
 
 
@@ -61,6 +60,7 @@ function mostrarLogin() {
     areaLogin.classList.remove("oculto");
 
     areaCadastro.classList.add("oculto");
+
 }
 
 
@@ -73,11 +73,12 @@ function mostrarCadastro() {
     areaLogin.classList.add("oculto");
 
     areaCadastro.classList.remove("oculto");
+
 }
 
 
 // ==========================================
-// FECHAR AO CLICAR FORA
+// FECHAR CLICANDO FORA
 // ==========================================
 
 modalAuth.addEventListener("click", function(event) {
@@ -99,81 +100,78 @@ const formCadastro =
     document.getElementById("form-cadastro");
 
 
-formCadastro.addEventListener(
-    "submit",
-    async function(event) {
+formCadastro.addEventListener("submit", async function(event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
 
-        const username =
-            document
-            .getElementById("cadastro-username")
-            .value
-            .trim();
+    const username =
+        document
+        .getElementById("cadastro-username")
+        .value
+        .trim();
 
 
-        const email =
-            document
-            .getElementById("cadastro-email")
-            .value
-            .trim();
+    const email =
+        document
+        .getElementById("cadastro-email")
+        .value
+        .trim();
 
 
-        const password =
-            document
-            .getElementById("cadastro-password")
-            .value;
+    const password =
+        document
+        .getElementById("cadastro-password")
+        .value;
 
 
-        const mensagem =
-            document.getElementById(
-                "mensagem-cadastro"
-            );
+    const mensagem =
+        document.getElementById("mensagem-cadastro");
 
 
-        mensagem.textContent =
-            "Criando sua conta...";
+    mensagem.textContent =
+        "A criar a sua conta...";
 
 
-        const { data, error } =
-            await supabaseClient.auth.signUp({
+    const { data, error } =
+        await supabaseClient.auth.signUp({
 
-                email: email,
+            email: email,
 
-                password: password,
+            password: password,
 
-                options: {
+            options: {
 
-                    data: {
-                        username: username
-                    }
+                data: {
+
+                    username: username
 
                 }
 
-            });
+            }
+
+        });
 
 
-        if (error) {
+    if (error) {
 
-            console.error(error);
-
-            mensagem.textContent =
-                "Erro: " + error.message;
-
-            return;
-
-        }
-
+        console.error(error);
 
         mensagem.textContent =
-            "Conta criada com sucesso!";
+            "Erro: " + error.message;
 
-
-        formCadastro.reset();
+        return;
 
     }
-);
+
+
+    mensagem.textContent =
+        "Conta criada com sucesso!";
+
+
+    formCadastro.reset();
+
+});
 
 
 // ==========================================
@@ -184,74 +182,65 @@ const formLogin =
     document.getElementById("form-login");
 
 
-formLogin.addEventListener(
-    "submit",
-    async function(event) {
+formLogin.addEventListener("submit", async function(event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
 
-        const email =
-            document
-            .getElementById("login-email")
-            .value
-            .trim();
+    const email =
+        document
+        .getElementById("login-email")
+        .value
+        .trim();
 
 
-        const password =
-            document
-            .getElementById("login-password")
-            .value;
+    const password =
+        document
+        .getElementById("login-password")
+        .value;
 
 
-        const mensagem =
-            document.getElementById(
-                "mensagem-login"
-            );
+    const mensagem =
+        document.getElementById("mensagem-login");
 
 
-        mensagem.textContent =
-            "Entrando...";
+    mensagem.textContent =
+        "A entrar...";
 
 
-        const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
+    const { error } =
+        await supabaseClient.auth.signInWithPassword({
 
-                email: email,
+            email: email,
 
-                password: password
+            password: password
 
-            });
+        });
 
 
-        if (error) {
+    if (error) {
 
-            console.error(error);
-
-            mensagem.textContent =
-                "E-mail ou senha incorretos.";
-
-            return;
-
-        }
-
+        console.error(error);
 
         mensagem.textContent =
-            "Login realizado com sucesso!";
+            "E-mail ou palavra-passe incorretos.";
 
-
-        formLogin.reset();
-
-        fecharModal();
-
-        atualizarUsuario();
+        return;
 
     }
-);
+
+
+    formLogin.reset();
+
+    fecharModal();
+
+    atualizarUsuario();
+
+});
 
 
 // ==========================================
-// SAIR
+// LOGOUT
 // ==========================================
 
 async function fazerLogout() {
@@ -264,7 +253,7 @@ async function fazerLogout() {
 
 
 // ==========================================
-// ATUALIZAR USUÁRIO
+// ATUALIZAR UTILIZADOR
 // ==========================================
 
 async function atualizarUsuario() {
@@ -289,8 +278,8 @@ async function atualizarUsuario() {
 
         btnAuthTopo.textContent = "Sair";
 
-        btnAuthTopo.onclick =
-            fazerLogout;
+        btnAuthTopo.onclick = fazerLogout;
+
 
     } else {
 
@@ -314,13 +303,11 @@ async function atualizarUsuario() {
 // VERIFICAR LOGIN
 // ==========================================
 
-supabaseClient.auth.onAuthStateChange(
-    function() {
+supabaseClient.auth.onAuthStateChange(function() {
 
-        atualizarUsuario();
+    atualizarUsuario();
 
-    }
-);
+});
 
 
 // ==========================================

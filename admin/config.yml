@@ -1,7 +1,7 @@
 backend:
-  name: github
-  repo: vhellenrocha-bit/victoriascriticsgithub.io # O seu repositório
+  name: git-gateway
   branch: main
+
 
 media_folder: "images" # Pasta onde as fotos das suas resenhas vão ficar guardadas
 public_folder: "/images"

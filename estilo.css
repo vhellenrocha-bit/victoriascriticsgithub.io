@@ -1,98 +1,185 @@
-/* 1. IMPORTAÇÃO DE FONTES DE REVISTA CORRIGIDA (Do Google Fonts) */
+/* IMPORTAÇÃO DE FONTES DE IMPRENSA */
 @import url('https://googleapis.com');
 
 body {
-    /* Fundo branco-marfim (estilo papel de revista premium) */
-    background-color: #fdfcfb; 
-    /* Fonte super limpa e legível para as resenhas */
+    background-color: #ffffff;
     font-family: 'Inter', sans-serif;
-    color: #222222;
+    color: #111111;
     margin: 0;
     padding: 0;
-    /* Melhora a leitura do texto */
-    line-height: 1.8; 
-    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* 2. ESTRUTURA DO ARTIGO (Não deixa o texto espalhar-se pelo ecrã inteiro) */
-.container, main, article {
-    max-width: 750px;
-    margin: 60px auto;
-    padding: 0 20px;
-}
-
-/* 3. TÍTULO PRINCIPAL DA RESENHA (Estilo Editorial) */
-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 600;
-    color: #111111;
+/* DESIGN DA CAPA (Estilo Revista de Luxo) */
+.capa-premium {
+    background-color: #111111; /* Bloco preto dramático no topo */
+    color: #ffffff;
     text-align: center;
-    line-height: 1.3;
-    margin-bottom: 10px;
+    padding: 100px 20px;
+    border-bottom: 3px solid #997d54;
 }
 
-/* Subtítulos ou nomes de pratos */
-h2, h3 {
+.capa-premium h1 {
     font-family: 'Playfair Display', serif;
-    color: #1c1c1c;
-    margin-top: 40px;
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin: 15px 0;
+    text-transform: uppercase;
+}
+
+.capa-data {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: #997d54;
+    font-weight: 600;
+}
+
+.capa-slogan {
+    font-size: 1rem;
+    letter-spacing: 6px;
+    color: #888888;
+    margin: 0;
+}
+
+/* LAYOUT EM COLUNAS EDITORIAIS */
+.grid-editorial {
+    flex: 1;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* BLOCO DE DESTAQUE ESCURO (Inspirado nas suas fotos) */
+.bloco-destaque-preto {
+    background-color: #111111;
+    color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide ao meio: texto e foto */
+    margin-bottom: 80px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 768px) {
+    .bloco-destaque-preto { grid-template-columns: 1fr; }
+}
+
+.conteudo-destaque {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tag-editorial {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #997d54;
     margin-bottom: 15px;
 }
 
-/* Estilo para a frase de introdução/resumo */
-.subtitulo {
+.bloco-destaque-preto h2 {
     font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.3rem;
-    color: #555555;
-    text-align: center;
-    margin-bottom: 40px;
+    font-size: 2.2rem;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
 }
 
-/* 4. DESIGN DAS FOTOS DOS PRATOS */
-img {
+.bloco-destaque-preto p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #cccccc;
+    font-weight: 300;
+}
+
+.imagem-destaque-chef img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta a foto perfeitamente ao bloco */
     display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 35px auto;
-    border-radius: 2px;
-    /* Sombra muito leve para destacar a comida */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); 
 }
 
-/* 5. RODAPÉ COM O SEU AVISO DE COPYRIGHT (Proteção) */
-footer {
-    text-align: center;
-    margin-top: 80px;
-    padding: 40px 20px;
-    border-top: 1px solid #eeeeee;
+/* LINHA DIVISÓRIA SUTIL */
+.titulo-linhas {
     font-size: 0.9rem;
-    color: #777777;
-    letter-spacing: 0.5px;
-}
-
-/* Remove os pontos pretos e centraliza os links dos artigos */
-.lista-artigos {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-    margin-top: 30px;
-}
-
-/* Deixa o link elegante, com um sublinhado suave e cor sofisticada */
-.lista-artigos li a {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
     color: #111111;
-    text-decoration: none;
-    border-bottom: 1px solid #cccccc;
-    padding-bottom: 5px;
-    transition: color 0.3s ease;
+    text-align: center;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #111111;
+    padding-bottom: 10px;
 }
 
-/* Quando o leitor passa o rato por cima do título do artigo */
-.lista-artigos li a:hover {
-    color: #997d54; /* Muda para um tom dourado/gourmet sutil */
-    border-bottom-color: #997d54;
+/* GRELHA DE RESENHAS (FOTOS COOL DE IA) */
+.grelha-artigos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.cartao-artigo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.moldura-foto {
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+}
+
+.moldura-foto img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.6s ease; /* Efeito suave ao passar o rato */
+}
+
+.cartao-artigo:hover .moldura-foto img {
+    transform: scale(1.05); /* A foto aumenta ligeiramente (Efeito Cool) */
+}
+
+.artigo-categoria {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #997d54;
+    font-weight: 600;
+}
+
+.artigo-titulo-link {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin: 10px 0;
+    line-height: 1.4;
+    color: #111111;
+}
+
+.artigo-resumo {
+    font-size: 0.9rem;
+    color: #666666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* RODAPÉ SOLICITADO: FONTE PEQUENA E NO FUNDO */
+.rodape-editorial {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-top: 1px solid #eeeeee;
+    margin-top: auto;
+}
+
+.rodape-editorial p {
+    font-size: 0.7rem; /* Fonte muito pequena */
+    color: #999999;
+    letter-spacing: 0.5px;
+    margin: 0;
 }

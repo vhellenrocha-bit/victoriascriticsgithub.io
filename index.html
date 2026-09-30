@@ -256,4 +256,212 @@
     <section class="mural-social-seccao">
         <h2>Painel de Discussão Crítica</h2>
         
-        <div id="mural-feed-comentarios">
+        <div id="mural-feed-comentarios">            <div class="caixa-comentario-feed">
+                <div class="autor-comentario">
+                    Victoria's Critics
+                    <span class="tag-verificado">Oficial</span>
+                </div>
+
+                <p class="texto-comentario">
+                    O painel de discussão está aberto aos leitores registados.
+                    Entre ou crie uma conta para participar.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+         JANELA DE LOGIN E REGISTO
+         ========================================== -->
+
+    <div id="modal-auth" class="modal-admin oculto">
+
+        <div class="janela-container">
+
+            <span
+                class="fechar-modal"
+                onclick="fecharModal()"
+            >
+                ×
+            </span>
+
+
+            <!-- ==============================
+                 LOGIN
+                 ============================== -->
+
+            <div id="area-login">
+
+                <h2>Entrar</h2>
+
+                <form id="form-login">
+
+                    <div class="campo-grupo">
+
+                        <label for="login-email">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="login-email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo-grupo">
+
+                        <label for="login-password">
+                            Palavra-passe
+                        </label>
+
+                        <input
+                            type="password"
+                            id="login-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-principal"
+                    >
+                        Entrar
+                    </button>
+
+                </form>
+
+
+                <p id="mensagem-login"></p>
+
+
+                <a
+                    class="link-alternar"
+                    onclick="mostrarCadastro()"
+                >
+                    Ainda não tenho uma conta
+                </a>
+
+            </div>
+
+
+            <!-- ==============================
+                 REGISTO
+                 ============================== -->
+
+            <div
+                id="area-cadastro"
+                class="oculto"
+            >
+
+                <h2>Criar conta</h2>
+
+                <form id="form-cadastro">
+
+                    <div class="campo-grupo">
+
+                        <label for="cadastro-username">
+                            Nome
+                        </label>
+
+                        <input
+                            type="text"
+                            id="cadastro-username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo-grupo">
+
+                        <label for="cadastro-email">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="cadastro-email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo-grupo">
+
+                        <label for="cadastro-password">
+                            Palavra-passe
+                        </label>
+
+                        <input
+                            type="password"
+                            id="cadastro-password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-principal"
+                    >
+                        Criar conta
+                    </button>
+
+                </form>
+
+
+                <p id="mensagem-cadastro"></p>
+
+
+                <a
+                    class="link-alternar"
+                    onclick="mostrarLogin()"
+                >
+                    Já tenho uma conta
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+         ========================================== -->
+
+    <footer class="rodape-discreto">
+
+        <p>
+            © Victoria's Critics — Alta Gastronomia & Debate Crítico
+        </p>
+
+    </footer>
+
+
+    <!-- ==========================================
+         SUPABASE
+         ========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- ==========================================
+         JAVASCRIPT DO SITE
+         ========================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>

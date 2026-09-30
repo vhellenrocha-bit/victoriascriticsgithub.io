@@ -1,8 +1,7 @@
-/* IMPORTAÇÃO DE FONTES DE IMPRENSA */
 @import url('https://googleapis.com');
 
 body {
-    background-color: #ffffff;
+    background-color: #fbf9f6; /* Fundo papel fosco confortável */
     font-family: 'Inter', sans-serif;
     color: #111111;
     margin: 0;
@@ -12,174 +11,196 @@ body {
     flex-direction: column;
 }
 
-/* DESIGN DA CAPA (Estilo Revista de Luxo) */
-.capa-premium {
-    background-color: #111111; /* Bloco preto dramático no topo */
-    color: #ffffff;
+/* TOPO EDITORIAL */
+.topo-revista {
     text-align: center;
-    padding: 100px 20px;
-    border-bottom: 3px solid #997d54;
+    padding: 60px 20px 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.capa-premium h1 {
+.topo-revista h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-size: 3.8rem;
     font-weight: 700;
-    letter-spacing: 4px;
-    margin: 15px 0;
-    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 10px 0;
 }
 
-.capa-data {
-    font-size: 0.8rem;
-    letter-spacing: 4px;
+.data-edicao {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
     color: #997d54;
     font-weight: 600;
 }
 
-.capa-slogan {
-    font-size: 1rem;
-    letter-spacing: 6px;
-    color: #888888;
+.subtitulo-revista {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #555555;
     margin: 0;
 }
 
-/* LAYOUT EM COLUNAS EDITORIAIS */
-.grid-editorial {
+/* ESTRUTURA DO MOSAICO (CSS GRID MASONRY) */
+.mosaico-container {
     flex: 1;
-    max-width: 1100px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 20px;
     box-sizing: border-box;
-}
-
-/* BLOCO DE DESTAQUE ESCURO (Inspirado nas suas fotos) */
-.bloco-destaque-preto {
-    background-color: #111111;
-    color: #ffffff;
+    
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Divide ao meio: texto e foto */
-    margin-bottom: 80px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    gap: 20px; /* Espaço entre os blocos do mosaico */
 }
 
-@media (max-width: 768px) {
-    .bloco-destaque-preto { grid-template-columns: 1fr; }
+/* Configuração de responsividade para telemóveis */
+@media (max-width: 900px) {
+    .mosaico-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
+    }
+}
+@media (max-width: 600px) {
+    .mosaico-container {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
 }
 
-.conteudo-destaque {
-    padding: 60px;
+/* CONFIGURAÇÃO BASE DOS BLOCOS */
+.bloco-mosaico {
+    position: relative;
+    overflow: hidden;
+    background-color: #111111;
+    transition: transform 0.4s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.tag-editorial {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #997d54;
-    margin-bottom: 15px;
-}
-
-.bloco-destaque-preto h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin: 0 0 20px 0;
-    line-height: 1.3;
-}
-
-.bloco-destaque-preto p {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: #cccccc;
-    font-weight: 300;
-}
-
-.imagem-destaque-chef img {
+.bloco-mosaico a {
+    text-decoration: none;
+    color: inherit;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajusta a foto perfeitamente ao bloco */
     display: block;
 }
 
-/* LINHA DIVISÓRIA SUTIL */
-.titulo-linhas {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #111111;
-    text-align: center;
-    margin-bottom: 50px;
-    border-bottom: 1px solid #111111;
-    padding-bottom: 10px;
+/* TAMANHOS VARIADOS DO MOSAICO */
+.bloco-mosaico.grande {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+.bloco-mosaico.alto {
+    grid-row: span 2;
+}
+.bloco-mosaico.largo {
+    grid-column: span 2;
 }
 
-/* GRELHA DE RESENHAS (FOTOS COOL DE IA) */
-.grelha-artigos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+@media (max-width: 600px) {
+    .bloco-mosaico.grande, .bloco-mosaico.alto, .bloco-mosaico.largo {
+        grid-column: span 1;
+        grid-row: span 1;
+        height: 300px;
+    }
 }
 
-.cartao-artigo a {
-    text-decoration: none;
-    color: inherit;
+/* CORES DOS BLOCOS DE TEXTO (Paleta Gourmet) */
+.bloco-mosaico.cor-vinho {
+    background-color: #4a1c1c; /* Vinho Bordeaux sofisticado */
+    color: #ffffff;
+    padding: 30px;
 }
 
-.moldura-foto {
-    overflow: hidden;
-    margin-bottom: 20px;
-    background-color: #f5f5f5;
+.bloco-mosaico.cor-oliva {
+    background-color: #2d3b32; /* Verde Oliva Escuro Gourmet */
+    color: #ffffff;
+    padding: 30px;
 }
 
-.moldura-foto img {
+/* ESTILO DAS IMAGENS NO MOSAICO */
+.bloco-mosaico img {
     width: 100%;
-    height: 350px;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease; /* Efeito suave ao passar o rato */
+    display: block;
+    transition: transform 0.6s ease;
 }
 
-.cartao-artigo:hover .moldura-foto img {
-    transform: scale(1.05); /* A foto aumenta ligeiramente (Efeito Cool) */
+/* Efeito de Zoom Moderno ao passar o rato */
+.bloco-mosaico:hover img {
+    transform: scale(1.06);
 }
 
-.artigo-categoria {
+/* TEXTOS DENTRO DOS BLOCOS COLORIDOS */
+.conteudo-texto-bloco h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+}
+.conteudo-texto-bloco p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #dddddd;
+    font-weight: 300;
+    margin: 0;
+}
+.tag-bloco {
     font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    color: #997d54;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* LEGENDAS SOBRE AS FOTOS */
+.legenda-mosaico {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 20px 20px 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85)); /* Degradê para ler o texto */
+    color: #ffffff;
+}
+
+.legenda-mosaico .categoria {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     color: #997d54;
     font-weight: 600;
 }
 
-.artigo-titulo-link {
+.legenda-mosaico h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin: 10px 0;
-    line-height: 1.4;
-    color: #111111;
+    font-size: 1.4rem;
+    margin: 5px 0 0 0;
+    font-weight: 400;
+    line-height: 1.3;
 }
 
-.artigo-resumo {
-    font-size: 0.9rem;
-    color: #666666;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* RODAPÉ SOLICITADO: FONTE PEQUENA E NO FUNDO */
-.rodape-editorial {
+/* RODAPÉ DISCRETO EXIGIDO */
+.rodape-discreto {
     text-align: center;
     padding: 40px 20px;
-    background-color: #ffffff;
     border-top: 1px solid #eeeeee;
-    margin-top: auto;
+    background-color: #ffffff;
+    margin-top: 40px;
 }
 
-.rodape-editorial p {
-    font-size: 0.7rem; /* Fonte muito pequena */
-    color: #999999;
+.rodape-discreto p {
+    font-size: 0.7rem; /* Tamanho muito pequeno */
+    color: #999999; /* Tom cinza suave */
     letter-spacing: 0.5px;
     margin: 0;
 }
+

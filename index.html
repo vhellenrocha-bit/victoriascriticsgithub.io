@@ -3,25 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victoria's Critics - Mosaico Editorial</title>
-    <!-- Ligação corrigida para o arquivo de estilos -->
-    <link rel="stylesheet" href="./estilo.css">
-</head>
+    <title>Victoria's Critics - Mosaico Interativo</title>
+    
+    <!-- DESIGN PREMIUM E PALETA DE CORES GOURMET -->
+    <style>
+        @import url('https://googleapis.com');
 
-    <!-- CABEÇALHO DA REVISTA -->
+        body {
+            background-color: #fbf9f6;
+            font-family: 'Inter', sans-serif;
+            color: #111111;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topo-revista {
+            text-align: center;
+            padding: 60px 20px 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .topo-revista h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 10px 0;
+        }
+
+        .data-edicao {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #997d54;
+            font-weight: 600;
+        }
+
+        .subtitulo-revista {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #555555;
+            margin: 0;
+        }
+
+        /* MOSAICO INTERATIVO (GRELHA DE REVISTA) */
+        .mosaico-container {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 220px;
+            gap: 20px;
+        }
+
+        /* ELEMENTOS DO MOSAICO INTERATIVO */
+        .bloco-mosaico {
+            position: relative;
+            overflow: hidden;
+            background-color: #111111;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            /* Animação de entrada suave */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+        }
+
+        /* INTERATIVIDADE: Efeito Flutuante ao passar o rato (Hover) */
+        .bloco-mosaico:hover {
+            transform: translateY(-5px); /* O bloco levanta ligeiramente */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* A sombra aumenta */
+        }
+
+        .bloco-mosaico a {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* TAMANHOS DO MOSAICO */
+        .bloco-mosaico.grande { grid-column: span 2; grid-row: span 2; }
+        .bloco-mosaico.alto { grid-row: span 2; }
+        .bloco-mosaico.largo { grid-column: span 2; }
+
+        /* CORES GOURMET DAS CAIXAS */
+        .bloco-mosaico.cor-vinho { background-color: #4a1c1c; color: #ffffff; padding: 30px; display: flex; align-items: center; }
+        .bloco-mosaico.cor-oliva { background-color: #2d3b32; color: #ffffff; padding: 30px; display: flex; align-items: center; }
+
+        /* IMAGENS COM ZOOM INTERATIVO */
+        .bloco-mosaico img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .bloco-mosaico:hover img {
+            transform: scale(1.08); /* Dá zoom na comida ao passar o rato */
+        }
+
+        /* TEXTOS INTERATIVOS */
+        .conteudo-texto-bloco h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 0 0 10px 0; }
+        .conteudo-texto-bloco p { font-size: 0.9rem; line-height: 1.6; color: #dddddd; font-weight: 300; margin: 0; }
+        .tag-bloco { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #997d54; display: block; margin-bottom: 10px; }
+
+        /* LEGENDAS SOBRE AS FOTOS */
+        .legenda-mosaico {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 40px 20px 20px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: #ffffff;
+            transition: background 0.3s ease;
+        }
+
+        /* INTERATIVIDADE: Escurece a legenda no foco */
+        .bloco-mosaico:hover .legenda-mosaico {
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+        }
+
+        .legenda-mosaico .categoria { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #997d54; font-weight: 600; }
+        .legenda-mosaico h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 5px 0 0 0; font-weight: 400; line-height: 1.3; }
+
+        /* RODAPÉ SOLICITADO (DISCRETO E PEQUENO NO FUNDO) */
+        .rodape-discreto {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #eeeeee;
+            background-color: #ffffff;
+            margin-top: 40px;
+        }
+
+        .rodape-discreto p {
+            font-size: 0.7rem;
+            color: #999999;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        /* RESPONSIVIDADE PARA TELEMÓVEIS */
+        @media (max-width: 900px) {
+            .mosaico-container { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+        }
+        @media (max-width: 600px) {
+            .mosaico-container { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .bloco-mosaico.grande, .bloco-mosaico.alto, .bloco-mosaico.largo { grid-column: span 1; grid-row: span 1; height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABEÇALHO -->
     <header class="topo-revista">
         <span class="data-edicao">EDIÇÃO N° 01 — 2026</span>
         <h1>VICTORIA'S CRITICS</h1>
         <p class="subtitulo-revista">Alta Gastronomia & Crítica Independente</p>
     </header>
 
-    <!-- MOSAICO GOURMET (IMAGENS E CORES) -->
+    <!-- MOSAICO GOURMET INTERATIVO -->
     <main class="mosaico-container">
         
-        <!-- Bloco 1: Foto Grande de Entrada (IA: Prato de Luxo Escuro) -->
-        <div class="bloco-mosaico grande">
+        <!-- Bloco 1: Foto Grande (Link Interativo para o Bresca) -->
+        <div class="bloco-mosaico grande" onclick="location.href='resenha-restaurante-bresca.html'">
             <a href="resenha-restaurante-bresca.html">
-                <img src="https://unsplash.com" alt="Gastronomia Conceitual">
+                <img src="https://unsplash.com" alt="Bresca Gastronomia">
                 <div class="legenda-mosaico">
                     <span class="categoria">Destaque</span>
                     <h3>Uma experiência inesquecível no Restaurante Bresca</h3>
@@ -29,33 +186,33 @@
             </a>
         </div>
 
-        <!-- Bloco 2: Bloco de Cor Sólida (Tom Vinho Terracota) -->
-        <div class="bloco-mosaico cor-vinho">
+        <!-- Bloco 2: Cor Vinho Interativa (Exibe mensagem de Alerta ao Clicar) -->
+        <div class="bloco-mosaico cor-vinho" onclick="alert('O Manifesto: Em breve poderá descarregar a nossa revista completa em formato PDF!')">
             <div class="conteudo-texto-bloco">
-                <span class="tag-bloco">O Manifesto</span>
+                <span class="tag-bloco">O Manifesto (Clique Aqui)</span>
                 <p>"A cozinha contemporânea não é apenas sobre alimentar, é sobre contar histórias através das texturas."</p>
             </div>
         </div>
 
         <!-- Bloco 3: Foto Média Vertical (IA: Sobremesa Artística) -->
         <div class="bloco-mosaico alto">
-            <img src="https://unsplash.com" alt="Sobremesa Conceitual IA">
+            <img src="https://unsplash.com" alt="Sobremesa Conceitual">
             <div class="legenda-mosaico">
                 <span class="categoria">Tendências</span>
                 <h3>A Reinvenção do Açúcar na Alta Cozinha</h3>
             </div>
         </div>
 
-        <!-- Bloco 4: Bloco de Cor Sólida (Tom Verde Oliva Gourmet) -->
-        <div class="bloco-mosaico cor-oliva">
+        <!-- Bloco 4: Cor Oliva Interativa -->
+        <div class="bloco-mosaico cor-oliva" onclick="alert('Subscreva a nossa Newsletter secreta deixando o seu contacto em breve!')">
             <div class="conteudo-texto-bloco">
-                <span class="tag-bloco">Próxima Parada</span>
+                <span class="tag-bloco">Novidades (Clique Aqui)</span>
                 <h3>Críticas Secretas</h3>
-                <p>Brevemente, análises exclusivas aos bastidores dos restaurantes mais cobiçados da temporada.</p>
+                <p>Análises exclusivas aos bastidores dos restaurantes mais cobiçados da temporada.</p>
             </div>
         </div>
 
-        <!-- Bloco 5: Foto Horizontal (IA: Ingredientes e Alta Definição) -->
+        <!-- Bloco 5: Foto Horizontal (IA: Prato de Massa Gourmet) -->
         <div class="bloco-mosaico largo">
             <img src="https://unsplash.com" alt="Ingredientes Frescos">
             <div class="legenda-mosaico">
@@ -66,7 +223,7 @@
 
     </main>
 
-    <!-- RODAPÉ DE PROTEÇÃO (PEQUENO E DISCRETO NO FINAL) -->
+    <!-- RODAPÉ DE PROTEÇÃO EXIGIDO -->
     <footer class="rodape-discreto">
         <p>&copy; 2026 Victoria's Critics. Todos os direitos reservados. É proibida a cópia ou reprodução do conteúdo.</p>
     </footer>

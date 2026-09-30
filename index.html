@@ -24,7 +24,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background-color: #111111;
+            background-color: #4a1c1c;
             color: #ffffff;
             border: 1px solid #997d54;
             padding: 8px 15px;
@@ -38,8 +38,7 @@
         }
 
         .btn-admin-topo:hover {
-            background-color: #4a1c1c;
-            color: #ffffff;
+            background-color: #111111;
         }
 
         .topo-revista {
@@ -140,10 +139,9 @@
             color: #ffffff;
         }
 
-        .legenda-mosaico class="categoria" { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #997d54; font-weight: 600; }
         .legenda-mosaico h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 5px 0 0 0; font-weight: 400; line-height: 1.3; }
 
-        /* JANELA FLUTUANTE DE LOGIN E ESCRITA (MODAL) */
+        /* JANELA FLUTUANTE (MODAL INTERATIVO) */
         .modal-admin {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -163,6 +161,8 @@
             box-sizing: border-box;
             border-top: 4px solid #4a1c1c;
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .fechar-modal {
@@ -172,14 +172,18 @@
         }
 
         .campo-grupo { margin-bottom: 20px; }
-        label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #666; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; }
+        label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #666; font-weight: 500; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
         .btn-principal {
             background-color: #111111; color: #ffffff; border: none; width: 100%; padding: 14px;
-            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; border-radius: 4px; transition: background 0.3s;
         }
         .btn-principal:hover { background-color: #4a1c1c; }
+
+        .link-alternar {
+            display: block; text-align: center; margin-top: 15px; color: #997d54; text-decoration: none; cursor: pointer; font-size: 0.85rem;
+        }
 
         .oculto { display: none !important; }
 
@@ -187,17 +191,11 @@
             text-align: center; padding: 40px 20px; border-top: 1px solid #eeeeee; background-color: #ffffff; margin-top: 40px;
         }
         .rodape-discreto p { font-size: 0.7rem; color: #999999; margin: 0; }
-
-        @media (max-width: 900px) { .mosaico-container { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; } }
-        @media (max-width: 600px) {
-            .mosaico-container { grid-template-columns: 1fr; grid-auto-rows: auto; }
-            .bloco-mosaico.grande, .bloco-mosaico.alto, .bloco-mosaico.largo { grid-column: span 1; grid-row: span 1; height: 280px; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- BOTÃO PÚBLICO DE ACESSO -->
+    <!-- BOTÃO PÚBLICO NO TOPO -->
     <button class="btn-admin-topo" onclick="abrirModal()">Painel da Editora</button>
 
     <header class="topo-revista">
@@ -247,21 +245,23 @@
         </div>
     </main>
 
-    <!-- JANELA FLUTUANTE (BLINDADA COM O SEU E-MAIL) -->
+    <!-- JANELA FLUTUANTE (LOGIN / REGISTO / INTERATIVIDADE) -->
     <div id="modalAdmin" class="modal-admin oculto">
         <div class="janela-container">
             <span class="fechar-modal" onclick="fecharModal()">&times;</span>
             
-            <!-- FORMULÁRIO DE LOGIN -->
+            <!-- 1. BLOCO DE LOGIN -->
             <div id="bloco-login">
-                <h2 style="font-family: 'Playfair Display', serif;">Acesso Restrito</h2>
-                <form onsubmit="validarDona(event)">
+                <h2 style="font-family: 'Playfair Display', serif; text-align: center;">Acesso à Revista</h2>
+                <form onsubmit="executarLogin(event)">
                     <div class="campo-grupo">
-                        <label>E-mail da Proprietária</label>
-                        <!-- DEFINA O SEU E-MAIL DE DONA ABAIXO -->
-                        <input type="email" id="email-dona" required placeholder="seu-email@gmail.com">
+                        <label>E-mail</label>
+                        <input type="email" id="login-email" required placeholder="seu-email@gmail.com">
                     </div>
-                    <button type="submit" class="btn-principal">Entrar no Painel</button>
+                    <div class="campo-grupo">
+                        <label>Password</label>
+                        <input type="password" id="login-senha" required placeholder="Sua password">
+                    </div>
+                    <button type="submit" class="btn-principal">Entrar</button>
                 </form>
-            </div>
-
+                <a class="link-alternar" onclick="mostrarRegisto()">Não tem conta? Criar conta de Utilizador</a>

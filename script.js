@@ -2,23 +2,31 @@
 // SUPABASE
 // ==========================================
 
-const SUPABASE_URL = "https://mefjsltueonhhrlusqpy.supabase.co";
+const SUPABASE_URL =
+    "https://mefjsltueonhhrlusqpy.supabase.co";
 
-const SUPABASE_ANON_KEY = "sb_publishable_sUY0ZUsbQnx8Jm1NENe4Cg_7g0ceZdf";
+const SUPABASE_ANON_KEY =
+    "sb_publishable_sUY0ZUsbQnx8Jm1NENe4Cg_7g0ceZdf";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
 
 
 // ==========================================
 // ELEMENTOS
 // ==========================================
 
-const modalAuth = document.getElementById("modal-auth");
-const areaLogin = document.getElementById("area-login");
-const areaCadastro = document.getElementById("area-cadastro");
+const modalAuth =
+    document.getElementById("modal-auth");
+
+const areaLogin =
+    document.getElementById("area-login");
+
+const areaCadastro =
+    document.getElementById("area-cadastro");
 
 const mensagemBoasVindas =
     document.getElementById("mensagem-boas-vindas");
@@ -28,7 +36,7 @@ const btnAuthTopo =
 
 
 // ==========================================
-// ABRIR MODAL
+// ABRIR / FECHAR
 // ==========================================
 
 function abrirModal() {
@@ -40,20 +48,12 @@ function abrirModal() {
 }
 
 
-// ==========================================
-// FECHAR MODAL
-// ==========================================
-
 function fecharModal() {
 
     modalAuth.classList.add("oculto");
 
 }
 
-
-// ==========================================
-// MOSTRAR LOGIN
-// ==========================================
 
 function mostrarLogin() {
 
@@ -63,10 +63,6 @@ function mostrarLogin() {
 
 }
 
-
-// ==========================================
-// MOSTRAR CADASTRO
-// ==========================================
 
 function mostrarCadastro() {
 
@@ -78,18 +74,21 @@ function mostrarCadastro() {
 
 
 // ==========================================
-// FECHAR CLICANDO FORA
+// FECHAR AO CLICAR FORA
 // ==========================================
 
-modalAuth.addEventListener("click", function(event) {
+modalAuth.addEventListener(
+    "click",
+    function(event) {
 
-    if (event.target === modalAuth) {
+        if (event.target === modalAuth) {
 
-        fecharModal();
+            fecharModal();
+
+        }
 
     }
-
-});
+);
 
 
 // ==========================================
@@ -100,78 +99,92 @@ const formCadastro =
     document.getElementById("form-cadastro");
 
 
-formCadastro.addEventListener("submit", async function(event) {
+formCadastro.addEventListener(
+    "submit",
+    async function(event) {
 
-    event.preventDefault();
-
-
-    const username =
-        document
-        .getElementById("cadastro-username")
-        .value
-        .trim();
+        event.preventDefault();
 
 
-    const email =
-        document
-        .getElementById("cadastro-email")
-        .value
-        .trim();
+        const username =
+            document
+                .getElementById("cadastro-username")
+                .value
+                .trim();
 
 
-    const password =
-        document
-        .getElementById("cadastro-password")
-        .value;
+        const email =
+            document
+                .getElementById("cadastro-email")
+                .value
+                .trim();
 
 
-    const mensagem =
-        document.getElementById("mensagem-cadastro");
+        const password =
+            document
+                .getElementById("cadastro-password")
+                .value;
 
 
-    mensagem.textContent =
-        "A criar a sua conta...";
+        const mensagem =
+            document.getElementById(
+                "mensagem-cadastro"
+            );
 
 
-    const { data, error } =
-        await supabaseClient.auth.signUp({
+        mensagem.textContent =
+            "A criar a sua conta...";
 
-            email: email,
 
-            password: password,
+        const { data, error } =
+            await supabaseClient.auth.signUp({
 
-            options: {
+                email: email,
 
-                data: {
+                password: password,
 
-                    username: username
+                options: {
+
+                    data: {
+
+                        username: username
+
+                    }
 
                 }
 
-            }
-
-        });
+            });
 
 
-    if (error) {
+        if (error) {
 
-        console.error(error);
+            console.error(
+                "ERRO NO CADASTRO:",
+                error
+            );
+
+            mensagem.textContent =
+                "Erro: " + error.message;
+
+            return;
+
+        }
+
+
+        console.log(
+            "CADASTRO:",
+            data
+        );
+
 
         mensagem.textContent =
-            "Erro: " + error.message;
+            "Conta criada com sucesso!";
 
-        return;
+
+        formCadastro.reset();
 
     }
-
-
-    mensagem.textContent =
-        "Conta criada com sucesso!";
-
-
-    formCadastro.reset();
-
-});
+);
 
 
 // ==========================================
@@ -182,65 +195,74 @@ const formLogin =
     document.getElementById("form-login");
 
 
-formLogin.addEventListener("submit", async function(event) {
+formLogin.addEventListener(
+    "submit",
+    async function(event) {
 
-    event.preventDefault();
-
-
-    const email =
-        document
-        .getElementById("login-email")
-        .value
-        .trim();
+        event.preventDefault();
 
 
-    const password =
-        document
-        .getElementById("login-password")
-        .value;
+        const email =
+            document
+                .getElementById("login-email")
+                .value
+                .trim();
 
 
-    const mensagem =
-        document.getElementById("mensagem-login");
+        const password =
+            document
+                .getElementById("login-password")
+                .value;
 
 
-    mensagem.textContent =
-        "A entrar...";
+        const mensagem =
+            document.getElementById(
+                "mensagem-login"
+            );
 
-
-    const { error } =
-        await supabaseClient.auth.signInWithPassword({
-
-            email: email,
-
-            password: password
-
-        });
-
-
-    if (error) {
-
-        console.error(error);
 
         mensagem.textContent =
-            "E-mail ou palavra-passe incorretos.";
+            "A entrar...";
 
-        return;
+
+        const { error } =
+            await supabaseClient.auth
+                .signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+        if (error) {
+
+            console.error(
+                "ERRO NO LOGIN:",
+                error
+            );
+
+            mensagem.textContent =
+                "Erro: " + error.message;
+
+            return;
+
+        }
+
+
+        formLogin.reset();
+
+        fecharModal();
+
+        atualizarUsuario();
 
     }
-
-
-    formLogin.reset();
-
-    fecharModal();
-
-    atualizarUsuario();
-
-});
+);
 
 
 // ==========================================
-// LOGOUT
+// SAIR
 // ==========================================
 
 async function fazerLogout() {
@@ -253,11 +275,7 @@ async function fazerLogout() {
 
 
 // ==========================================
-// ATUALIZAR UTILIZADOR
-// ==========================================
-
-async function atualizarUsuario() {// ==========================================
-// VERIFICAR SE O UTILIZADOR É EDITORA
+// VERIFICAR SE É EDITORA
 // ==========================================
 
 async function verificarEditora() {
@@ -266,9 +284,13 @@ async function verificarEditora() {
         data: { user }
     } = await supabaseClient.auth.getUser();
 
+
     if (!user) {
+
         return false;
+
     }
+
 
     const { data, error } =
         await supabaseClient
@@ -277,18 +299,29 @@ async function verificarEditora() {
             .eq("id", user.id)
             .single();
 
+
     if (error) {
 
         console.error(
-            "Erro ao verificar perfil:",
+            "ERRO AO VERIFICAR EDITORA:",
             error
         );
 
         return false;
+
     }
 
+
     return data.role === "editor";
+
 }
+
+
+// ==========================================
+// ATUALIZAR UTILIZADOR
+// ==========================================
+
+async function atualizarUsuario() {
 
     const {
         data: { user }
@@ -308,9 +341,22 @@ async function verificarEditora() {
             " — Modo Discussão Ativo";
 
 
-        btnAuthTopo.textContent = "Sair";
+        btnAuthTopo.textContent =
+            "Sair";
 
-        btnAuthTopo.onclick = fazerLogout;
+
+        btnAuthTopo.onclick =
+            fazerLogout;
+
+
+        const ehEditora =
+            await verificarEditora();
+
+
+        console.log(
+            "É editora?",
+            ehEditora
+        );
 
 
     } else {
@@ -332,14 +378,16 @@ async function verificarEditora() {
 
 
 // ==========================================
-// VERIFICAR LOGIN
+// VERIFICAR ALTERAÇÕES DE LOGIN
 // ==========================================
 
-supabaseClient.auth.onAuthStateChange(function() {
+supabaseClient.auth.onAuthStateChange(
+    function() {
 
-    atualizarUsuario();
+        atualizarUsuario();
 
-});
+    }
+);
 
 
 // ==========================================

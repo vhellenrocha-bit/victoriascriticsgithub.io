@@ -818,6 +818,739 @@
 
 
         /* ==========================================
+           ESTÚDIO EDITORIAL — DESIGN PREMIUM
+        ========================================== */
+
+        .painel-editora {
+
+            max-width: 1240px;
+
+            width: calc(100% - 40px);
+
+            margin: 50px auto;
+
+            padding: 0;
+
+            background: #f5f1eb;
+
+            border: 1px solid #e3ddd3;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+
+        }
+
+
+        .painel-editorial-topo {
+
+            padding: 38px 42px;
+
+            background: #111111;
+
+            color: #ffffff;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 30px;
+
+        }
+
+
+        .painel-editorial-topo h2 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 2.5rem;
+
+            font-weight: 500;
+
+            margin: 12px 0 6px;
+
+        }
+
+
+        .painel-editorial-topo p {
+
+            color: #bdbdbd;
+
+            margin: 0;
+
+            font-size: 0.9rem;
+
+        }
+
+
+        .selo-editora {
+
+            display: inline-block;
+
+            color: #c6a875;
+
+            font-size: 0.68rem;
+
+            letter-spacing: 3px;
+
+            font-weight: 700;
+
+        }
+
+
+        .estado-editorial {
+
+            border: 1px solid #4b4b4b;
+
+            padding: 10px 15px;
+
+            font-size: 0.7rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .estado-ponto {
+
+            width: 7px;
+
+            height: 7px;
+
+            display: inline-block;
+
+            border-radius: 50%;
+
+            background: #997d54;
+
+            margin-right: 8px;
+
+        }
+
+
+        .editorial-layout {
+
+            display: grid;
+
+            grid-template-columns: minmax(0, 1fr) 350px;
+
+            gap: 25px;
+
+            padding: 25px;
+
+        }
+
+
+        .editorial-coluna-principal,
+        .editorial-coluna-lateral {
+
+            min-width: 0;
+
+        }
+
+
+        .editorial-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e5dfd6;
+
+            border-radius: 7px;
+
+            padding: 28px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .editorial-card-cabecalho {
+
+            margin-bottom: 28px;
+
+            border-bottom: 1px solid #eee9e1;
+
+            padding-bottom: 18px;
+
+        }
+
+
+        .editorial-card h3 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.5rem;
+
+            font-weight: 500;
+
+            margin: 7px 0 0;
+
+        }
+
+
+        .editorial-label {
+
+            color: #997d54;
+
+            font-size: 0.65rem;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .campo-editorial {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .campo-editorial label {
+
+            color: #333333;
+
+            font-size: 0.7rem;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .campo-editorial input,
+        .campo-editorial textarea,
+        .campo-editorial select {
+
+            background: #fcfbf9;
+
+            border: 1px solid #dcd6cc;
+
+            border-radius: 4px;
+
+            padding: 14px;
+
+        }
+
+
+        .campo-editorial input:focus,
+        .campo-editorial textarea:focus,
+        .campo-editorial select:focus {
+
+            border-color: #997d54;
+
+            box-shadow: 0 0 0 2px rgba(153,125,84,0.08);
+
+        }
+
+
+        .campo-editorial textarea {
+
+            line-height: 1.8;
+
+        }
+
+
+        .editorial-dupla {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+        }
+
+
+        .editorial-ajuda {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: #999999;
+
+            font-size: 0.7rem;
+
+            margin-top: 7px;
+
+        }
+
+
+        .area-upload-imagem {
+
+            border: 1px dashed #cfc6b9;
+
+            background: #faf8f4;
+
+            border-radius: 6px;
+
+            padding: 35px 20px;
+
+            text-align: center;
+
+        }
+
+
+        .icone-upload {
+
+            font-size: 2rem;
+
+            color: #997d54;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .area-upload-imagem strong {
+
+            display: block;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.15rem;
+
+            font-weight: 500;
+
+        }
+
+
+        .area-upload-imagem p {
+
+            color: #999999;
+
+            font-size: 0.72rem;
+
+            margin: 8px 0 20px;
+
+        }
+
+
+        .botao-upload {
+
+            display: inline-block;
+
+            background: #111111;
+
+            color: #ffffff;
+
+            padding: 11px 18px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            font-size: 0.7rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .botao-upload:hover {
+
+            background: #4a1c1c;
+
+        }
+
+
+        .preview-imagem-editor {
+
+            margin-top: 18px;
+
+        }
+
+
+        .preview-imagem-editor img {
+
+            width: 100%;
+
+            max-height: 300px;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 5px;
+
+        }
+
+
+        .remover-imagem {
+
+            width: 100%;
+
+            margin-top: 8px;
+
+            padding: 9px;
+
+            background: transparent;
+
+            border: 1px solid #d6d0c7;
+
+            color: #666666;
+
+            cursor: pointer;
+
+            border-radius: 4px;
+
+            font-size: 0.7rem;
+
+        }
+
+
+        .remover-imagem:hover {
+
+            border-color: #4a1c1c;
+
+            color: #4a1c1c;
+
+        }
+
+
+        .nota-imagem {
+
+            color: #999999;
+
+            font-size: 0.7rem;
+
+            line-height: 1.5;
+
+            margin-bottom: 0;
+
+        }
+
+
+        .estado-publicacao {
+
+            background: #f7f5f1;
+
+            padding: 12px;
+
+            margin: 18px 0 22px;
+
+            font-size: 0.72rem;
+
+            color: #555555;
+
+        }
+
+
+        .editorial-publicar {
+
+            background: #111111;
+
+            border-radius: 7px;
+
+            padding: 20px;
+
+        }
+
+
+        .btn-publicar-editorial {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: 0;
+
+            border-radius: 4px;
+
+            background: #997d54;
+
+            color: #ffffff;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+        }
+
+
+        .btn-publicar-editorial:hover {
+
+            background: #b09260;
+
+        }
+
+
+        .btn-guardar-rascunho {
+
+            width: 100%;
+
+            margin-top: 10px;
+
+            padding: 12px;
+
+            border: 1px solid #555555;
+
+            border-radius: 4px;
+
+            background: transparent;
+
+            color: #ffffff;
+
+            cursor: pointer;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            font-size: 0.7rem;
+
+        }
+
+
+        .mensagem-editorial {
+
+            color: #ffffff !important;
+
+            font-size: 0.75rem;
+
+            text-align: center;
+
+            margin: 12px 0 0;
+
+        }
+
+
+        /* ==========================================
+           BIBLIOTECA DE PUBLICAÇÕES
+        ========================================== */
+
+        .biblioteca-publicacoes {
+
+            margin: 0 25px 25px;
+
+            padding: 28px;
+
+            background: #ffffff;
+
+            border: 1px solid #e5dfd6;
+
+            border-radius: 7px;
+
+        }
+
+
+        .biblioteca-cabecalho {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding-bottom: 18px;
+
+            border-bottom: 1px solid #eee9e1;
+
+        }
+
+
+        .biblioteca-cabecalho h3 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.5rem;
+
+            font-weight: 500;
+
+            margin: 7px 0 0;
+
+        }
+
+
+        .btn-atualizar-publicacoes {
+
+            border: 1px solid #997d54;
+
+            background: transparent;
+
+            color: #4a1c1c;
+
+            padding: 10px 15px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            font-size: 0.7rem;
+
+            font-weight: 700;
+
+        }
+
+
+        .btn-atualizar-publicacoes:hover {
+
+            background: #4a1c1c;
+
+            color: #ffffff;
+
+        }
+
+
+        .lista-publicacoes-editora {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+
+            gap: 18px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .publicacao-admin-card {
+
+            border: 1px solid #e5dfd6;
+
+            border-radius: 6px;
+
+            overflow: hidden;
+
+            background: #fcfbf9;
+
+        }
+
+
+        .publicacao-admin-card img {
+
+            width: 100%;
+
+            height: 180px;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        .publicacao-admin-sem-imagem {
+
+            height: 180px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f3efe8;
+
+            color: #999;
+
+            font-size: 0.75rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .publicacao-admin-conteudo {
+
+            padding: 18px;
+
+        }
+
+
+        .publicacao-admin-conteudo h4 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 1.2rem;
+
+            font-weight: 500;
+
+            line-height: 1.35;
+
+            margin: 8px 0 16px;
+
+        }
+
+
+        .btn-apagar-publicacao {
+
+            width: 100%;
+
+            border: 1px solid #7a2525;
+
+            background: transparent;
+
+            color: #7a2525;
+
+            padding: 10px 12px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            font-size: 0.68rem;
+
+            font-weight: 700;
+
+        }
+
+
+        .btn-apagar-publicacao:hover {
+
+            background: #7a2525;
+
+            color: #ffffff;
+
+        }
+
+
+        .biblioteca-vazia {
+
+            color: #888888;
+
+            text-align: center;
+
+            padding: 25px 10px;
+
+            margin: 0;
+
+        }
+
+
+        /* ==========================================
            RODAPÉ
         ========================================== */
 
@@ -847,7 +1580,7 @@
 
 
         /* ==========================================
-           MOBILE
+           RESPONSIVO
         ========================================== */
 
         @media (max-width: 900px) {
@@ -856,6 +1589,37 @@
 
                 grid-template-columns:
                     repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .editorial-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .painel-editorial-topo {
+
+                padding: 30px 25px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .editorial-dupla {
+
+                grid-template-columns: 1fr;
+
+                gap: 0;
 
             }
 
@@ -906,338 +1670,50 @@
 
                 width: calc(100% - 20px);
 
+            }
+
+
+            .editorial-layout {
+
+                padding: 12px;
+
+            }
+
+
+            .editorial-card {
+
                 padding: 20px;
+
+            }
+
+
+            .painel-editorial-topo h2 {
+
+                font-size: 2rem;
+
+            }
+
+
+            .biblioteca-publicacoes {
+
+                margin: 0 12px 12px;
+
+                padding: 20px;
+
+            }
+
+
+            .biblioteca-cabecalho {
+
+                flex-direction: column;
+
+                align-items: flex-start;
 
             }
 
         }
 
-    /* ==========================================
-   ESTÚDIO EDITORIAL — DESIGN PREMIUM
-========================================== */
-
-.painel-editora {
-    max-width: 1240px;
-    width: calc(100% - 40px);
-    margin: 50px auto;
-    padding: 0;
-    background: #f5f1eb;
-    border: 1px solid #e3ddd3;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-}
-
-.painel-editorial-topo {
-    padding: 38px 42px;
-    background: #111111;
-    color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-}
-
-.painel-editorial-topo h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 500;
-    margin: 12px 0 6px;
-}
-
-.painel-editorial-topo p {
-    color: #bdbdbd;
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-.selo-editora {
-    display: inline-block;
-    color: #c6a875;
-    font-size: 0.68rem;
-    letter-spacing: 3px;
-    font-weight: 700;
-}
-
-.estado-editorial {
-    border: 1px solid #4b4b4b;
-    padding: 10px 15px;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
-}
-
-.estado-ponto {
-    width: 7px;
-    height: 7px;
-    display: inline-block;
-    border-radius: 50%;
-    background: #997d54;
-    margin-right: 8px;
-}
-
-.editorial-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 350px;
-    gap: 25px;
-    padding: 25px;
-}
-
-.editorial-coluna-principal,
-.editorial-coluna-lateral {
-    min-width: 0;
-}
-
-.editorial-card {
-    background: #ffffff;
-    border: 1px solid #e5dfd6;
-    border-radius: 7px;
-    padding: 28px;
-    margin-bottom: 25px;
-}
-
-.editorial-card-cabecalho {
-    margin-bottom: 28px;
-    border-bottom: 1px solid #eee9e1;
-    padding-bottom: 18px;
-}
-
-.editorial-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 7px 0 0;
-}
-
-.editorial-label {
-    color: #997d54;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.campo-editorial {
-    margin-bottom: 22px;
-}
-
-.campo-editorial label {
-    color: #333333;
-    font-size: 0.7rem;
-    margin-bottom: 8px;
-}
-
-.campo-editorial input,
-.campo-editorial textarea,
-.campo-editorial select {
-    background: #fcfbf9;
-    border: 1px solid #dcd6cc;
-    border-radius: 4px;
-    padding: 14px;
-}
-
-.campo-editorial input:focus,
-.campo-editorial textarea:focus,
-.campo-editorial select:focus {
-    border-color: #997d54;
-    box-shadow: 0 0 0 2px rgba(153,125,84,0.08);
-}
-
-.campo-editorial textarea {
-    line-height: 1.8;
-}
-
-.campo-editorial small {
-    display: block;
-    color: #888888;
-    margin-top: 7px;
-    font-size: 0.72rem;
-}
-
-.editorial-dupla {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-}
-
-.editorial-ajuda {
-    display: flex;
-    justify-content: space-between;
-    color: #999999;
-    font-size: 0.7rem;
-    margin-top: 7px;
-}
-
-.area-upload-imagem {
-    border: 1px dashed #cfc6b9;
-    background: #faf8f4;
-    border-radius: 6px;
-    padding: 35px 20px;
-    text-align: center;
-}
-
-.icone-upload {
-    font-size: 2rem;
-    color: #997d54;
-    margin-bottom: 12px;
-}
-
-.area-upload-imagem strong {
-    display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 500;
-}
-
-.area-upload-imagem p {
-    color: #999999;
-    font-size: 0.72rem;
-    margin: 8px 0 20px;
-}
-
-.botao-upload {
-    display: inline-block;
-    background: #111111;
-    color: #ffffff;
-    padding: 11px 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.botao-upload:hover {
-    background: #4a1c1c;
-}
-
-.preview-imagem-editor {
-    margin-top: 18px;
-}
-
-.preview-imagem-editor img {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    display: block;
-    border-radius: 5px;
-}
-
-.remover-imagem {
-    width: 100%;
-    margin-top: 8px;
-    padding: 9px;
-    background: transparent;
-    border: 1px solid #d6d0c7;
-    color: #666666;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.7rem;
-}
-
-.remover-imagem:hover {
-    border-color: #4a1c1c;
-    color: #4a1c1c;
-}
-
-.nota-imagem {
-    color: #999999;
-    font-size: 0.7rem;
-    line-height: 1.5;
-    margin-bottom: 0;
-}
-
-.estado-publicacao {
-    background: #f7f5f1;
-    padding: 12px;
-    margin: 18px 0 22px;
-    font-size: 0.72rem;
-    color: #555555;
-}
-
-.editorial-publicar {
-    background: #111111;
-    border-radius: 7px;
-    padding: 20px;
-}
-
-.btn-publicar-editorial {
-    width: 100%;
-    padding: 15px;
-    border: 0;
-    border-radius: 4px;
-    background: #997d54;
-    color: #ffffff;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-.btn-publicar-editorial:hover {
-    background: #b09260;
-}
-
-.btn-guardar-rascunho {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px;
-    border: 1px solid #555555;
-    border-radius: 4px;
-    background: transparent;
-    color: #ffffff;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.7rem;
-}
-
-.mensagem-editorial {
-    color: #ffffff !important;
-    font-size: 0.75rem;
-    text-align: center;
-    margin: 12px 0 0;
-}
-
-@media (max-width: 850px) {
-
-    .editorial-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .painel-editorial-topo {
-        padding: 30px 25px;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .editorial-dupla {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-}
-
-@media (max-width: 600px) {
-
-    .painel-editora {
-        width: calc(100% - 20px);
-    }
-
-    .editorial-layout {
-        padding: 12px;
-    }
-
-    .editorial-card {
-        padding: 20px;
-    }
-
-    .painel-editorial-topo h2 {
-        font-size: 2rem;
-    }
-
-}</style>
+    </style>
 
 </head>
 
@@ -1400,54 +1876,474 @@
 
 
     <!-- ==========================================
-         PAINEL DA EDITORA
-         
-         ATENÇÃO:
-         AGORA EXISTE APENAS UM PAINEL
-         E ELE ESTÁ FORA DA BARRA SUPERIOR.
+         ESTÚDIO EDITORIAL DA EDITORA
     ========================================== -->
 
-   <!-- ==========================================
-     ESTÚDIO EDITORIAL DA EDITORA
-========================================== -->
-
-<div class="biblioteca-publicacoes">
-
-    <div class="biblioteca-cabecalho">
-
-        <div>
-            <span class="editorial-label">
-                ARQUIVO EDITORIAL
-            </span>
-
-            <h3>
-                Publicações existentes
-            </h3>
-        </div>
-
-        <button
-            type="button"
-            class="btn-atualizar-publicacoes"
-            onclick="carregarPublicacoesEditora()"
-        >
-            Atualizar
-        </button>
-
-    </div>
-
-
-    <div
-        id="lista-publicacoes-editora"
-        class="lista-publicacoes-editora"
+    <section
+        id="painel-editora"
+        class="painel-editora oculto"
     >
 
-        <p class="biblioteca-vazia">
-            A carregar publicações...
-        </p>
 
-    </div>
+        <!-- CABEÇALHO -->
 
-</div>
+        <div class="painel-editorial-topo">
+
+            <div>
+
+                <span class="selo-editora">
+                    ⚜ EDITORIAL STUDIO
+                </span>
+
+                <h2>
+                    Estúdio Editorial
+                </h2>
+
+                <p>
+                    Crie, edite e publique as críticas
+                    do Victoria's Critics.
+                </p>
+
+            </div>
+
+
+            <div class="estado-editorial">
+
+                <span class="estado-ponto"></span>
+
+                Área privada
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CORPO -->
+
+        <div class="editorial-layout">
+
+
+            <!-- ======================================
+                 COLUNA PRINCIPAL — TEXTO
+            ======================================= -->
+
+            <div class="editorial-coluna-principal">
+
+                <div class="editorial-card">
+
+                    <div class="editorial-card-cabecalho">
+
+                        <div>
+
+                            <span class="editorial-label">
+                                NOVA CRÍTICA
+                            </span>
+
+                            <h3>
+                                Composição editorial
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TÍTULO -->
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-titulo">
+                            Título da crítica
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editor-titulo"
+                            placeholder="Ex.: A delicada arquitetura de sabores do restaurante..."
+                        >
+
+                        <small>
+                            Escolha um título forte, elegante e editorial.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- SUBTÍTULO -->
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-subtitulo">
+                            Linha fina
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editor-subtitulo"
+                            placeholder="Uma experiência entre técnica, produto e memória."
+                        >
+
+                    </div>
+
+
+
+                    <!-- CATEGORIA -->
+
+                    <div class="editorial-dupla">
+
+                        <div class="campo-editorial">
+
+                            <label for="editor-categoria">
+                                Categoria
+                            </label>
+
+                            <select id="editor-categoria">
+
+                                <option value="Crítica">
+                                    Crítica
+                                </option>
+
+                                <option value="Alta Gastronomia">
+                                    Alta Gastronomia
+                                </option>
+
+                                <option value="Restaurantes">
+                                    Restaurantes
+                                </option>
+
+                                <option value="Chef">
+                                    Chef
+                                </option>
+
+                                <option value="Ingredientes">
+                                    Ingredientes
+                                </option>
+
+                                <option value="Experiências">
+                                    Experiências
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo-editorial">
+
+                            <label for="editor-data">
+                                Data da crítica
+                            </label>
+
+                            <input
+                                type="date"
+                                id="editor-data"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TEXTO -->
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-conteudo">
+                            Texto da crítica
+                        </label>
+
+                        <textarea
+                            id="editor-conteudo"
+                            rows="20"
+                            placeholder="Comece a escrever a sua crítica...
+
+Descreva o ambiente, o serviço, a cozinha, os pratos, as técnicas, os ingredientes e a experiência.
+
+Escreva com a voz editorial do Victoria's Critics."
+                        ></textarea>
+
+
+                        <div class="editorial-ajuda">
+
+                            <span>
+                                Texto editorial
+                            </span>
+
+                            <span>
+                                Use parágrafos para criar ritmo.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONCLUSÃO -->
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-conclusao">
+                            Conclusão editorial
+                        </label>
+
+                        <textarea
+                            id="editor-conclusao"
+                            rows="6"
+                            placeholder="A sua apreciação final sobre a experiência..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ======================================
+                 COLUNA LATERAL
+            ======================================= -->
+
+            <aside class="editorial-coluna-lateral">
+
+
+                <!-- FOTOGRAFIA -->
+
+                <div class="editorial-card">
+
+                    <div class="editorial-card-cabecalho">
+
+                        <div>
+
+                            <span class="editorial-label">
+                                IMAGEM PRINCIPAL
+                            </span>
+
+                            <h3>
+                                Fotografia
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="area-upload-imagem"
+                        id="area-upload-imagem"
+                    >
+
+                        <div class="icone-upload">
+                            ✦
+                        </div>
+
+                        <strong>
+                            Adicionar fotografia
+                        </strong>
+
+                        <p>
+                            JPG, PNG ou WEBP
+                        </p>
+
+
+                        <label
+                            for="editor-imagem"
+                            class="botao-upload"
+                        >
+                            Escolher imagem
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="editor-imagem"
+                            accept="image/jpeg,image/png,image/webp"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <div
+                        id="preview-imagem-editor"
+                        class="preview-imagem-editor oculto"
+                    >
+
+                        <img
+                            id="imagem-preview"
+                            src=""
+                            alt="Pré-visualização da fotografia"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="remover-imagem"
+                            onclick="removerImagemSelecionada()"
+                        >
+                            Remover fotografia
+                        </button>
+
+                    </div>
+
+
+                    <p class="nota-imagem">
+                        A fotografia será utilizada como
+                        imagem principal da publicação.
+                    </p>
+
+                </div>
+
+
+
+                <!-- PUBLICAÇÃO -->
+
+                <div class="editorial-card">
+
+                    <span class="editorial-label">
+                        PUBLICAÇÃO
+                    </span>
+
+                    <h3>
+                        Estado da crítica
+                    </h3>
+
+
+                    <div class="estado-publicacao">
+
+                        <span class="estado-ponto"></span>
+
+                        Pronta para edição
+
+                    </div>
+
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-autor">
+                            Assinatura
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editor-autor"
+                            value="Victoria's Critics"
+                        >
+
+                    </div>
+
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-destaque">
+                            Destaque
+                        </label>
+
+                        <select id="editor-destaque">
+
+                            <option value="normal">
+                                Publicação normal
+                            </option>
+
+                            <option value="destaque">
+                                Destacar na página inicial
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PUBLICAR -->
+
+                <div class="editorial-publicar">
+
+                    <button
+                        type="button"
+                        class="btn-publicar-editorial"
+                        onclick="criarPublicacao()"
+                    >
+                        Publicar crítica
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn-guardar-rascunho"
+                    >
+                        Guardar como rascunho
+                    </button>
+
+
+                    <p
+                        id="mensagem-editor"
+                        class="mensagem-editorial"
+                    ></p>
+
+                </div>
+
+
+            </aside>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             BIBLIOTECA DE PUBLICAÇÕES
+             FICA DENTRO DA ÁREA PRIVADA
+        ========================================== -->
+
+        <div class="biblioteca-publicacoes">
+
+            <div class="biblioteca-cabecalho">
+
+                <div>
+
+                    <span class="editorial-label">
+                        ARQUIVO EDITORIAL
+                    </span>
+
+                    <h3>
+                        Publicações existentes
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-atualizar-publicacoes"
+                    onclick="carregarPublicacoesEditora()"
+                >
+                    Atualizar
+                </button>
+
+            </div>
+
+
+            <div
+                id="lista-publicacoes-editora"
+                class="lista-publicacoes-editora"
+            >
+
+                <p class="biblioteca-vazia">
+                    A carregar publicações...
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
 
@@ -1455,423 +2351,7 @@
          PAINEL DE DISCUSSÃO
     ========================================== -->
 
-  <section
-    id="painel-editora"
-    class="painel-editora oculto"
->
-
-    <!-- CABEÇALHO -->
-
-    <div class="painel-editorial-topo">
-
-        <div>
-
-            <span class="selo-editora">
-                ⚜ EDITORIAL STUDIO
-            </span>
-
-            <h2>
-                Estúdio Editorial
-            </h2>
-
-            <p>
-                Crie, edite e publique as críticas
-                do Victoria's Critics.
-            </p>
-
-        </div>
-
-        <div class="estado-editorial">
-
-            <span class="estado-ponto"></span>
-
-            Área privada
-
-        </div>
-
-    </div>
-
-
-    <!-- CORPO -->
-
-    <div class="editorial-layout">
-
-
-        <!-- ======================================
-             COLUNA PRINCIPAL — TEXTO
-        ======================================= -->
-
-        <div class="editorial-coluna-principal">
-
-            <div class="editorial-card">
-
-                <div class="editorial-card-cabecalho">
-
-                    <div>
-
-                        <span class="editorial-label">
-                            NOVA CRÍTICA
-                        </span>
-
-                        <h3>
-                            Composição editorial
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <!-- TÍTULO -->
-
-                <div class="campo-editorial">
-
-                    <label for="editor-titulo">
-                        Título da crítica
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editor-titulo"
-                        placeholder="Ex.: A delicada arquitetura de sabores do restaurante..."
-                    >
-
-                    <small>
-                        Escolha um título forte, elegante e editorial.
-                    </small>
-
-                </div>
-
-
-                <!-- SUBTÍTULO -->
-
-                <div class="campo-editorial">
-
-                    <label for="editor-subtitulo">
-                        Linha fina
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editor-subtitulo"
-                        placeholder="Uma experiência entre técnica, produto e memória."
-                    >
-
-                </div>
-
-
-                <!-- CATEGORIA -->
-
-                <div class="editorial-dupla">
-
-                    <div class="campo-editorial">
-
-                        <label for="editor-categoria">
-                            Categoria
-                        </label>
-
-                        <select id="editor-categoria">
-
-                            <option value="Crítica">
-                                Crítica
-                            </option>
-
-                            <option value="Alta Gastronomia">
-                                Alta Gastronomia
-                            </option>
-
-                            <option value="Restaurantes">
-                                Restaurantes
-                            </option>
-
-                            <option value="Chef">
-                                Chef
-                            </option>
-
-                            <option value="Ingredientes">
-                                Ingredientes
-                            </option>
-
-                            <option value="Experiências">
-                                Experiências
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="campo-editorial">
-
-                        <label for="editor-data">
-                            Data da crítica
-                        </label>
-
-                        <input
-                            type="date"
-                            id="editor-data"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- TEXTO -->
-
-                <div class="campo-editorial">
-
-                    <label for="editor-conteudo">
-                        Texto da crítica
-                    </label>
-
-                    <textarea
-                        id="editor-conteudo"
-                        rows="20"
-                        placeholder="Comece a escrever a sua crítica...
-
-Descreva o ambiente, o serviço, a cozinha, os pratos, as técnicas, os ingredientes e a experiência.
-
-Escreva com a voz editorial do Victoria's Critics."
-                    ></textarea>
-
-                    <div class="editorial-ajuda">
-
-                        <span>
-                            Texto editorial
-                        </span>
-
-                        <span>
-                            Use parágrafos para criar ritmo.
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONCLUSÃO -->
-
-                <div class="campo-editorial">
-
-                    <label for="editor-conclusao">
-                        Conclusão editorial
-                    </label>
-
-                    <textarea
-                        id="editor-conclusao"
-                        rows="6"
-                        placeholder="A sua apreciação final sobre a experiência..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ======================================
-             COLUNA LATERAL
-        ======================================= -->
-
-        <aside class="editorial-coluna-lateral">
-
-
-            <!-- FOTOGRAFIA -->
-
-            <div class="editorial-card">
-
-                <div class="editorial-card-cabecalho">
-
-                    <div>
-
-                        <span class="editorial-label">
-                            IMAGEM PRINCIPAL
-                        </span>
-
-                        <h3>
-                            Fotografia
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="area-upload-imagem"
-                    id="area-upload-imagem"
-                >
-
-                    <div class="icone-upload">
-                        ✦
-                    </div>
-
-                    <strong>
-                        Adicionar fotografia
-                    </strong>
-
-                    <p>
-                        JPG, PNG ou WEBP
-                    </p>
-
-
-                    <label
-                        for="editor-imagem"
-                        class="botao-upload"
-                    >
-                        Escolher imagem
-                    </label>
-
-
-                    <input
-                        type="file"
-                        id="editor-imagem"
-                        accept="image/jpeg,image/png,image/webp"
-                        hidden
-                    >
-
-                </div>
-
-
-                <div
-                    id="preview-imagem-editor"
-                    class="preview-imagem-editor oculto"
-                >
-
-                    <img
-                        id="imagem-preview"
-                        src=""
-                        alt="Pré-visualização da fotografia"
-                    >
-
-                    <button
-                        type="button"
-                        class="remover-imagem"
-                        onclick="removerImagemSelecionada()"
-                    >
-                        Remover fotografia
-                    </button>
-
-                </div>
-
-
-                <p class="nota-imagem">
-                    A fotografia será utilizada como
-                    imagem principal da publicação.
-                </p>
-
-            </div>
-
-
-
-            <!-- PUBLICAÇÃO -->
-
-            <div class="editorial-card">
-
-                <span class="editorial-label">
-                    PUBLICAÇÃO
-                </span>
-
-                <h3>
-                    Estado da crítica
-                </h3>
-
-
-                <div class="estado-publicacao">
-
-                    <span class="estado-ponto"></span>
-
-                    Pronta para edição
-
-                </div>
-
-
-                <div class="campo-editorial">
-
-                    <label for="editor-autor">
-                        Assinatura
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editor-autor"
-                        value="Victoria's Critics"
-                    >
-
-                </div>
-
-
-                <div class="campo-editorial">
-
-                    <label for="editor-destaque">
-                        Destaque
-                    </label>
-
-                    <select id="editor-destaque">
-
-                        <option value="normal">
-                            Publicação normal
-                        </option>
-
-                        <option value="destaque">
-                            Destacar na página inicial
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- PUBLICAR -->
-
-            <div class="editorial-publicar">
-
-                <button
-                    type="button"
-                    class="btn-publicar-editorial"
-                    onclick="criarPublicacao()"
-                >
-
-                    Publicar crítica
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="btn-guardar-rascunho"
-                >
-
-                    Guardar como rascunho
-
-                </button>
-
-
-                <p
-                    id="mensagem-editor"
-                    class="mensagem-editorial"
-                ></p>
-
-            </div>
-
-
-        </aside>
-
-    </div>
-
-</section>
-
-
-       <!-- ==========================================
-     BIBLIOTECA DE PUBLICAÇÕES
-========================================== -->
-
-  <section class="mural-social-seccao">
+    <section class="mural-social-seccao">
 
         <h2>
             Painel de Discussão Crítica

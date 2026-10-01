@@ -194,11 +194,9 @@ if (formCadastro) {
                     error
                 );
 
-
                 mensagem.textContent =
                     "Erro: " +
                     error.message;
-
 
                 return;
             }
@@ -280,11 +278,9 @@ if (formLogin) {
                     error
                 );
 
-
                 mensagem.textContent =
                     "Erro: " +
                     error.message;
-
 
                 return;
             }
@@ -448,15 +444,12 @@ function esconderPainelEditora() {
 // ATUALIZAR UTILIZADOR
 // ==========================================
 
-async function atualizarUsuario() {// ==========================================
-// ATUALIZAR UTILIZADOR
-// ==========================================
-
 async function atualizarUsuario() {
 
     const {
         data: { user },
         error
+
     } = await supabaseClient.auth.getUser();
 
 
@@ -541,77 +534,6 @@ async function atualizarUsuario() {
         mostrarPainelEditora();
 
     } else {
-
-        esconderPainelEditora();
-
-    }
-
-}} = await supabaseClient.auth.getUser();
-
-
-    if (user) {
-
-        const nome =
-            user.user_metadata?.username ||
-            "Utilizador";
-
-
-        if (mensagemBoasVindas) {
-
-            mensagemBoasVindas.textContent =
-                "Olá, " +
-                nome +
-                " — Modo Discussão Ativo";
-
-        }
-
-
-        if (btnAuthTopo) {
-
-            btnAuthTopo.textContent =
-                "Sair";
-
-            btnAuthTopo.onclick =
-                fazerLogout;
-
-        }
-
-
-        const ehEditora =
-            await verificarEditora();
-
-
-        if (ehEditora) {
-
-            mostrarPainelEditora();
-
-        } else {
-
-            esconderPainelEditora();
-
-        }
-
-
-    } else {
-
-        if (mensagemBoasVindas) {
-
-            mensagemBoasVindas.textContent =
-                "Canal de Discussão Moderado — Modo Leitura";
-
-        }
-
-
-        if (btnAuthTopo) {
-
-            btnAuthTopo.textContent =
-                "Entrar / Registar";
-
-            btnAuthTopo.onclick =
-                abrirModal;
-
-        }
-
 
         esconderPainelEditora();
 

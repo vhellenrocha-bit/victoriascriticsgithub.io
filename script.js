@@ -458,16 +458,11 @@ async function atualizarUsuario(user) {
     // MOSTRAR / ESCONDER PAINEL
     // ------------------------------------------
 
-    if (ehEditora) {
+  if (ehEditora) {
 
-        mostrarPainelEditora();
+    mostrarPainelEditora();
 
-    } else {
-
-        esconderPainelEditora();
-
-    }
-
+}
 }
 
 

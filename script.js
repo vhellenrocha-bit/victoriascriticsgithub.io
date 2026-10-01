@@ -1,22 +1,14 @@
-// ==========================================
-// SUPABASE
-// ==========================================
+const SUPABASE_URL = "https://mefjsltueonhhrlusqpy.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_sUY0ZUsbQnx8Jm1NENe4Cg_7g0ceZdf";
 
-const SUPABASE_URL =
-    "https://mefjsltueonhhrlusqpy.supabase.co";
-
-const SUPABASE_ANON_KEY =
-    "sb_publishable_sUY0ZUsbQnx8Jm1NENe4Cg_7g0ceZdf";
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
 
 
 // ==========================================
-// ELEMENTOS
+// ELEMENTOS DO SITE
 // ==========================================
 
 const modalAuth =
@@ -133,6 +125,7 @@ if (formCadastro) {
                     "mensagem-cadastro"
                 );
 
+
             mensagem.textContent =
                 "A criar a sua conta...";
 
@@ -166,6 +159,7 @@ if (formCadastro) {
                     "Erro: " + error.message;
 
                 return;
+
             }
 
 
@@ -203,19 +197,16 @@ if (formLogin) {
 
             event.preventDefault();
 
-
             const email =
                 document
                     .getElementById("login-email")
                     .value
                     .trim();
 
-
             const password =
                 document
                     .getElementById("login-password")
                     .value;
-
 
             const mensagem =
                 document.getElementById(
@@ -228,14 +219,13 @@ if (formLogin) {
 
 
             const { data, error } =
-                await supabaseClient.auth
-                    .signInWithPassword({
+                await supabaseClient.auth.signInWithPassword({
 
-                        email: email,
+                    email: email,
 
-                        password: password
+                    password: password
 
-                    });
+                });
 
 
             if (error) {
@@ -249,6 +239,7 @@ if (formLogin) {
                     "Erro: " + error.message;
 
                 return;
+
             }
 
 
@@ -256,9 +247,6 @@ if (formLogin) {
 
             fecharModal();
 
-
-            // Usa diretamente o utilizador
-            // devolvido pelo login.
             await atualizarUsuario(
                 data.user
             );
@@ -290,11 +278,7 @@ async function fazerLogout() {
 
 async function verificarEditora(user) {
 
-    if (!user) {
-
-        return false;
-
-    }
+    if (!user) return false;
 
 
     const { data, error } =
@@ -313,6 +297,7 @@ async function verificarEditora(user) {
         );
 
         return false;
+
     }
 
 
@@ -323,6 +308,7 @@ async function verificarEditora(user) {
         );
 
         return false;
+
     }
 
 
@@ -338,7 +324,7 @@ async function verificarEditora(user) {
 
 
 // ==========================================
-// MOSTRAR PAINEL
+// MOSTRAR PAINEL DA EDITORA
 // ==========================================
 
 function mostrarPainelEditora() {
@@ -352,13 +338,15 @@ function mostrarPainelEditora() {
     if (!painel) return;
 
 
-    painel.classList.remove("oculto");
+    painel.classList.remove(
+        "oculto"
+    );
 
 }
 
 
 // ==========================================
-// ESCONDER PAINEL
+// ESCONDER PAINEL DA EDITORA
 // ==========================================
 
 function esconderPainelEditora() {
@@ -372,7 +360,9 @@ function esconderPainelEditora() {
     if (!painel) return;
 
 
-    painel.classList.add("oculto");
+    painel.classList.add(
+        "oculto"
+    );
 
 }
 
@@ -382,10 +372,6 @@ function esconderPainelEditora() {
 // ==========================================
 
 async function atualizarUsuario(user) {
-
-    // ------------------------------------------
-    // NÃO EXISTE UTILIZADOR
-    // ------------------------------------------
 
     if (!user) {
 
@@ -415,10 +401,6 @@ async function atualizarUsuario(user) {
     }
 
 
-    // ------------------------------------------
-    // UTILIZADOR AUTENTICADO
-    // ------------------------------------------
-
     const nome =
         user.user_metadata?.username ||
         user.email ||
@@ -446,28 +428,25 @@ async function atualizarUsuario(user) {
     }
 
 
-    // ------------------------------------------
-    // VERIFICAR PERFIL
-    // ------------------------------------------
-
     const ehEditora =
         await verificarEditora(user);
 
 
-    // ------------------------------------------
-    // MOSTRAR / ESCONDER PAINEL
-    // ------------------------------------------
+    if (ehEditora) {
 
-  if (ehEditora) {
+        mostrarPainelEditora();
 
-    mostrarPainelEditora();
+    } else {
 
-}
+        esconderPainelEditora();
+
+    }
+
 }
 
 
 // ==========================================
-// CRIAR PUBLICAÇÃO
+// PUBLICAR CRÍTICA
 // ==========================================
 
 async function criarPublicacao() {
@@ -480,6 +459,11 @@ async function criarPublicacao() {
     const campoConteudo =
         document.getElementById(
             "editor-conteudo"
+        );
+
+    const campoImagem =
+        document.getElementById(
+            "editor-imagem"
         );
 
     const mensagem =
@@ -498,8 +482,13 @@ async function criarPublicacao() {
     const titulo =
         campoTitulo.value.trim();
 
+
     const conteudo =
         campoConteudo.value.trim();
+
+
+    const arquivo =
+        campoImagem?.files?.[0] || null;
 
 
     if (!titulo || !conteudo) {
@@ -516,9 +505,16 @@ async function criarPublicacao() {
     }
 
 
+    // ==========================================
+    // VERIFICAR SESSÃO
+    // ==========================================
+
     const {
-        data: { session }
-    } = await supabaseClient.auth.getSession();
+        data: {
+            session
+        }
+    } =
+        await supabaseClient.auth.getSession();
 
 
     const user =
@@ -538,6 +534,10 @@ async function criarPublicacao() {
 
     }
 
+
+    // ==========================================
+    // VERIFICAR EDITORA
+    // ==========================================
 
     const ehEditora =
         await verificarEditora(user);
@@ -560,12 +560,113 @@ async function criarPublicacao() {
     if (mensagem) {
 
         mensagem.textContent =
-            "A publicar...";
+            "A preparar a publicação...";
 
     }
 
 
-    const { error } =
+    // ==========================================
+    // ENVIAR IMAGEM
+    // ==========================================
+
+    let imagemUrl = null;
+
+
+    if (arquivo) {
+
+        if (mensagem) {
+
+            mensagem.textContent =
+                "A enviar a fotografia...";
+
+        }
+
+
+        const nomeSeguro =
+            arquivo.name.replace(
+                /[^a-zA-Z0-9._-]/g,
+                "_"
+            );
+
+
+        const caminhoImagem =
+            user.id +
+            "/" +
+            Date.now() +
+            "-" +
+            nomeSeguro;
+
+
+        const {
+            error: erroUpload
+        } =
+            await supabaseClient
+                .storage
+                .from("site-imagens")
+                .upload(
+                    caminhoImagem,
+                    arquivo,
+                    {
+                        cacheControl: "3600",
+                        upsert: false,
+                        contentType: arquivo.type
+                    }
+                );
+
+
+        if (erroUpload) {
+
+            console.error(
+                "ERRO AO ENVIAR IMAGEM:",
+                erroUpload
+            );
+
+
+            if (mensagem) {
+
+                mensagem.textContent =
+                    "Erro ao enviar a fotografia: " +
+                    erroUpload.message;
+
+            }
+
+            return;
+
+        }
+
+
+        const {
+            data: dadosUrl
+        } =
+            supabaseClient
+                .storage
+                .from("site-imagens")
+                .getPublicUrl(
+                    caminhoImagem
+                );
+
+
+        imagemUrl =
+            dadosUrl.publicUrl;
+
+    }
+
+
+    // ==========================================
+    // GUARDAR PUBLICAÇÃO
+    // ==========================================
+
+    if (mensagem) {
+
+        mensagem.textContent =
+            "A publicar a crítica...";
+
+    }
+
+
+    const {
+        error: erroPublicacao
+    } =
         await supabaseClient
             .from("publicacoes")
             .insert({
@@ -574,16 +675,18 @@ async function criarPublicacao() {
 
                 conteudo: conteudo,
 
+                imagem_url: imagemUrl,
+
                 publicada: true
 
             });
 
 
-    if (error) {
+    if (erroPublicacao) {
 
         console.error(
             "ERRO AO PUBLICAR:",
-            error
+            erroPublicacao
         );
 
 
@@ -591,7 +694,7 @@ async function criarPublicacao() {
 
             mensagem.textContent =
                 "Erro ao publicar: " +
-                error.message;
+                erroPublicacao.message;
 
         }
 
@@ -600,27 +703,195 @@ async function criarPublicacao() {
     }
 
 
-    if (mensagem) {
-
-        mensagem.textContent =
-            "✓ Publicação criada com sucesso!";
-
-    }
-
+    // ==========================================
+    // LIMPAR FORMULÁRIO
+    // ==========================================
 
     campoTitulo.value = "";
 
     campoConteudo.value = "";
 
+
+    if (campoImagem) {
+
+        campoImagem.value = "";
+
+    }
+
+
+    const preview =
+        document.getElementById(
+            "preview-imagem-editor"
+        );
+
+
+    const imagemPreview =
+        document.getElementById(
+            "imagem-preview"
+        );
+
+
+    if (imagemPreview) {
+
+        imagemPreview.src = "";
+
+    }
+
+
+    if (preview) {
+
+        preview.classList.add(
+            "oculto"
+        );
+
+    }
+
+
+    if (mensagem) {
+
+        mensagem.textContent =
+            "✓ Crítica publicada com sucesso!";
+
+    }
+
 }
 
 
 // ==========================================
-// INICIALIZAÇÃO CORRETA DA SESSÃO
+// PRÉ-VISUALIZAÇÃO DA IMAGEM
 // ==========================================
 
-// Primeiro verifica a sessão atual.
-// Não usamos getUser() aqui.
+const campoImagem =
+    document.getElementById(
+        "editor-imagem"
+    );
+
+
+if (campoImagem) {
+
+    campoImagem.addEventListener(
+        "change",
+        function() {
+
+            const arquivo =
+                campoImagem.files[0];
+
+
+            const preview =
+                document.getElementById(
+                    "preview-imagem-editor"
+                );
+
+
+            const imagemPreview =
+                document.getElementById(
+                    "imagem-preview"
+                );
+
+
+            if (!arquivo) {
+
+                if (preview) {
+
+                    preview.classList.add(
+                        "oculto"
+                    );
+
+                }
+
+                return;
+
+            }
+
+
+            const leitor =
+                new FileReader();
+
+
+            leitor.onload =
+                function(event) {
+
+                    if (imagemPreview) {
+
+                        imagemPreview.src =
+                            event.target.result;
+
+                    }
+
+
+                    if (preview) {
+
+                        preview.classList.remove(
+                            "oculto"
+                        );
+
+                    }
+
+                };
+
+
+            leitor.readAsDataURL(
+                arquivo
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// REMOVER IMAGEM
+// ==========================================
+
+function removerImagemSelecionada() {
+
+    const campoImagem =
+        document.getElementById(
+            "editor-imagem"
+        );
+
+
+    const preview =
+        document.getElementById(
+            "preview-imagem-editor"
+        );
+
+
+    const imagemPreview =
+        document.getElementById(
+            "imagem-preview"
+        );
+
+
+    if (campoImagem) {
+
+        campoImagem.value = "";
+
+    }
+
+
+    if (imagemPreview) {
+
+        imagemPreview.src = "";
+
+    }
+
+
+    if (preview) {
+
+        preview.classList.add(
+            "oculto"
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// VERIFICAR SESSÃO AO ABRIR O SITE
+// ==========================================
 
 supabaseClient.auth.getSession()
     .then(function(resultado) {
@@ -628,8 +899,10 @@ supabaseClient.auth.getSession()
         const session =
             resultado.data.session;
 
+
         const user =
             session?.user || null;
+
 
         atualizarUsuario(user);
 
@@ -637,7 +910,7 @@ supabaseClient.auth.getSession()
 
 
 // ==========================================
-// ALTERAÇÕES DE LOGIN / LOGOUT
+// ACOMPANHAR LOGIN / LOGOUT
 // ==========================================
 
 supabaseClient.auth.onAuthStateChange(
@@ -645,6 +918,7 @@ supabaseClient.auth.onAuthStateChange(
 
         const user =
             session?.user || null;
+
 
         atualizarUsuario(user);
 

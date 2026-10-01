@@ -18,6 +18,10 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #fbf9f6;
             font-family: 'Inter', sans-serif;
@@ -59,7 +63,7 @@
 
         .btn-status-auth:hover {
             background-color: #4a1c1c;
-            color: white;
+            color: #ffffff;
             border-color: #4a1c1c;
         }
 
@@ -69,11 +73,10 @@
 
         .topo-revista {
             text-align: center;
-            padding: 40px 20px 30px 20px;
+            padding: 40px 20px 30px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
-            box-sizing: border-box;
         }
 
         .topo-revista h1 {
@@ -102,7 +105,6 @@
             width: 100%;
             margin: 0 auto;
             padding: 20px;
-            box-sizing: border-box;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-auto-rows: 220px;
@@ -122,8 +124,7 @@
 
         .bloco-mosaico:hover {
             transform: translateY(-5px);
-            box-shadow:
-                0 12px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
 
         .bloco-mosaico a {
@@ -168,8 +169,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition:
-                transform 0.6s ease;
+            transition: transform 0.6s ease;
         }
 
         .bloco-mosaico:hover img {
@@ -181,198 +181,45 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 40px 20px 20px 20px;
-            background:
-                linear-gradient(
-                    transparent,
-                    rgba(0,0,0,0.9)
-                );
+            padding: 40px 20px 20px;
+            background: linear-gradient(
+                transparent,
+                rgba(0,0,0,0.9)
+            );
             color: #ffffff;
         }
 
         .legenda-mosaico h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
-            margin: 5px 0 0 0;
+            margin: 5px 0 0;
             line-height: 1.3;
         }
 
-        /* ==========================================
-           PAINEL DE DISCUSSÃO
-        ========================================== */
-
-        .mural-social-seccao {
-            max-width: 1200px;
-            width: 100%;
-            margin: 50px auto;
-            padding: 35px;
-            box-sizing: border-box;
-            background-color: #ffffff;
-            border-radius: 6px;
-            box-shadow:
-                0 4px 20px rgba(0,0,0,0.02);
-            border-top:
-                3px solid #4a1c1c;
-        }
-
-        .mural-social-seccao h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin:
-                0 0 25px 0;
-        }
-
-        .caixa-comentario-feed {
-            background-color: #fdfcfb;
-            border-left:
-                3px solid #997d54;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius:
-                0 6px 6px 0;
-        }
-
-        .autor-comentario {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #4a1c1c;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tag-verificado {
-            background-color: #2d3b32;
-            color: #ffffff;
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 2px;
+        .tag-bloco {
+            display: block;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
+            color: #c6a875;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
 
-        .texto-comentario {
-            font-size: 1rem;
-            color: #222222;
-            margin: 0;
+        .conteudo-texto-bloco p {
             line-height: 1.6;
         }
 
         /* ==========================================
-           MODAL
+           CLASSE DE CONTROLO
         ========================================== */
-
-        .modal-admin {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color:
-                rgba(0,0,0,0.65);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(3px);
-        }
-
-        .janela-container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            max-width: 460px;
-            width: 100%;
-            box-sizing: border-box;
-            border-top:
-                4px solid #4a1c1c;
-            position: relative;
-            box-shadow:
-                0 20px 50px rgba(0,0,0,0.15);
-        }
-
-        .fechar-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .fechar-modal:hover {
-            color: #111;
-        }
-
-        .campo-grupo {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 600;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 12px;
-            border:
-                1px solid #cccccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        input:focus,
-        textarea:focus {
-            border-color: #4a1c1c;
-            outline: none;
-        }
-
-        .btn-principal {
-            background-color: #111111;
-            color: #ffffff;
-            border: none;
-            width: 100%;
-            padding: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 0.85rem;
-        }
-
-        .btn-principal:hover {
-            background-color: #4a1c1c;
-        }
-
-        .link-alternar {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #997d54;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
 
         .oculto {
             display: none !important;
         }
 
         /* ==========================================
-           ESTÚDIO EDITORIAL — DESIGN PREMIUM
+           ESTÚDIO EDITORIAL
         ========================================== */
 
         .painel-editora {
@@ -487,6 +334,17 @@
             margin-bottom: 8px;
         }
 
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
         .campo-editorial input,
         .campo-editorial textarea,
         .campo-editorial select {
@@ -496,15 +354,23 @@
             padding: 14px;
         }
 
-        .campo-editorial input:focus,
-        .campo-editorial textarea:focus,
-        .campo-editorial select:focus {
+        input:focus,
+        textarea:focus,
+        select:focus {
             border-color: #997d54;
+            outline: none;
             box-shadow: 0 0 0 2px rgba(153,125,84,0.08);
         }
 
         .campo-editorial textarea {
             line-height: 1.8;
+        }
+
+        .campo-editorial small {
+            display: block;
+            margin-top: 7px;
+            color: #999999;
+            font-size: 0.7rem;
         }
 
         .editorial-dupla {
@@ -516,10 +382,15 @@
         .editorial-ajuda {
             display: flex;
             justify-content: space-between;
+            gap: 15px;
             color: #999999;
             font-size: 0.7rem;
             margin-top: 7px;
         }
+
+        /* ==========================================
+           UPLOAD
+        ========================================== */
 
         .area-upload-imagem {
             border: 1px dashed #cfc6b9;
@@ -598,7 +469,12 @@
             font-size: 0.7rem;
             line-height: 1.5;
             margin-bottom: 0;
+            margin-top: 12px;
         }
+
+        /* ==========================================
+           PUBLICAÇÃO
+        ========================================== */
 
         .estado-publicacao {
             background: #f7f5f1;
@@ -653,7 +529,7 @@
         }
 
         /* ==========================================
-           BIBLIOTECA DE PUBLICAÇÕES
+           BIBLIOTECA
         ========================================== */
 
         .biblioteca-publicacoes {
@@ -770,14 +646,154 @@
         }
 
         /* ==========================================
+           PAINEL DE DISCUSSÃO
+        ========================================== */
+
+        .mural-social-seccao {
+            max-width: 1200px;
+            width: 100%;
+            margin: 50px auto;
+            padding: 35px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border-top: 3px solid #4a1c1c;
+        }
+
+        .mural-social-seccao h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin: 0 0 25px;
+        }
+
+        .caixa-comentario-feed {
+            background-color: #fdfcfb;
+            border-left: 3px solid #997d54;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .autor-comentario {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4a1c1c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag-verificado {
+            background-color: #2d3b32;
+            color: #ffffff;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .texto-comentario {
+            font-size: 1rem;
+            color: #222222;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           MODAL DE LOGIN
+        ========================================== */
+
+        .modal-admin {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.65);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+
+        .janela-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 460px;
+            width: calc(100% - 30px);
+            border-top: 4px solid #4a1c1c;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .fechar-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #999999;
+        }
+
+        .fechar-modal:hover {
+            color: #111111;
+        }
+
+        .campo-grupo {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #555555;
+            font-weight: 600;
+        }
+
+        .btn-principal {
+            background-color: #111111;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .btn-principal:hover {
+            background-color: #4a1c1c;
+        }
+
+        .link-alternar {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #997d54;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* ==========================================
            RODAPÉ
         ========================================== */
 
         .rodape-discreto {
             text-align: center;
             padding: 40px 20px;
-            border-top:
-                1px solid #eeeeee;
+            border-top: 1px solid #eeeeee;
             background-color: #ffffff;
         }
 
@@ -794,8 +810,7 @@
         @media (max-width: 900px) {
 
             .mosaico-container {
-                grid-template-columns:
-                    repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
 
         }
@@ -867,6 +882,11 @@
             .biblioteca-cabecalho {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+
+            .mural-social-seccao {
+                width: calc(100% - 20px);
+                padding: 25px;
             }
 
         }
@@ -1028,7 +1048,7 @@
 
 
     <!-- ==========================================
-         ESTÚDIO EDITORIAL DA EDITORA
+         ESTÚDIO EDITORIAL
     ========================================== -->
 
     <section
@@ -1036,7 +1056,7 @@
         class="painel-editora oculto"
     >
 
-        <!-- CABEÇALHO -->
+        <!-- CABEÇALHO DO ESTÚDIO -->
 
         <div class="painel-editorial-topo">
 
@@ -1068,13 +1088,13 @@
         </div>
 
 
-        <!-- CORPO -->
+        <!-- CORPO DO ESTÚDIO -->
 
         <div class="editorial-layout">
 
 
             <!-- ======================================
-                 COLUNA PRINCIPAL — TEXTO
+                 COLUNA PRINCIPAL
             ======================================= -->
 
             <div class="editorial-coluna-principal">
@@ -1083,17 +1103,13 @@
 
                     <div class="editorial-card-cabecalho">
 
-                        <div>
+                        <span class="editorial-label">
+                            NOVA CRÍTICA
+                        </span>
 
-                            <span class="editorial-label">
-                                NOVA CRÍTICA
-                            </span>
-
-                            <h3>
-                                Composição editorial
-                            </h3>
-
-                        </div>
+                        <h3>
+                            Composição editorial
+                        </h3>
 
                     </div>
 
@@ -1136,7 +1152,7 @@
                     </div>
 
 
-                    <!-- CATEGORIA -->
+                    <!-- CATEGORIA + DATA -->
 
                     <div class="editorial-dupla">
 
@@ -1260,17 +1276,13 @@ Escreva com a voz editorial do Victoria's Critics."
 
                     <div class="editorial-card-cabecalho">
 
-                        <div>
+                        <span class="editorial-label">
+                            IMAGEM PRINCIPAL
+                        </span>
 
-                            <span class="editorial-label">
-                                IMAGEM PRINCIPAL
-                            </span>
-
-                            <h3>
-                                Fotografia
-                            </h3>
-
-                        </div>
+                        <h3>
+                            Fotografia
+                        </h3>
 
                     </div>
 
@@ -1401,6 +1413,334 @@ Escreva com a voz editorial do Victoria's Critics."
                 </div>
 
 
-                <!-- PUBLICAR -->
+                <!-- BOTÃO PUBLICAR -->
 
-                <div class="
+                <div class="editorial-publicar">
+
+                    <button
+                        type="button"
+                        class="btn-publicar-editorial"
+                        onclick="criarPublicacao()"
+                    >
+                        Publicar crítica
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-guardar-rascunho"
+                        onclick="alert('A função de rascunho será ativada numa próxima etapa.')"
+                    >
+                        Guardar rascunho
+                    </button>
+
+                    <p
+                        id="mensagem-editorial"
+                        class="mensagem-editorial"
+                    ></p>
+
+                </div>
+
+
+            </aside>
+
+        </div>
+
+
+        <!-- ==========================================
+             BIBLIOTECA DA EDITORA
+        ========================================== -->
+
+        <section class="biblioteca-publicacoes">
+
+            <div class="biblioteca-cabecalho">
+
+                <div>
+
+                    <span class="editorial-label">
+                        ARQUIVO EDITORIAL
+                    </span>
+
+                    <h3>
+                        Publicações
+                    </h3>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-atualizar-publicacoes"
+                    onclick="carregarPublicacoesEditora()"
+                >
+                    Atualizar arquivo
+                </button>
+
+            </div>
+
+
+            <div
+                id="lista-publicacoes-editora"
+                class="lista-publicacoes-editora"
+            >
+
+                <p class="biblioteca-vazia">
+                    O arquivo editorial será carregado aqui.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </section>
+
+
+    <!-- ==========================================
+         PAINEL DE DISCUSSÃO
+    ========================================== -->
+
+    <section class="mural-social-seccao">
+
+        <h2>
+            Canal de Discussão
+        </h2>
+
+
+        <div class="caixa-comentario-feed">
+
+            <div class="autor-comentario">
+
+                Comunidade Victoria's Critics
+
+                <span class="tag-verificado">
+                    Moderado
+                </span>
+
+            </div>
+
+            <p class="texto-comentario">
+                O espaço de discussão será dedicado a comentários
+                sobre gastronomia, restaurantes, técnicas e experiências.
+            </p>
+
+        </div>
+
+
+        <div class="caixa-comentario-feed">
+
+            <div class="autor-comentario">
+
+                Victoria's Critics
+
+                <span class="tag-verificado">
+                    Editorial
+                </span>
+
+            </div>
+
+            <p class="texto-comentario">
+                Comentários e contribuições devem manter o respeito
+                pelo trabalho dos profissionais e pela comunidade.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         MODAL DE AUTENTICAÇÃO
+    ========================================== -->
+
+    <div
+        id="modal-admin"
+        class="modal-admin oculto"
+    >
+
+        <div class="janela-container">
+
+            <span
+                class="fechar-modal"
+                onclick="fecharModal()"
+            >
+                ×
+            </span>
+
+
+            <!-- LOGIN -->
+
+            <div id="form-login">
+
+                <h2>
+                    Acesso Editorial
+                </h2>
+
+                <p>
+                    Entre na sua conta para aceder ao espaço editorial.
+                </p>
+
+
+                <div class="campo-grupo">
+
+                    <label for="email-login">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email-login"
+                        placeholder="seu@email.com"
+                    >
+
+                </div>
+
+
+                <div class="campo-grupo">
+
+                    <label for="senha-login">
+                        Palavra-passe
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha-login"
+                        placeholder="••••••••"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-principal"
+                    onclick="fazerLogin()"
+                >
+                    Entrar
+                </button>
+
+
+                <a
+                    class="link-alternar"
+                    onclick="mostrarRegisto()"
+                >
+                    Ainda não tem conta? Registar
+                </a>
+
+            </div>
+
+
+            <!-- REGISTO -->
+
+            <div
+                id="form-registo"
+                class="oculto"
+            >
+
+                <h2>
+                    Criar conta
+                </h2>
+
+                <p>
+                    Crie uma conta para participar no canal.
+                </p>
+
+
+                <div class="campo-grupo">
+
+                    <label for="username-registo">
+                        Nome de utilizador
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username-registo"
+                        placeholder="Nome"
+                    >
+
+                </div>
+
+
+                <div class="campo-grupo">
+
+                    <label for="email-registo">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email-registo"
+                        placeholder="seu@email.com"
+                    >
+
+                </div>
+
+
+                <div class="campo-grupo">
+
+                    <label for="senha-registo">
+                        Palavra-passe
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha-registo"
+                        placeholder="••••••••"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-principal"
+                    onclick="fazerRegisto()"
+                >
+                    Criar conta
+                </button>
+
+
+                <a
+                    class="link-alternar"
+                    onclick="mostrarLogin()"
+                >
+                    Já tenho conta — Entrar
+                </a>
+
+            </div>
+
+
+            <p id="mensagem-auth"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         RODAPÉ
+    ========================================== -->
+
+    <footer class="rodape-discreto">
+
+        <p>
+            © Victoria's Critics — Alta Gastronomia & Debate Crítico Real
+        </p>
+
+    </footer>
+
+
+    <!-- ==========================================
+         SUPABASE
+    ========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- ==========================================
+         SCRIPT DO SITE
+    ========================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

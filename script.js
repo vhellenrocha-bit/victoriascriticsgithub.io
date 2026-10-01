@@ -306,7 +306,11 @@ async function fazerLogout() {
 
     await supabaseClient.auth.signOut();
 
-    atualizarUsuario();
+    atualizarUsuario();if (ehEditora) {
+
+    mostrarPainelEditora();
+
+}
 
 }
 

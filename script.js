@@ -448,12 +448,105 @@ function esconderPainelEditora() {
 // ATUALIZAR UTILIZADOR
 // ==========================================
 
+async function atualizarUsuario() {// ==========================================
+// ATUALIZAR UTILIZADOR
+// ==========================================
+
 async function atualizarUsuario() {
 
     const {
-        data: { user }
-
+        data: { user },
+        error
     } = await supabaseClient.auth.getUser();
+
+
+    // ------------------------------------------
+    // NÃO ESTÁ LOGADO
+    // ------------------------------------------
+
+    if (error || !user) {
+
+        if (mensagemBoasVindas) {
+
+            mensagemBoasVindas.textContent =
+                "Canal de Discussão Moderado — Modo Leitura";
+
+        }
+
+
+        if (btnAuthTopo) {
+
+            btnAuthTopo.textContent =
+                "Entrar / Registar";
+
+            btnAuthTopo.onclick =
+                abrirModal;
+
+        }
+
+
+        esconderPainelEditora();
+
+        return;
+    }
+
+
+    // ------------------------------------------
+    // UTILIZADOR LOGADO
+    // ------------------------------------------
+
+    const nome =
+        user.user_metadata?.username ||
+        user.email ||
+        "Utilizador";
+
+
+    if (mensagemBoasVindas) {
+
+        mensagemBoasVindas.textContent =
+            "Olá, " +
+            nome +
+            " — Modo Discussão Ativo";
+
+    }
+
+
+    if (btnAuthTopo) {
+
+        btnAuthTopo.textContent =
+            "Sair";
+
+        btnAuthTopo.onclick =
+            fazerLogout;
+
+    }
+
+
+    // ------------------------------------------
+    // VERIFICAR SE É EDITORA
+    // ------------------------------------------
+
+    const ehEditora =
+        await verificarEditora();
+
+
+    console.log(
+        "Resultado da verificação de editora:",
+        ehEditora
+    );
+
+
+    if (ehEditora) {
+
+        mostrarPainelEditora();
+
+    } else {
+
+        esconderPainelEditora();
+
+    }
+
+}} = await supabaseClient.auth.getUser();
 
 
     if (user) {

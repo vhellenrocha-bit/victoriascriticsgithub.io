@@ -219,7 +219,140 @@
 
     <!-- BARRA SOCIAL DE ESTADO -->
     <div class="barra-usuario"><section
+    id="painel-editora"<!-- ==========================================
+     PAINEL DA EDITORA
+========================================== -->
+
+<section
     id="painel-editora"
+    class="painel-editora oculto"
+>
+
+    <div class="painel-editora-cabecalho">
+
+        <div>
+
+            <span class="selo-editora">
+                ⚜ EDITORA
+            </span>
+
+            <h2>
+                Painel da Editora
+            </h2>
+
+            <p>
+                Área privada de publicação e gestão
+                do Victoria's Critics.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================
+         NOVA PUBLICAÇÃO
+    ======================================= -->
+
+    <div class="editor-publicacao">
+
+        <h3>
+            Nova publicação
+        </h3>
+
+
+        <!-- TÍTULO -->
+
+        <div class="campo-grupo">
+
+            <label for="editor-titulo">
+                Título
+            </label>
+
+            <input
+                type="text"
+                id="editor-titulo"
+                placeholder="Título da crítica"
+            >
+
+        </div>
+
+
+        <!-- TEXTO -->
+
+        <div class="campo-grupo">
+
+            <label for="editor-conteudo">
+                Texto
+            </label>
+
+            <textarea
+                id="editor-conteudo"
+                rows="12"
+                placeholder="Escreva aqui a sua crítica..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- FOTOGRAFIA -->
+
+        <div class="campo-grupo">
+
+            <label for="editor-imagem">
+                Fotografia
+            </label>
+
+            <input
+                type="file"
+                id="editor-imagem"
+                accept="image/jpeg,image/png,image/webp"
+            >
+
+            <small>
+                Formatos aceites: JPG, PNG ou WEBP.
+            </small>
+
+        </div>
+
+
+        <!-- BOTÃO PUBLICAR -->
+
+        <button
+            type="button"
+            class="btn-principal"
+            onclick="criarPublicacao()"
+        >
+            Publicar texto
+        </button>
+
+
+        <!-- MENSAGEM -->
+
+        <p id="mensagem-editor"></p>
+
+    </div>
+
+
+    <!-- ======================================
+         FUTURAS FERRAMENTAS
+    ======================================= -->
+
+    <div class="editor-ferramentas">
+
+        <h3>
+            Gestão do Site
+        </h3>
+
+        <p>
+            As ferramentas de aparência, tema,
+            cores, tipografia e organização do site
+            serão adicionadas aqui.
+        </p>
+
+    </div>
+
+</section>
     class="painel-editora oculto"
 >
 

@@ -1411,7 +1411,51 @@
      ESTÚDIO EDITORIAL DA EDITORA
 ========================================== -->
 
-<section
+<div class="biblioteca-publicacoes">
+
+    <div class="biblioteca-cabecalho">
+
+        <div>
+            <span class="editorial-label">
+                ARQUIVO EDITORIAL
+            </span>
+
+            <h3>
+                Publicações existentes
+            </h3>
+        </div>
+
+        <button
+            type="button"
+            class="btn-atualizar-publicacoes"
+            onclick="carregarPublicacoesEditora()"
+        >
+            Atualizar
+        </button>
+
+    </div>
+
+
+    <div
+        id="lista-publicacoes-editora"
+        class="lista-publicacoes-editora"
+    >
+
+        <p class="biblioteca-vazia">
+            A carregar publicações...
+        </p>
+
+    </div>
+
+</div>
+
+
+
+    <!-- ==========================================
+         PAINEL DE DISCUSSÃO
+    ========================================== -->
+
+  <section
     id="painel-editora"
     class="painel-editora oculto"
 >
@@ -1827,51 +1871,7 @@ Escreva com a voz editorial do Victoria's Critics."
      BIBLIOTECA DE PUBLICAÇÕES
 ========================================== -->
 
-<div class="biblioteca-publicacoes">
-
-    <div class="biblioteca-cabecalho">
-
-        <div>
-            <span class="editorial-label">
-                ARQUIVO EDITORIAL
-            </span>
-
-            <h3>
-                Publicações existentes
-            </h3>
-        </div>
-
-        <button
-            type="button"
-            class="btn-atualizar-publicacoes"
-            onclick="carregarPublicacoesEditora()"
-        >
-            Atualizar
-        </button>
-
-    </div>
-
-
-    <div
-        id="lista-publicacoes-editora"
-        class="lista-publicacoes-editora"
-    >
-
-        <p class="biblioteca-vazia">
-            A carregar publicações...
-        </p>
-
-    </div>
-
-</div>
-
-
-
-    <!-- ==========================================
-         PAINEL DE DISCUSSÃO
-    ========================================== -->
-
-    <section class="mural-social-seccao">
+  <section class="mural-social-seccao">
 
         <h2>
             Painel de Discussão Crítica

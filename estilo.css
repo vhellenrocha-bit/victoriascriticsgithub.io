@@ -297,5 +297,8 @@ body {
 .editor-ferramentas h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
+}/* ESCONDER ELEMENTOS ATÉ O JAVASCRIPT AUTORIZAR */
+.oculto {
+    display: none !important;
 }
 

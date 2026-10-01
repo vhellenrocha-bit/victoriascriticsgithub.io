@@ -300,5 +300,15 @@ body {
 }/* ESCONDER ELEMENTOS ATÉ O JAVASCRIPT AUTORIZAR */
 .oculto {
     display: none !important;
+}/* ==========================================
+   PAINEL DA EDITORA
+   ========================================== */
+
+#painel-editora {
+    display: block;
+}
+
+#painel-editora.oculto {
+    display: none !important;
 }
 

@@ -8,7 +8,6 @@ const SUPABASE_URL =
 const SUPABASE_ANON_KEY =
     "sb_publishable_sUY0ZUsbQnx8Jm1NENe4Cg_7g0ceZdf";
 
-
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
@@ -17,7 +16,7 @@ const supabaseClient =
 
 
 // ==========================================
-// ELEMENTOS DO SITE
+// ELEMENTOS
 // ==========================================
 
 const modalAuth =
@@ -37,14 +36,12 @@ const btnAuthTopo =
 
 
 // ==========================================
-// ABRIR MODAL
+// MODAL
 // ==========================================
 
 function abrirModal() {
 
-    if (!modalAuth) {
-        return;
-    }
+    if (!modalAuth) return;
 
     modalAuth.classList.remove("oculto");
 
@@ -52,29 +49,17 @@ function abrirModal() {
 }
 
 
-// ==========================================
-// FECHAR MODAL
-// ==========================================
-
 function fecharModal() {
 
-    if (!modalAuth) {
-        return;
-    }
+    if (!modalAuth) return;
 
     modalAuth.classList.add("oculto");
 }
 
 
-// ==========================================
-// MOSTRAR LOGIN
-// ==========================================
-
 function mostrarLogin() {
 
-    if (!areaLogin || !areaCadastro) {
-        return;
-    }
+    if (!areaLogin || !areaCadastro) return;
 
     areaLogin.classList.remove("oculto");
 
@@ -82,25 +67,15 @@ function mostrarLogin() {
 }
 
 
-// ==========================================
-// MOSTRAR CADASTRO
-// ==========================================
-
 function mostrarCadastro() {
 
-    if (!areaLogin || !areaCadastro) {
-        return;
-    }
+    if (!areaLogin || !areaCadastro) return;
 
     areaLogin.classList.add("oculto");
 
     areaCadastro.classList.remove("oculto");
 }
 
-
-// ==========================================
-// FECHAR MODAL AO CLICAR FORA
-// ==========================================
 
 if (modalAuth) {
 
@@ -172,9 +147,7 @@ if (formCadastro) {
                     options: {
 
                         data: {
-
                             username: username
-
                         }
 
                     }
@@ -190,8 +163,7 @@ if (formCadastro) {
                 );
 
                 mensagem.textContent =
-                    "Erro: " +
-                    error.message;
+                    "Erro: " + error.message;
 
                 return;
             }
@@ -255,7 +227,7 @@ if (formLogin) {
                 "A entrar...";
 
 
-            const { error } =
+            const { data, error } =
                 await supabaseClient.auth
                     .signInWithPassword({
 
@@ -274,8 +246,7 @@ if (formLogin) {
                 );
 
                 mensagem.textContent =
-                    "Erro: " +
-                    error.message;
+                    "Erro: " + error.message;
 
                 return;
             }
@@ -285,7 +256,12 @@ if (formLogin) {
 
             fecharModal();
 
-            atualizarUsuario();
+
+            // Usa diretamente o utilizador
+            // devolvido pelo login.
+            await atualizarUsuario(
+                data.user
+            );
 
         }
     );
@@ -303,49 +279,30 @@ async function fazerLogout() {
 
     esconderPainelEditora();
 
-    atualizarUsuario();
+    atualizarUsuario(null);
 
 }
 
 
 // ==========================================
-// VERIFICAR SE É EDITORA
+// VERIFICAR EDITORA
 // ==========================================
 
-async function verificarEditora() {
+async function verificarEditora(user) {
 
-    const {
-        data: { user },
-        error: userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-    if (userError || !user) {
-
-        console.log(
-            "Não existe utilizador autenticado."
-        );
+    if (!user) {
 
         return false;
+
     }
 
 
-    console.log(
-        "Utilizador autenticado:",
-        user.email
-    );
-
-
-    const {
-        data,
-        error
-
-    } = await supabaseClient
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .maybeSingle();
+    const { data, error } =
+        await supabaseClient
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .maybeSingle();
 
 
     if (error) {
@@ -359,16 +316,10 @@ async function verificarEditora() {
     }
 
 
-    console.log(
-        "Perfil encontrado:",
-        data
-    );
-
-
     if (!data) {
 
         console.log(
-            "Não existe perfil para este utilizador."
+            "Perfil não encontrado."
         );
 
         return false;
@@ -381,26 +332,13 @@ async function verificarEditora() {
             .toLowerCase();
 
 
-    if (role === "editor") {
+    return role === "editor";
 
-        console.log(
-            "UTILIZADOR É EDITORA!"
-        );
-
-        return true;
-    }
-
-
-    console.log(
-        "Utilizador não é editora."
-    );
-
-    return false;
 }
 
 
 // ==========================================
-// MOSTRAR PAINEL DA EDITORA
+// MOSTRAR PAINEL
 // ==========================================
 
 function mostrarPainelEditora() {
@@ -411,9 +349,7 @@ function mostrarPainelEditora() {
         );
 
 
-    if (!painel) {
-        return;
-    }
+    if (!painel) return;
 
 
     painel.classList.remove("oculto");
@@ -422,7 +358,7 @@ function mostrarPainelEditora() {
 
 
 // ==========================================
-// ESCONDER PAINEL DA EDITORA
+// ESCONDER PAINEL
 // ==========================================
 
 function esconderPainelEditora() {
@@ -433,9 +369,7 @@ function esconderPainelEditora() {
         );
 
 
-    if (!painel) {
-        return;
-    }
+    if (!painel) return;
 
 
     painel.classList.add("oculto");
@@ -447,20 +381,13 @@ function esconderPainelEditora() {
 // ATUALIZAR UTILIZADOR
 // ==========================================
 
-async function atualizarUsuario() {
-
-    const {
-        data: { user },
-        error
-
-    } = await supabaseClient.auth.getUser();
-
+async function atualizarUsuario(user) {
 
     // ------------------------------------------
-    // NÃO ESTÁ LOGADO
+    // NÃO EXISTE UTILIZADOR
     // ------------------------------------------
 
-    if (error || !user) {
+    if (!user) {
 
         if (mensagemBoasVindas) {
 
@@ -484,11 +411,12 @@ async function atualizarUsuario() {
         esconderPainelEditora();
 
         return;
+
     }
 
 
     // ------------------------------------------
-    // UTILIZADOR LOGADO
+    // UTILIZADOR AUTENTICADO
     // ------------------------------------------
 
     const nome =
@@ -519,18 +447,16 @@ async function atualizarUsuario() {
 
 
     // ------------------------------------------
-    // VERIFICAR EDITORA
+    // VERIFICAR PERFIL
     // ------------------------------------------
 
     const ehEditora =
-        await verificarEditora();
+        await verificarEditora(user);
 
 
-    console.log(
-        "Resultado da verificação de editora:",
-        ehEditora
-    );
-
+    // ------------------------------------------
+    // MOSTRAR / ESCONDER PAINEL
+    // ------------------------------------------
 
     if (ehEditora) {
 
@@ -556,12 +482,10 @@ async function criarPublicacao() {
             "editor-titulo"
         );
 
-
     const campoConteudo =
         document.getElementById(
             "editor-conteudo"
         );
-
 
     const mensagem =
         document.getElementById(
@@ -572,12 +496,12 @@ async function criarPublicacao() {
     if (!campoTitulo || !campoConteudo) {
 
         return;
+
     }
 
 
     const titulo =
         campoTitulo.value.trim();
-
 
     const conteudo =
         campoConteudo.value.trim();
@@ -593,13 +517,17 @@ async function criarPublicacao() {
         }
 
         return;
+
     }
 
 
     const {
-        data: { user }
+        data: { session }
+    } = await supabaseClient.auth.getSession();
 
-    } = await supabaseClient.auth.getUser();
+
+    const user =
+        session?.user || null;
 
 
     if (!user) {
@@ -612,11 +540,12 @@ async function criarPublicacao() {
         }
 
         return;
+
     }
 
 
     const ehEditora =
-        await verificarEditora();
+        await verificarEditora(user);
 
 
     if (!ehEditora) {
@@ -629,6 +558,7 @@ async function criarPublicacao() {
         }
 
         return;
+
     }
 
 
@@ -671,6 +601,7 @@ async function criarPublicacao() {
         }
 
         return;
+
     }
 
 
@@ -690,20 +621,37 @@ async function criarPublicacao() {
 
 
 // ==========================================
-// ESTADO DE LOGIN
+// INICIALIZAÇÃO CORRETA DA SESSÃO
+// ==========================================
+
+// Primeiro verifica a sessão atual.
+// Não usamos getUser() aqui.
+
+supabaseClient.auth.getSession()
+    .then(function(resultado) {
+
+        const session =
+            resultado.data.session;
+
+        const user =
+            session?.user || null;
+
+        atualizarUsuario(user);
+
+    });
+
+
+// ==========================================
+// ALTERAÇÕES DE LOGIN / LOGOUT
 // ==========================================
 
 supabaseClient.auth.onAuthStateChange(
-    function() {
+    function(event, session) {
 
-        atualizarUsuario();
+        const user =
+            session?.user || null;
+
+        atualizarUsuario(user);
 
     }
 );
-
-
-// ==========================================
-// INICIAR
-// ==========================================
-
-atualizarUsuario();

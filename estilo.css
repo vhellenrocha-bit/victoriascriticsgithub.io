@@ -202,5 +202,100 @@ body {
     color: #999999; /* Tom cinza suave */
     letter-spacing: 0.5px;
     margin: 0;
+}/* ==========================================
+   PAINEL DA EDITORA
+========================================== */
+
+.painel-editora {
+    max-width: 1200px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 35px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 6px;
+    border-top: 4px solid #997d54;
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.06);
+}
+
+.painel-editora-cabecalho {
+    margin-bottom: 30px;
+}
+
+.selo-editora {
+    display: inline-block;
+    background-color: #4a1c1c;
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    border-radius: 3px;
+}
+
+.painel-editora h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin: 12px 0 5px 0;
+    color: #111111;
+}
+
+.painel-editora p {
+    color: #666666;
+    line-height: 1.6;
+}
+
+.editor-publicacao {
+    border-top: 1px solid #eeeeee;
+    padding-top: 25px;
+}
+
+.editor-publicacao h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+}
+
+.editor-publicacao input[type="text"],
+.editor-publicacao textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.editor-publicacao textarea {
+    min-height: 220px;
+    resize: vertical;
+}
+
+.editor-publicacao input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+    background-color: #fafafa;
+}
+
+.editor-publicacao small {
+    display: block;
+    margin-top: 7px;
+    color: #777777;
+}
+
+#mensagem-editor {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #4a1c1c;
+}
+
+.editor-ferramentas {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid #eeeeee;
+}
+
+.editor-ferramentas h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
 }
 

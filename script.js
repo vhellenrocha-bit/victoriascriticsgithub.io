@@ -923,4 +923,161 @@ supabaseClient.auth.onAuthStateChange(
         atualizarUsuario(user);
 
     }
-);
+);// ==========================================
+// APAGAR PUBLICAÇÃO E FOTOGRAFIA
+// ==========================================
+
+async function apagarPublicacao(id, imagemUrl) {
+
+    const confirmar = confirm(
+        "Tem a certeza de que deseja apagar esta publicação?\n\n" +
+        "A publicação e a fotografia associada serão apagadas."
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    const {
+        data: {
+            session
+        }
+    } = await supabaseClient.auth.getSession();
+
+
+    const user =
+        session?.user || null;
+
+
+    if (!user) {
+
+        alert(
+            "É necessário estar autenticada."
+        );
+
+        return;
+    }
+
+
+    const ehEditora =
+        await verificarEditora(user);
+
+
+    if (!ehEditora) {
+
+        alert(
+            "Acesso não autorizado."
+        );
+
+        return;
+    }
+
+
+    // ==========================================
+    // APAGAR FOTOGRAFIA DO STORAGE
+    // ==========================================
+
+    if (imagemUrl) {
+
+        try {
+
+            const marcador =
+                "/site-imagens/";
+
+            const posicao =
+                imagemUrl.indexOf(
+                    marcador
+                );
+
+
+            if (posicao !== -1) {
+
+                const caminhoImagem =
+                    decodeURIComponent(
+                        imagemUrl.substring(
+                            posicao +
+                            marcador.length
+                        )
+                    );
+
+
+                const {
+                    error: erroImagem
+                } =
+                    await supabaseClient
+                        .storage
+                        .from("site-imagens")
+                        .remove([
+                            caminhoImagem
+                        ]);
+
+
+                if (erroImagem) {
+
+                    console.error(
+                        "ERRO AO APAGAR IMAGEM:",
+                        erroImagem
+                    );
+
+                }
+
+            }
+
+        } catch (erro) {
+
+            console.error(
+                "ERRO AO PROCESSAR IMAGEM:",
+                erro
+            );
+
+        }
+
+    }
+
+
+    // ==========================================
+    // APAGAR PUBLICAÇÃO
+    // ==========================================
+
+    const {
+        error: erroPublicacao
+    } =
+        await supabaseClient
+            .from("publicacoes")
+            .delete()
+            .eq("id", id);
+
+
+    if (erroPublicacao) {
+
+        console.error(
+            "ERRO AO APAGAR PUBLICAÇÃO:",
+            erroPublicacao
+        );
+
+
+        alert(
+            "Não foi possível apagar a publicação."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "Publicação apagada com sucesso."
+    );
+
+
+    // Atualizar a lista, quando existir
+    if (
+        typeof carregarPublicacoesEditora ===
+        "function"
+    ) {
+
+        carregarPublicacoesEditora();
+
+    }
+
+}

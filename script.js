@@ -425,6 +425,26 @@ function mostrarPainelEditora() {
 function esconderPainelEditora() {
 
     const painel =
+        document.getElementById("painel-editora");
+
+    if (!painel) {
+        return;
+    }
+
+    // Só esconde o painel quando não existe utilizador autenticado.
+    supabaseClient.auth.getUser().then(function(resultado) {
+
+        const user = resultado.data.user;
+
+        if (!user) {
+            painel.classList.add("oculto");
+        }
+
+    });
+
+}
+
+    const painel =
         document.getElementById(
             "painel-editora"
         );

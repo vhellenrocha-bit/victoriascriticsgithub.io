@@ -1082,10 +1082,420 @@
          E ELE ESTÁ FORA DA BARRA SUPERIOR.
     ========================================== -->
 
-    <section
-        id="painel-editora"
-        class="painel-editora oculto"
-    >
+   <!-- ==========================================
+     ESTÚDIO EDITORIAL DA EDITORA
+========================================== -->
+
+<section
+    id="painel-editora"
+    class="painel-editora oculto"
+>
+
+    <!-- CABEÇALHO -->
+
+    <div class="painel-editorial-topo">
+
+        <div>
+
+            <span class="selo-editora">
+                ⚜ EDITORIAL STUDIO
+            </span>
+
+            <h2>
+                Estúdio Editorial
+            </h2>
+
+            <p>
+                Crie, edite e publique as críticas
+                do Victoria's Critics.
+            </p>
+
+        </div>
+
+        <div class="estado-editorial">
+
+            <span class="estado-ponto"></span>
+
+            Área privada
+
+        </div>
+
+    </div>
+
+
+    <!-- CORPO -->
+
+    <div class="editorial-layout">
+
+
+        <!-- ======================================
+             COLUNA PRINCIPAL — TEXTO
+        ======================================= -->
+
+        <div class="editorial-coluna-principal">
+
+            <div class="editorial-card">
+
+                <div class="editorial-card-cabecalho">
+
+                    <div>
+
+                        <span class="editorial-label">
+                            NOVA CRÍTICA
+                        </span>
+
+                        <h3>
+                            Composição editorial
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TÍTULO -->
+
+                <div class="campo-editorial">
+
+                    <label for="editor-titulo">
+                        Título da crítica
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editor-titulo"
+                        placeholder="Ex.: A delicada arquitetura de sabores do restaurante..."
+                    >
+
+                    <small>
+                        Escolha um título forte, elegante e editorial.
+                    </small>
+
+                </div>
+
+
+                <!-- SUBTÍTULO -->
+
+                <div class="campo-editorial">
+
+                    <label for="editor-subtitulo">
+                        Linha fina
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editor-subtitulo"
+                        placeholder="Uma experiência entre técnica, produto e memória."
+                    >
+
+                </div>
+
+
+                <!-- CATEGORIA -->
+
+                <div class="editorial-dupla">
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-categoria">
+                            Categoria
+                        </label>
+
+                        <select id="editor-categoria">
+
+                            <option value="Crítica">
+                                Crítica
+                            </option>
+
+                            <option value="Alta Gastronomia">
+                                Alta Gastronomia
+                            </option>
+
+                            <option value="Restaurantes">
+                                Restaurantes
+                            </option>
+
+                            <option value="Chef">
+                                Chef
+                            </option>
+
+                            <option value="Ingredientes">
+                                Ingredientes
+                            </option>
+
+                            <option value="Experiências">
+                                Experiências
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo-editorial">
+
+                        <label for="editor-data">
+                            Data da crítica
+                        </label>
+
+                        <input
+                            type="date"
+                            id="editor-data"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- TEXTO -->
+
+                <div class="campo-editorial">
+
+                    <label for="editor-conteudo">
+                        Texto da crítica
+                    </label>
+
+                    <textarea
+                        id="editor-conteudo"
+                        rows="20"
+                        placeholder="Comece a escrever a sua crítica...
+
+Descreva o ambiente, o serviço, a cozinha, os pratos, as técnicas, os ingredientes e a experiência.
+
+Escreva com a voz editorial do Victoria's Critics."
+                    ></textarea>
+
+                    <div class="editorial-ajuda">
+
+                        <span>
+                            Texto editorial
+                        </span>
+
+                        <span>
+                            Use parágrafos para criar ritmo.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONCLUSÃO -->
+
+                <div class="campo-editorial">
+
+                    <label for="editor-conclusao">
+                        Conclusão editorial
+                    </label>
+
+                    <textarea
+                        id="editor-conclusao"
+                        rows="6"
+                        placeholder="A sua apreciação final sobre a experiência..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             COLUNA LATERAL
+        ======================================= -->
+
+        <aside class="editorial-coluna-lateral">
+
+
+            <!-- FOTOGRAFIA -->
+
+            <div class="editorial-card">
+
+                <div class="editorial-card-cabecalho">
+
+                    <div>
+
+                        <span class="editorial-label">
+                            IMAGEM PRINCIPAL
+                        </span>
+
+                        <h3>
+                            Fotografia
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="area-upload-imagem"
+                    id="area-upload-imagem"
+                >
+
+                    <div class="icone-upload">
+                        ✦
+                    </div>
+
+                    <strong>
+                        Adicionar fotografia
+                    </strong>
+
+                    <p>
+                        JPG, PNG ou WEBP
+                    </p>
+
+
+                    <label
+                        for="editor-imagem"
+                        class="botao-upload"
+                    >
+                        Escolher imagem
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="editor-imagem"
+                        accept="image/jpeg,image/png,image/webp"
+                        hidden
+                    >
+
+                </div>
+
+
+                <div
+                    id="preview-imagem-editor"
+                    class="preview-imagem-editor oculto"
+                >
+
+                    <img
+                        id="imagem-preview"
+                        src=""
+                        alt="Pré-visualização da fotografia"
+                    >
+
+                    <button
+                        type="button"
+                        class="remover-imagem"
+                        onclick="removerImagemSelecionada()"
+                    >
+                        Remover fotografia
+                    </button>
+
+                </div>
+
+
+                <p class="nota-imagem">
+                    A fotografia será utilizada como
+                    imagem principal da publicação.
+                </p>
+
+            </div>
+
+
+
+            <!-- PUBLICAÇÃO -->
+
+            <div class="editorial-card">
+
+                <span class="editorial-label">
+                    PUBLICAÇÃO
+                </span>
+
+                <h3>
+                    Estado da crítica
+                </h3>
+
+
+                <div class="estado-publicacao">
+
+                    <span class="estado-ponto"></span>
+
+                    Pronta para edição
+
+                </div>
+
+
+                <div class="campo-editorial">
+
+                    <label for="editor-autor">
+                        Assinatura
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editor-autor"
+                        value="Victoria's Critics"
+                    >
+
+                </div>
+
+
+                <div class="campo-editorial">
+
+                    <label for="editor-destaque">
+                        Destaque
+                    </label>
+
+                    <select id="editor-destaque">
+
+                        <option value="normal">
+                            Publicação normal
+                        </option>
+
+                        <option value="destaque">
+                            Destacar na página inicial
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PUBLICAR -->
+
+            <div class="editorial-publicar">
+
+                <button
+                    type="button"
+                    class="btn-publicar-editorial"
+                    onclick="criarPublicacao()"
+                >
+
+                    Publicar crítica
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-guardar-rascunho"
+                >
+
+                    Guardar como rascunho
+
+                </button>
+
+
+                <p
+                    id="mensagem-editor"
+                    class="mensagem-editorial"
+                ></p>
+
+            </div>
+
+
+        </aside>
+
+    </div>
+
+</section>
 
 
         <div class="painel-editora-cabecalho">

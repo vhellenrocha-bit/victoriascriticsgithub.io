@@ -136,13 +136,11 @@ if (formCadastro) {
 
             event.preventDefault();
 
-
             const username =
                 document
                     .getElementById("cadastro-username")
                     .value
                     .trim();
-
 
             const email =
                 document
@@ -150,18 +148,15 @@ if (formCadastro) {
                     .value
                     .trim();
 
-
             const password =
                 document
                     .getElementById("cadastro-password")
                     .value;
 
-
             const mensagem =
                 document.getElementById(
                     "mensagem-cadastro"
                 );
-
 
             mensagem.textContent =
                 "A criar a sua conta...";
@@ -306,11 +301,9 @@ async function fazerLogout() {
 
     await supabaseClient.auth.signOut();
 
-    atualizarUsuario();if (ehEditora) {
+    esconderPainelEditora();
 
-    mostrarPainelEditora();
-
-}
+    atualizarUsuario();
 
 }
 
@@ -382,7 +375,13 @@ async function verificarEditora() {
     }
 
 
-   if (String(data.role).trim().toLowerCase() === "editor") {
+    const role =
+        String(data.role)
+            .trim()
+            .toLowerCase();
+
+
+    if (role === "editor") {
 
         console.log(
             "UTILIZADOR É EDITORA!"
@@ -427,26 +426,6 @@ function mostrarPainelEditora() {
 // ==========================================
 
 function esconderPainelEditora() {
-
-    const painel =
-        document.getElementById("painel-editora");
-
-    if (!painel) {
-        return;
-    }
-
-    // Só esconde o painel quando não existe utilizador autenticado.
-    supabaseClient.auth.getUser().then(function(resultado) {
-
-        const user = resultado.data.user;
-
-        if (!user) {
-            painel.classList.add("oculto");
-        }
-
-    });
-
-}
 
     const painel =
         document.getElementById(
@@ -540,7 +519,7 @@ async function atualizarUsuario() {
 
 
     // ------------------------------------------
-    // VERIFICAR SE É EDITORA
+    // VERIFICAR EDITORA
     // ------------------------------------------
 
     const ehEditora =
@@ -711,7 +690,7 @@ async function criarPublicacao() {
 
 
 // ==========================================
-// SUPABASE — ESTADO DE LOGIN
+// ESTADO DE LOGIN
 // ==========================================
 
 supabaseClient.auth.onAuthStateChange(

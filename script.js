@@ -378,7 +378,7 @@ async function verificarEditora() {
     }
 
 
-    if (data.role === "editor") {
+   if (String(data.role).trim().toLowerCase() === "editor") {
 
         console.log(
             "UTILIZADOR É EDITORA!"
